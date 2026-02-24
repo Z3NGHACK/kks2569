@@ -246,7 +246,7 @@ export default function Header() {
                   >
                     <div className="relative w-10 h-10 rounded-full overflow-hidden shadow-sm mb-2">
                       <Image
-                        src={`/flags/${lang.code}.svg`}
+                        src={`/flags/${lang.code}.png`}
                         alt={lang.name}
                         fill
                         className="object-cover"
