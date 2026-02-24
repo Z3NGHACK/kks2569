@@ -1,0 +1,54 @@
+{
+  "Hero": {
+    "title": {
+      "line1": "Chờ đã!",
+      "line2": "Hãy chọn tái sử dụng thay vì vứt bỏ",
+      "highlight": "tái sử dụng"
+    },
+    "description": "Công ty TNHH Khmer Kansai thu gom và tái tạo đồ gia dụng không cần thiết, nhựa, nhôm/sắt, xe đạp đã qua sử dụng, máy móc xây dựng, thiết bị nông nghiệp, v.v., đóng góp vào vòng tuần hoàn tài nguyên và tái sử dụng tại Đông Nam Á với sự quan tâm đến môi trường.",
+    "cta": {
+      "quote": "Báo giá / Liên hệ",
+      "services": "Xem Dịch vụ"
+    }
+  },
+  "Services": {
+    "recycleTitle": "Kinh doanh tái chế",
+    "recycleDesc": "Thu gom và tái tạo phế liệu kim loại như nhựa, nhôm, sắt",
+    "buyTitle": "Kinh doanh mua lại",
+    "buyDesc": "Mua lại và tái tạo đồ gia dụng, ô tô, sản phẩm da với giá hợp lý",
+    "machineTitle": "Máy móc xây dựng & Thiết bị nông nghiệp",
+    "machineDesc": "Mua giá cao và đại lý xuất nhập khẩu máy móc xây dựng và nông nghiệp",
+    "globalTitle": "Mở rộng toàn cầu",
+    "globalDesc": "Mạng lưới tái sử dụng và bán hàng tại Đông Nam Á"
+  },
+  
+  "Header": {
+    "companyName": "Khmer Kansai Co., Ltd.",
+    "companyNameEn": "Khmer Kansai Co., Ltd.",
+    "contactButton": "Contact",
+    "nav": {
+      "home": "Home",
+      "about": "About",
+      "service": "Services",
+      "plan": "Pricing",
+      "contact": "Contact / Quote"
+    }
+  },
+  "Footer": {
+    "companyName": "クメール関西株式会社",
+    "description": "不要になった家電やプラスチック、アルミ・鉄・自転車、建設機械、農機具を回収・再生し、資源循環に貢献します。",
+    "menu": "メニュー",
+    "menuItems": {
+      "home": "トップ",
+      "about": "会社概要",
+      "service": "サービス概要",
+      "plan": "料金プラン",
+      "contact": "お問い合わせ"
+    },
+    "contact": "お問い合わせ",
+    "email": "info@kks2026.com",
+    "phoneLabel": "お電話でのお問い合わせ",
+    "location": "大阪府",
+    "copyright": "© 2024 クメール関西株式会社 All Rights Reserved."
+  }
+}

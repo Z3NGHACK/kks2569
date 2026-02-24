@@ -1,0 +1,344 @@
+{
+  "HEADER": {
+    "COMPANY_NAME": "Khmer Kansai Co., Ltd.",
+    "COMPANY_NAME_SHORT": "KKS",
+    "NAV": {
+      "TOP": "Home",
+      "ABOUT": "About Us",
+      "SERVICE": "Services",
+      "PLAN": "Pricing",
+      "CONTACT": "Contact"
+    },
+    "CONTACT_BUTTON": "Contact Us"
+  },
+  "FOOTER": {
+    "DESCRIPTION": "We collect and recycle unwanted appliances, plastics, aluminum, iron, bicycles, construction machinery, and agricultural equipment, contributing to resource circulation.",
+    "MENU": "Menu",
+    "CONTACT_INFO": "Contact Information",
+    "EMAIL": "info@kks2026.com",
+    "PHONE": "Phone Inquiry",
+    "LOCATION": "Osaka, Japan",
+    "COPYRIGHT": "© 2024 Khmer Kansai Co., Ltd. All Rights Reserved."
+  },
+  "HOME": {
+    "HERO": {
+      "TITLE_1": "Wait a moment!",
+      "TITLE_2": "Choose to",
+      "TITLE_HIGHLIGHT": "Reuse",
+      "TITLE_3": "Rather Than Discard",
+      "DESCRIPTION": "Khmer Kansai Co., Ltd. collects and recycles unwanted appliances, plastics, aluminum, iron, bicycles, construction machinery, and agricultural equipment. We contribute to eco-friendly activities by reusing these resources in Southeast Asia.",
+      "BUTTON_PRIMARY": "Get a Quote / Contact Us",
+      "BUTTON_SECONDARY": "View Services"
+    },
+    "MISSION": {
+      "TITLE": "Towards a Sustainable Future",
+      "SUBTITLE": "We aim to reduce environmental impact and realize a circular society for a sustainable future."
+    },
+    "SERVICES": {
+      "TITLE": "Our Services",
+      "RECYCLE": {
+        "TITLE": "Recycling Business",
+        "DESCRIPTION": "Collection and recycling of plastics, aluminum, iron, and other metal scraps"
+      },
+      "BUYING": {
+        "TITLE": "Purchase Business",
+        "DESCRIPTION": "Fair price purchase and recycling of appliances, cars, and leather products"
+      },
+      "MACHINERY": {
+        "TITLE": "Construction & Agricultural Machinery",
+        "DESCRIPTION": "High-value purchase and export agency for construction machinery and agricultural equipment"
+      },
+      "GLOBAL": {
+        "TITLE": "Global Expansion",
+        "DESCRIPTION": "Reuse and sales network in Southeast Asia"
+      }
+    },
+    "CTA": {
+      "TITLE": "Feel Free to Contact Us First",
+      "SUBTITLE": "Even items you think are no longer usable may be able to create new value.",
+      "BUTTON": "Contact Us Here"
+    }
+  },
+  "ABOUT": {
+    "PAGE_TITLE": "About Us",
+    "PAGE_SUBTITLE": "Company Profile",
+    "MESSAGE": {
+      "TITLE": "Message from the President",
+      "P1": "Thank you for visiting the website of Khmer Kansai Co., Ltd.",
+      "P2": "We aim to realize a circular society that values resources. Through the collection of unwanted appliances, plastics, aluminum, iron, bicycles, construction machinery, and agricultural equipment, we contribute to reducing environmental impact while supporting our customers' lives through our purchase business and estate clearance services.",
+      "P3": "Even items you think can no longer be used may be able to create new value. Rather than simply disposing of waste, we propose the best ways to 'connect to the next' and link to a sustainable future.",
+      "P4": "We will continue to walk with the local community, providing environmentally friendly and reliable services. We look forward to your continued support of Khmer Kansai Co., Ltd.",
+      "COMPANY": "Khmer Kansai Co., Ltd.",
+      "PRESIDENT": "President: Haruhisa Sugimoto"
+    },
+    "INFO": {
+      "TITLE": "Company Information",
+      "COMPANY_NAME": "Company Name",
+      "COMPANY_NAME_VALUE": "Khmer Kansai Co., Ltd.",
+      "REPRESENTATIVE": "Representative",
+      "REPRESENTATIVE_VALUE": "Haruhisa Sugimoto",
+      "LOCATION": "Location",
+      "LOCATION_VALUE": "Osaka Prefecture, Japan",
+      "EMAIL": "Email",
+      "EMAIL_VALUE": "info@kks2026.com",
+      "BUSINESS": "Business Activities",
+      "BUSINESS_ITEMS": [
+        "Recycling business (appliances, plastics, metals)",
+        "Purchase business (electrical products, cars, leather goods)",
+        "Construction machinery and agricultural equipment purchase and export",
+        "Estate clearance and special cleaning"
+      ]
+    }
+  },
+  "PLAN": {
+    "PAGE_TITLE": "Pricing Plans",
+    "PAGE_SUBTITLE": "Pricing & Plans",
+    "INTRO": {
+      "TITLE": "Wondering if it's still usable? Please consult us before throwing it away!",
+      "SUBTITLE": "We purchase a wide range of items including electrical appliances, cars, and leather products."
+    },
+    "FEATURES": {
+      "VISIT": {
+        "TITLE": "On-site Purchase",
+        "DESC": "We visit your home or business to purchase items."
+      },
+      "CASH": {
+        "TITLE": "Same-day Cash",
+        "DESC": "We can pay cash on the spot after appraisal."
+      },
+      "BRING_IN": {
+        "TITLE": "Direct Drop-off Welcome!",
+        "DESC": "Those nearby can bring items directly to us."
+      }
+    },
+    "ITEMS": {
+      "TITLE": "Purchase Items List",
+      "APPLIANCES": {
+        "TITLE": "Home Appliances",
+        "ITEMS": [
+          "TVs (LCD, Plasma, CRT)",
+          "Refrigerators & Freezers",
+          "Washing Machines & Dryers",
+          "Air Conditioners",
+          "Computers & Tablets"
+        ]
+      },
+      "METAL": {
+        "TITLE": "Metals",
+        "ITEMS": [
+          "Aluminum Cans & Scrap",
+          "Iron Scrap",
+          "Copper & Brass",
+          "Stainless Steel",
+          "Other Metals"
+        ]
+      },
+      "PLASTIC": {
+        "TITLE": "Plastics",
+        "ITEMS": [
+          "Used Plastics",
+          "Plastic Products",
+          "Recycled Pellets",
+          "Virgin Pellets"
+        ]
+      },
+      "VEHICLES": {
+        "TITLE": "Cars & Bikes",
+        "ITEMS": [
+          "Used Cars",
+          "Accident Cars",
+          "Non-running Cars",
+          "Motorcycles & Mopeds",
+          "Bicycles"
+        ]
+      },
+      "MACHINERY": {
+        "TITLE": "Construction & Agricultural",
+        "ITEMS": [
+          "Excavators",
+          "Bulldozers",
+          "Tractors",
+          "Combines",
+          "Other Heavy Equipment"
+        ]
+      },
+      "LEATHER": {
+        "TITLE": "Leather Goods",
+        "ITEMS": [
+          "Brand Bags",
+          "Wallets",
+          "Shoes & Belts",
+          "Leather Jackets"
+        ]
+      }
+    },
+    "CTA": {
+      "TITLE": "Feel Free to Contact Us First",
+      "DESC": "Purchase prices vary depending on item condition and market rates. We offer free appraisals, so please feel free to consult us.",
+      "BUTTON": "Request Free Appraisal"
+    }
+  },
+  "CONTACT": {
+    "PAGE_TITLE": "Quote & Inquiry",
+    "PAGE_SUBTITLE": "Contact Us",
+    "FORM": {
+      "TITLE": "Contact Form",
+      "NAME": "Name",
+      "NAME_PLACEHOLDER": "Taro Yamada",
+      "EMAIL": "Email Address",
+      "EMAIL_PLACEHOLDER": "example@email.com",
+      "PHONE": "Phone Number",
+      "PHONE_PLACEHOLDER": "090-1234-5678",
+      "TYPE": "Inquiry Type",
+      "TYPE_OPTIONS": {
+        "SELECT": "Please select",
+        "BUYING": "Purchase Consultation",
+        "RECYCLE": "Recycling Consultation",
+        "QUOTE": "Quote Request",
+        "OTHER": "Other"
+      },
+      "MESSAGE": "Inquiry Details",
+      "MESSAGE_PLACEHOLDER": "Please enter your inquiry details...",
+      "PRIVACY": "I agree to the Privacy Policy",
+      "PRIVACY_LINK": "Privacy Policy",
+      "SUBMIT": "Submit",
+      "NOTE": "We respond to inquiries in order, but depending on the content, it may take time. Thank you for your understanding."
+    },
+    "INFO": {
+      "TITLE": "Contact Information",
+      "EMAIL_LABEL": "Email Address",
+      "PHONE_LABEL": "Phone",
+      "PHONE_DESC": "We also accept inquiries by phone",
+      "LOCATION_LABEL": "Location",
+      "HOURS_LABEL": "Business Hours",
+      "HOURS_VALUE": "Weekdays 9:00 - 18:00"
+    },
+    "URGENT": {
+      "TITLE": "For Urgent Matters",
+      "DESC": "For faster response, please contact us by phone or LINE.",
+      "PHONE_BUTTON": "Call",
+      "LINE_BUTTON": "Contact via LINE"
+    },
+    "PRIVACY_POLICY": {
+      "TITLE": "Privacy Policy",
+      "INTRO": "Khmer Kansai Co., Ltd. (hereinafter referred to as 'the Company') recognizes the importance of personal information protection in the services provided on this website, complies with the Act on the Protection of Personal Information, and establishes the following Privacy Policy (hereinafter referred to as 'this Policy').",
+      "SECTION1": {
+        "TITLE": "Article 1 (Personal Information)",
+        "CONTENT": "'Personal Information' refers to 'personal information' as defined in the Personal Information Protection Act, and is information about a living individual that can identify the specific individual by name, date of birth, address, telephone number, contact information, or other descriptions contained in the information, as well as data related to appearance, fingerprints, voiceprints, and health insurance card insurer numbers that can identify the specific individual from the information alone (personal identification information)."
+      },
+      "SECTION2": {
+        "TITLE": "Article 2 (Business Operator Information)",
+        "COMPANY_NAME": "Company Name",
+        "REPRESENTATIVE": "Representative"
+      },
+      "SECTION3": {
+        "TITLE": "Article 3 (Method of Acquiring Personal Information)",
+        "CONTENT": "The Company may ask for personal information such as name, date of birth, address, telephone number, and email address when users register for use."
+      },
+      "SECTION4": {
+        "TITLE": "Article 4 (Purpose of Collecting and Using Personal Information)",
+        "PURPOSES": [
+          "Provision and operation of Company services",
+          "Response to inquiries from customers (including identity verification)",
+          "Information provision regarding services being used and guidance on other services provided by the Company",
+          "Contact regarding maintenance, important notices, etc.",
+          "Identification of customers who violate terms of use or use services for fraudulent or unreasonable purposes, and refusal of use",
+          "Confirmation and viewing of registered information, changes, deletion, and viewing of usage status",
+          "Billing for usage fees for paid services",
+          "Purposes incidental to the above purposes of use"
+        ]
+      },
+      "SECTION5": {
+        "TITLE": "Article 5 (Security Measures for Personal Information)",
+        "CONTENT": "To protect personal information, the Company takes measures such as management of personal information, designation of methods for carrying out personal information, and prevention of unauthorized access from third parties based on regulations regarding information security, and strives to prevent leakage, loss, falsification, and destruction of personal information."
+      },
+      "SECTION6": {
+        "TITLE": "Article 6 (Disclosure of Personal Information)",
+        "CONTENT": "When requested by the individual to disclose personal information and records of provision to third parties, the Company will disclose this to the individual without delay."
+      },
+      "SECTION7": {
+        "TITLE": "Article 7 (Correction and Deletion of Personal Information)",
+        "CONTENT": "If the personal information held by the Company is incorrect, the customer can request correction, addition, or deletion (hereinafter referred to as 'correction, etc.') of the personal information according to procedures established by the Company."
+      },
+      "SECTION8": {
+        "TITLE": "Article 8 (Contact for Inquiries)",
+        "CONTENT": "For questions, uncertainties, complaints, and other inquiries regarding the handling of personal information by the Company, please contact the following:",
+        "COMPANY_LABEL": "Company Name",
+        "EMAIL_LABEL": "Email"
+      },
+      "DATE": "Established: 2024"
+    }
+  },
+  "ROLES": {
+    "ADMIN": "Admin",
+    "OPERATOR": "Operator",
+    "USER": "User"
+  },
+  "LANGUAGES": {
+    "JA": "Japanese",
+    "EN": "English",
+    "VI": "Vietnamese"
+  },
+  "SERVICE": {
+    "PAGE_TITLE": "Our Services",
+    "PAGE_SUBTITLE": "Recycling & Trading",
+    "SCRAP": {
+      "TITLE": "Scrap Metal & Materials Trading",
+      "DESCRIPTION": "We specialize in buying and selling various scrap metals and recyclable materials. From copper wires to aluminum sheets, we offer competitive prices and professional handling.",
+      "COPPER": {
+        "TITLE": "Copper",
+        "DESC": "Copper wires, pipes, and scrap. High market value."
+      },
+      "ALUMINUM": {
+        "TITLE": "Aluminum",
+        "DESC": "Cans, sheets, profiles, and industrial scrap."
+      },
+      "IRON": {
+        "TITLE": "Iron & Steel",
+        "DESC": "Heavy machinery, structural steel, and mixed scrap."
+      },
+      "BRASS": {
+        "TITLE": "Brass & Bronze",
+        "DESC": "Fittings, valves, and decorative items."
+      }
+    },
+    "PLASTIC_RECYCLE": {
+      "TITLE": "Plastic Recycling & Pelletizing",
+      "DESCRIPTION": "We buy old and waste plastic, then process it into high-quality reusable plastic pellets. These pellets serve as raw materials for manufacturing new plastic products.",
+      "BUYING": {
+        "TITLE": "We Buy:",
+        "DESC": "PET bottles, HDPE containers, PP products, industrial plastic waste, and mixed plastics."
+      },
+      "PROCESS": {
+        "TITLE": "Processing:",
+        "DESC": "Sorting, cleaning, shredding, melting, and pelletizing into uniform plastic granules."
+      },
+      "SELLING": {
+        "TITLE": "We Sell:",
+        "DESC": "High-quality recycled pellets: PET, HDPE, PP, and custom compounds for manufacturing."
+      }
+    },
+    "MACHINERY": {
+      "TITLE": "Construction & Agricultural Machinery",
+      "DESCRIPTION": "We buy and sell construction machinery and agricultural equipment. From excavators to tractors, we handle export to Southeast Asian markets.",
+      "EXCAVATORS": {
+        "TITLE": "Excavators",
+        "DESC": "CAT, Komatsu, Hitachi models. We buy used and refurbished units for export."
+      },
+      "TRACTORS": {
+        "TITLE": "Tractors & Combines",
+        "DESC": "Agricultural machinery including tractors, harvesters, and tillage equipment."
+      },
+      "PARTS": {
+        "TITLE": "Parts & Components",
+        "DESC": "Spare parts, engines, hydraulic components, and attachments."
+      },
+      "QUOTE": "Global export to Cambodia, Vietnam, and other Southeast Asian markets."
+    },
+    "GALLERY": {
+      "TITLE": "Our Products & Materials",
+      "SUBTITLE": "Products We Handle",
+      "VIEW_MORE": "View All Products"
+    }
+  }
+}

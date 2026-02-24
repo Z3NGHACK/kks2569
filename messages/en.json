@@ -1,0 +1,20 @@
+{
+  "Header": {
+    "companyName": "Khmer Kansai Co., Ltd.",
+    "companyNameEn": "Khmer Kansai Co., Ltd.",
+    "top": "Top",
+    "about": "About",
+    "service": "Services",
+    "plan": "Plans",
+    "contact": "Contact / Quote",
+    "inquiry": "Contact"
+  },
+  "LanguageSwitcher": {
+    "label": "Select language"
+  },
+  "NotFound": {
+    "title": "ページが見つかりません",
+    "description": "お探しのページが見つかりませんでした。",
+    "backToHome": "ホームに戻る"
+  }
+}

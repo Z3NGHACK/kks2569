@@ -1,0 +1,20 @@
+{
+  "Header": {
+    "companyName": "クメール関西株式会社",
+    "companyNameEn": "Khmer Kansai Co., Ltd.",
+    "top": "トップ",
+    "about": "会社概要",
+    "service": "サービス概要",
+    "plan": "料金プラン",
+    "contact": "お見積り･お問い合わせ",
+    "inquiry": "お問い合わせ"
+  },
+  "LanguageSwitcher": {
+    "label": "言語を選択"
+  },
+  "NotFound": {
+    "title": "ページが見つかりません",
+    "description": "お探しのページが見つかりませんでした。",
+    "backToHome": "ホームに戻る"
+  }
+}

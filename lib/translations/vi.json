@@ -1,0 +1,344 @@
+{
+  "HEADER": {
+    "COMPANY_NAME": "Công ty TNHH Khmer Kansai",
+    "COMPANY_NAME_SHORT": "KKS",
+    "NAV": {
+      "TOP": "Trang chủ",
+      "ABOUT": "Giới thiệu",
+      "SERVICE": "Dịch vụ",
+      "PLAN": "Bảng giá",
+      "CONTACT": "Liên hệ"
+    },
+    "CONTACT_BUTTON": "Liên hệ"
+  },
+  "FOOTER": {
+    "DESCRIPTION": "Chúng tôi thu gom và tái chế đồ điện, nhựa, nhôm, sắt, xe đạp, máy móc xây dựng và thiết bị nông nghiệp không còn sử dụng, góp phần vào việc tuần hoàn tài nguyên.",
+    "MENU": "Menu",
+    "CONTACT_INFO": "Thông tin liên hệ",
+    "EMAIL": "info@kks2026.com",
+    "PHONE": "Liên hệ qua điện thoại",
+    "LOCATION": "Osaka, Nhật Bản",
+    "COPYRIGHT": "© 2024 Công ty TNHH Khmer Kansai. Bảo lưu mọi quyền."
+  },
+  "HOME": {
+    "HERO": {
+      "TITLE_1": "Khoan đã!",
+      "TITLE_2": "Chọn",
+      "TITLE_HIGHLIGHT": "Tái sử dụng",
+      "TITLE_3": "Thay vì Vứt bỏ",
+      "DESCRIPTION": "Công ty TNHH Khmer Kansai thu gom và tái chế đồ điện, nhựa, nhôm, sắt, xe đạp, máy móc xây dựng và thiết bị nông nghiệp không còn sử dụng. Chúng tôi đóng góp vào các hoạt động thân thiện với môi trường bằng cách tái sử dụng các tài nguyên này ở Đông Nam Á.",
+      "BUTTON_PRIMARY": "Nhận báo giá / Liên hệ",
+      "BUTTON_SECONDARY": "Xem dịch vụ"
+    },
+    "MISSION": {
+      "TITLE": "Hướng tới Tương lai Bền vững",
+      "SUBTITLE": "Chúng tôi hướng tới việc giảm thiểu tác động môi trường và hiện thực hóa xã hội tuần hoàn cho một tương lai bền vững."
+    },
+    "SERVICES": {
+      "TITLE": "Dịch vụ của chúng tôi",
+      "RECYCLE": {
+        "TITLE": "Kinh doanh Tái chế",
+        "DESCRIPTION": "Thu gom và tái chế nhựa, nhôm, sắt và các phế liệu kim loại khác"
+      },
+      "BUYING": {
+        "TITLE": "Kinh doanh Mua lại",
+        "DESCRIPTION": "Mua lại đồ điện, ô tô và sản phẩm da với giá hợp lý"
+      },
+      "MACHINERY": {
+        "TITLE": "Máy móc Xây dựng & Nông nghiệp",
+        "DESCRIPTION": "Mua lại giá cao và đại lý xuất khẩu máy móc xây dựng và thiết bị nông nghiệp"
+      },
+      "GLOBAL": {
+        "TITLE": "Mở rộng Toàn cầu",
+        "DESCRIPTION": "Mạng lưới tái sử dụng và bán hàng tại Đông Nam Á"
+      }
+    },
+    "CTA": {
+      "TITLE": "Hãy Liên hệ Với Chúng tôi Trước",
+      "SUBTITLE": "Ngay cả những vật dụng bạn nghĩ không còn sử dụng được cũng có thể tạo ra giá trị mới.",
+      "BUTTON": "Liên hệ tại đây"
+    }
+  },
+  "ABOUT": {
+    "PAGE_TITLE": "Giới thiệu",
+    "PAGE_SUBTITLE": "Hồ sơ công ty",
+    "MESSAGE": {
+      "TITLE": "Thông điệp từ Chủ tịch",
+      "P1": "Cảm ơn quý khách đã truy cập website của Công ty TNHH Khmer Kansai.",
+      "P2": "Chúng tôi hướng tới việc hiện thực hóa xã hội tuần hoàn coi trọng tài nguyên. Thông qua việc thu gom đồ điện, nhựa, nhôm, sắt, xe đạp, máy móc xây dựng và thiết bị nông nghiệp không còn sử dụng, chúng tôi đóng góp vào việc giảm thiểu tác động môi trường đồng thời hỗ trợ cuộc sống của khách hàng thông qua kinh doanh mua lại và dịch vụ dọn dẹp di sản.",
+      "P3": "Ngay cả những vật dụng bạn nghĩ không còn sử dụng được cũng có thể tạo ra giá trị mới. Thay vì đơn giản là vứt bỏ rác thải, chúng tôi đề xuất những cách tốt nhất để 'kết nối với tương lai' và liên kết với một tương lai bền vững.",
+      "P4": "Chúng tôi sẽ tiếp tục đồng hành cùng cộng đồng địa phương, cung cấp các dịch vụ thân thiện với môi trường và đáng tin cậy. Chúng tôi mong nhận được sự ủng hộ tiếp tục của quý khách đối với Công ty TNHH Khmer Kansai.",
+      "COMPANY": "Công ty TNHH Khmer Kansai",
+      "PRESIDENT": "Chủ tịch: Haruhisa Sugimoto"
+    },
+    "INFO": {
+      "TITLE": "Thông tin công ty",
+      "COMPANY_NAME": "Tên công ty",
+      "COMPANY_NAME_VALUE": "Công ty TNHH Khmer Kansai",
+      "REPRESENTATIVE": "Người đại diện",
+      "REPRESENTATIVE_VALUE": "Haruhisa Sugimoto",
+      "LOCATION": "Địa điểm",
+      "LOCATION_VALUE": "Tỉnh Osaka, Nhật Bản",
+      "EMAIL": "Email",
+      "EMAIL_VALUE": "info@kks2026.com",
+      "BUSINESS": "Hoạt động kinh doanh",
+      "BUSINESS_ITEMS": [
+        "Kinh doanh tái chế (đồ điện, nhựa, kim loại)",
+        "Kinh doanh mua lại (sản phẩm điện, ô tô, đồ da)",
+        "Mua lại và xuất khẩu máy móc xây dựng và thiết bị nông nghiệp",
+        "Dọn dẹp di sản và vệ sinh đặc biệt"
+      ]
+    }
+  },
+  "PLAN": {
+    "PAGE_TITLE": "Bảng giá",
+    "PAGE_SUBTITLE": "Bảng giá & Gói dịch vụ",
+    "INTRO": {
+      "TITLE": "Tự hỏi liệu nó còn sử dụng được không? Vui lòng tham khảo ý kiến chúng tôi trước khi vứt bỏ!",
+      "SUBTITLE": "Chúng tôi mua lại nhiều loại vật dụng bao gồm đồ điện, ô tô và sản phẩm da."
+    },
+    "FEATURES": {
+      "VISIT": {
+        "TITLE": "Mua hàng Tận nơi",
+        "DESC": "Chúng tôi đến tận nhà hoặc cơ sở kinh doanh của bạn để mua hàng."
+      },
+      "CASH": {
+        "TITLE": "Tiền mặt Ngay trong ngày",
+        "DESC": "Chúng tôi có thể thanh toán tiền mặt ngay sau khi thẩm định."
+      },
+      "BRING_IN": {
+        "TITLE": "Chào đón Mang trực tiếp đến!",
+        "DESC": "Những người ở gần có thể mang vật dụng trực tiếp đến chúng tôi."
+      }
+    },
+    "ITEMS": {
+      "TITLE": "Danh sách vật dụng mua lại",
+      "APPLIANCES": {
+        "TITLE": "Thiết bị Gia dụng",
+        "ITEMS": [
+          "TV (LCD, Plasma, CRT)",
+          "Tủ lạnh & Tủ đông",
+          "Máy giặt & Máy sấy",
+          "Điều hòa không khí",
+          "Máy tính & Máy tính bảng"
+        ]
+      },
+      "METAL": {
+        "TITLE": "Kim loại",
+        "ITEMS": [
+          "Lon nhôm & Phế liệu nhôm",
+          "Phế liệu sắt",
+          "Đồng & Đồng thau",
+          "Thép không gỉ",
+          "Kim loại khác"
+        ]
+      },
+      "PLASTIC": {
+        "TITLE": "Nhựa",
+        "ITEMS": [
+          "Nhựa đã qua sử dụng",
+          "Sản phẩm nhựa",
+          "Hạt nhựa tái chế",
+          "Hạt nhựa nguyên sinh"
+        ]
+      },
+      "VEHICLES": {
+        "TITLE": "Ô tô & Xe máy",
+        "ITEMS": [
+          "Ô tô đã qua sử dụng",
+          "Ô tô tai nạn",
+          "Ô tô không chạy được",
+          "Xe máy & Xe tay ga",
+          "Xe đạp"
+        ]
+      },
+      "MACHINERY": {
+        "TITLE": "Máy móc Xây dựng & Nông nghiệp",
+        "ITEMS": [
+          "Máy xúc",
+          "Máy ủi",
+          "Máy kéo",
+          "Máy gặt đập liên hợp",
+          "Thiết bị nặng khác"
+        ]
+      },
+      "LEATHER": {
+        "TITLE": "Đồ da",
+        "ITEMS": [
+          "Túi hiệu",
+          "Ví",
+          "Giày & Thắt lưng",
+          "Áo khoác da"
+        ]
+      }
+    },
+    "CTA": {
+      "TITLE": "Hãy Liên hệ Với Chúng tôi Trước",
+      "DESC": "Giá mua lại thay đổi tùy theo tình trạng vật dụng và thị trường. Chúng tôi cung cấp dịch vụ thẩm định miễn phí, vui lòng tham khảo ý kiến chúng tôi.",
+      "BUTTON": "Yêu cầu Thẩm định Miễn phí"
+    }
+  },
+  "CONTACT": {
+    "PAGE_TITLE": "Báo giá & Liên hệ",
+    "PAGE_SUBTITLE": "Liên hệ với chúng tôi",
+    "FORM": {
+      "TITLE": "Mẫu Liên hệ",
+      "NAME": "Họ tên",
+      "NAME_PLACEHOLDER": "Nguyễn Văn A",
+      "EMAIL": "Địa chỉ Email",
+      "EMAIL_PLACEHOLDER": "example@email.com",
+      "PHONE": "Số điện thoại",
+      "PHONE_PLACEHOLDER": "090-1234-5678",
+      "TYPE": "Loại Liên hệ",
+      "TYPE_OPTIONS": {
+        "SELECT": "Vui lòng chọn",
+        "BUYING": "Tư vấn Mua lại",
+        "RECYCLE": "Tư vấn Tái chế",
+        "QUOTE": "Yêu cầu Báo giá",
+        "OTHER": "Khác"
+      },
+      "MESSAGE": "Chi tiết Liên hệ",
+      "MESSAGE_PLACEHOLDER": "Vui lòng nhập chi tiết liên hệ của bạn...",
+      "PRIVACY": "Tôi đồng ý với Chính sách Bảo mật",
+      "PRIVACY_LINK": "Chính sách Bảo mật",
+      "SUBMIT": "Gửi",
+      "NOTE": "Chúng tôi trả lời các liên hệ theo thứ tự, nhưng tùy theo nội dung, có thể mất thời gian. Cảm ơn sự thông cảm của quý khách."
+    },
+    "INFO": {
+      "TITLE": "Thông tin Liên hệ",
+      "EMAIL_LABEL": "Địa chỉ Email",
+      "PHONE_LABEL": "Điện thoại",
+      "PHONE_DESC": "Chúng tôi cũng tiếp nhận liên hệ qua điện thoại",
+      "LOCATION_LABEL": "Địa điểm",
+      "HOURS_LABEL": "Giờ làm việc",
+      "HOURS_VALUE": "Thứ 2 - Thứ 6 9:00 - 18:00"
+    },
+    "URGENT": {
+      "TITLE": "Cho các vấn đề Khẩn cấp",
+      "DESC": "Để phản hồi nhanh hơn, vui lòng liên hệ với chúng tôi qua điện thoại hoặc LINE.",
+      "PHONE_BUTTON": "Gọi điện",
+      "LINE_BUTTON": "Liên hệ qua LINE"
+    },
+    "PRIVACY_POLICY": {
+      "TITLE": "Chính sách Bảo mật",
+      "INTRO": "Công ty TNHH Khmer Kansai (sau đây gọi là 'Công ty') nhận thức được tầm quan trọng của việc bảo vệ thông tin cá nhân trong các dịch vụ cung cấp trên website này, tuân thủ Luật Bảo vệ Thông tin Cá nhân và thiết lập Chính sách Bảo mật sau đây (sau đây gọi là 'Chính sách này').",
+      "SECTION1": {
+        "TITLE": "Điều 1 (Thông tin Cá nhân)",
+        "CONTENT": "'Thông tin Cá nhân' đề cập đến 'thông tin cá nhân' theo định nghĩa trong Luật Bảo vệ Thông tin Cá nhân, và là thông tin về cá nhân còn sống có thể xác định cá nhân cụ thể bằng tên, ngày sinh, địa chỉ, số điện thoại, thông tin liên hệ hoặc các mô tả khác có trong thông tin, cũng như dữ liệu liên quan đến ngoại hình, dấu vân tay, giọng nói và số bảo hiểm y tế có thể xác định cá nhân cụ thể từ thông tin đơn lẻ (thông tin nhận dạng cá nhân)."
+      },
+      "SECTION2": {
+        "TITLE": "Điều 2 (Thông tin Doanh nghiệp)",
+        "COMPANY_NAME": "Tên công ty",
+        "REPRESENTATIVE": "Người đại diện"
+      },
+      "SECTION3": {
+        "TITLE": "Điều 3 (Phương thức Thu thập Thông tin Cá nhân)",
+        "CONTENT": "Công ty có thể yêu cầu thông tin cá nhân như tên, ngày sinh, địa chỉ, số điện thoại và địa chỉ email khi người dùng đăng ký sử dụng."
+      },
+      "SECTION4": {
+        "TITLE": "Điều 4 (Mục đích Thu thập và Sử dụng Thông tin Cá nhân)",
+        "PURPOSES": [
+          "Cung cấp và vận hành dịch vụ của Công ty",
+          "Phản hồi liên hệ từ khách hàng (bao gồm xác minh danh tính)",
+          "Cung cấp thông tin về dịch vụ đang sử dụng và hướng dẫn về các dịch vụ khác do Công ty cung cấp",
+          "Liên hệ về bảo trì, thông báo quan trọng, v.v.",
+          "Xác định khách hàng vi phạm điều khoản sử dụng hoặc sử dụng dịch vụ cho mục đích gian lận hoặc phi lý, và từ chối sử dụng",
+          "Xác nhận và xem thông tin đăng ký, thay đổi, xóa và xem tình trạng sử dụng",
+          "Thanh toán phí sử dụng cho dịch vụ trả phí",
+          "Các mục đích liên quan đến các mục đích sử dụng nêu trên"
+        ]
+      },
+      "SECTION5": {
+        "TITLE": "Điều 5 (Biện pháp An ninh Thông tin Cá nhân)",
+        "CONTENT": "Để bảo vệ thông tin cá nhân, Công ty thực hiện các biện pháp như quản lý thông tin cá nhân, chỉ định phương thức mang thông tin cá nhân ra ngoài và ngăn chặn truy cập trái phép từ bên thứ ba dựa trên các quy định về an ninh thông tin, và nỗ lực ngăn chặn rò rỉ, mất mát, giả mạo và phá hủy thông tin cá nhân."
+      },
+      "SECTION6": {
+        "TITLE": "Điều 6 (Tiết lộ Thông tin Cá nhân)",
+        "CONTENT": "Khi được cá nhân yêu cầu tiết lộ thông tin cá nhân và hồ sơ cung cấp cho bên thứ ba, Công ty sẽ tiết lộ cho cá nhân đó không chậm trễ."
+      },
+      "SECTION7": {
+        "TITLE": "Điều 7 (Sửa đổi và Xóa Thông tin Cá nhân)",
+        "CONTENT": "Nếu thông tin cá nhân do Công ty nắm giữ không chính xác, khách hàng có thể yêu cầu sửa đổi, bổ sung hoặc xóa thông tin cá nhân (sau đây gọi là 'sửa đổi, v.v.') theo thủ tục do Công ty thiết lập."
+      },
+      "SECTION8": {
+        "TITLE": "Điều 8 (Liên hệ)",
+        "CONTENT": "Đối với câu hỏi, thắc mắc, khiếu nại và các liên hệ khác về việc xử lý thông tin cá nhân của Công ty, vui lòng liên hệ:",
+        "COMPANY_LABEL": "Tên công ty",
+        "EMAIL_LABEL": "Email"
+      },
+      "DATE": "Ban hành: 2024"
+    }
+  },
+  "ROLES": {
+    "ADMIN": "Quản trị viên",
+    "OPERATOR": "Vận hành viên",
+    "USER": "Người dùng"
+  },
+  "LANGUAGES": {
+    "JA": "Tiếng Nhật",
+    "EN": "Tiếng Anh",
+    "VI": "Tiếng Việt"
+  },
+  "SERVICE": {
+    "PAGE_TITLE": "Dịch Vụ Của Chúng Tôi",
+    "PAGE_SUBTITLE": "Tái Chế & Kinh Doanh",
+    "SCRAP": {
+      "TITLE": "Mua Bán Phế Liệu Kim Loại & Vật Liệu",
+      "DESCRIPTION": "Chúng tôi chuyên mua bán các loại phế liệu kim loại và vật liệu tái chế đa dạng. Từ dây đồng đến tấm nhôm, chúng tôi cung cấp giá cạnh tranh và xử lý chuyên nghiệp.",
+      "COPPER": {
+        "TITLE": "Đồng",
+        "DESC": "Dây đồng, ống đồng và phế liệu đồng. Giá trị thị trường cao."
+      },
+      "ALUMINUM": {
+        "TITLE": "Nhôm",
+        "DESC": "Lon nhôm, tấm nhôm, profile và phế liệu công nghiệp."
+      },
+      "IRON": {
+        "TITLE": "Sắt & Thép",
+        "DESC": "Máy móc nặng, thép kết cấu và phế liệu hỗn hợp."
+      },
+      "BRASS": {
+        "TITLE": "Đồng Thau & Đồng Đỏ",
+        "DESC": "Phụ kiện, van và đồ trang trí."
+      }
+    },
+    "PLASTIC_RECYCLE": {
+      "TITLE": "Tái Chế Nhựa & Ép Viên (Pelletizing)",
+      "DESCRIPTION": "Chúng tôi mua nhựa cũ và nhựa thải, sau đó xử lý thành viên nhựa tái chế chất lượng cao. Các viên nhựa này được sử dụng làm nguyên liệu thô cho sản xuất sản phẩm nhựa mới.",
+      "BUYING": {
+        "TITLE": "Chúng Tôi Mua:",
+        "DESC": "Chai PET, thùng HDPE, sản phẩm PP, nhựa thải công nghiệp và nhựa hỗn hợp."
+      },
+      "PROCESS": {
+        "TITLE": "Quy Trình Xử Lý:",
+        "DESC": "Phân loại, làm sạch, xay nhỏ, nấu chảy và ép thành hạt nhựa đồng đều."
+      },
+      "SELLING": {
+        "TITLE": "Chúng Tôi Bán:",
+        "DESC": "Hạt nhựa tái chế chất lượng cao: PET, HDPE, PP và hợp chất tùy chỉnh cho sản xuất."
+      }
+    },
+    "MACHINERY": {
+      "TITLE": "Máy Móc Xây Dựng & Nông Nghiệp",
+      "DESCRIPTION": "Chúng tôi mua bán máy móc xây dựng và thiết bị nông nghiệp. Từ máy xúc đến máy kéo, chúng tôi xử lý xuất khẩu sang các thị trường Đông Nam Á.",
+      "EXCAVATORS": {
+        "TITLE": "Máy Xúc",
+        "DESC": "Các model CAT, Komatsu, Hitachi. Chúng tôi mua máy cũ và máy tân trang để xuất khẩu."
+      },
+      "TRACTORS": {
+        "TITLE": "Máy Kéo & Máy Gặt",
+        "DESC": "Máy móc nông nghiệp bao gồm máy kéo, máy gặt đập liên hợp và thiết bị cày xới."
+      },
+      "PARTS": {
+        "TITLE": "Phụ Tùng & Linh Kiện",
+        "DESC": "Phụ tùng thay thế, động cơ, linh kiện thủy lực và phụ kiện gắn kèm."
+      },
+      "QUOTE": "Xuất khẩu toàn cầu sang Campuchia, Việt Nam và các thị trường Đông Nam Á khác."
+    },
+    "GALLERY": {
+      "TITLE": "Sản Phẩm & Nguyên Liệu Của Chúng Tôi",
+      "SUBTITLE": "Các Sản Phẩm Chúng Tôi Xử Lý",
+      "VIEW_MORE": "Xem Tất Cả Sản Phẩm"
+    }
+  }
+}
