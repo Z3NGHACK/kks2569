@@ -74,14 +74,16 @@
     "INFO": {
       "TITLE": "Thông tin công ty",
       "COMPANY_NAME": "Tên công ty",
-      "COMPANY_NAME_VALUE": "Công ty TNHH Khmer Kansai",
-      "REPRESENTATIVE": "Người đại diện",
-      "REPRESENTATIVE_VALUE": "Haruhisa Sugimoto",
-      "LOCATION": "Địa điểm",
-      "LOCATION_VALUE": "Tỉnh Osaka, Nhật Bản",
+      "CO_FOUNDERS": "Đồng sáng lập",
+      "PRESIDENT": "Chủ tịch",
+      "VICE_PRESIDENT": "Phó Chủ tịch",
+      "HEAD_OFFICE_BRANCH": "Trụ sở chính / Chi nhánh",
+      "CONTACT": "Liên hệ",
+      "TEL_PRESIDENT": "ĐT (Chủ tịch)",
+      "TEL_VICE_PRESIDENT": "ĐT (Phó Chủ tịch)",
       "EMAIL": "Email",
-      "EMAIL_VALUE": "info@kks2026.com",
-      "BUSINESS": "Hoạt động kinh doanh",
+      "WEBSITE": "Website",
+      "BUSINESS": "Lĩnh vực kinh doanh",
       "BUSINESS_ITEMS": [
         "Kinh doanh tái chế (đồ điện, nhựa, kim loại)",
         "Kinh doanh mua lại (sản phẩm điện, ô tô, đồ da)",
@@ -279,66 +281,372 @@
     "EN": "Tiếng Anh",
     "VI": "Tiếng Việt"
   },
+  
   "SERVICE": {
     "PAGE_TITLE": "Dịch Vụ Của Chúng Tôi",
     "PAGE_SUBTITLE": "Tái Chế & Kinh Doanh",
-    "SCRAP": {
-      "TITLE": "Mua Bán Phế Liệu Kim Loại & Vật Liệu",
-      "DESCRIPTION": "Chúng tôi chuyên mua bán các loại phế liệu kim loại và vật liệu tái chế đa dạng. Từ dây đồng đến tấm nhôm, chúng tôi cung cấp giá cạnh tranh và xử lý chuyên nghiệp.",
-      "COPPER": {
-        "TITLE": "Đồng",
-        "DESC": "Dây đồng, ống đồng và phế liệu đồng. Giá trị thị trường cao."
-      },
-      "ALUMINUM": {
-        "TITLE": "Nhôm",
-        "DESC": "Lon nhôm, tấm nhôm, profile và phế liệu công nghiệp."
-      },
-      "IRON": {
-        "TITLE": "Sắt & Thép",
-        "DESC": "Máy móc nặng, thép kết cấu và phế liệu hỗn hợp."
-      },
-      "BRASS": {
-        "TITLE": "Đồng Thau & Đồng Đỏ",
-        "DESC": "Phụ kiện, van và đồ trang trí."
-      }
-    },
+    
     "PLASTIC_RECYCLE": {
-      "TITLE": "Tái Chế Nhựa & Ép Viên (Pelletizing)",
-      "DESCRIPTION": "Chúng tôi mua nhựa cũ và nhựa thải, sau đó xử lý thành viên nhựa tái chế chất lượng cao. Các viên nhựa này được sử dụng làm nguyên liệu thô cho sản xuất sản phẩm nhựa mới.",
+      "TITLE": "Tái Chế Nhựa & Sản Xuất",
+      "DESCRIPTION": "Chúng tôi là nhà sản xuất tái chế nhựa hàng đầu. Mua các loại nhựa phế thải, xử lý qua phân loại, làm sạch, xay nghiền và tạo hạt để sản xuất viên nhựa tái chế chất lượng cao cho sản xuất công nghiệp.",
       "BUYING": {
-        "TITLE": "Chúng Tôi Mua:",
-        "DESC": "Chai PET, thùng HDPE, sản phẩm PP, nhựa thải công nghiệp và nhựa hỗn hợp."
+        "TITLE": "Chúng Tôi Mua Tất Cả Các Loại:",
+        "DESC": "Phế liệu công nghiệp, nhựa tiêu dùng sau sử dụng, nhựa hỗn hợp, phế liệu nhà máy"
       },
-      "PROCESS": {
-        "TITLE": "Quy Trình Xử Lý:",
-        "DESC": "Phân loại, làm sạch, xay nhỏ, nấu chảy và ép thành hạt nhựa đồng đều."
+      "MANUFACTURING": {
+        "TITLE": "Sản Xuất:",
+        "DESC": "Cơ sở tạo hạt hiện đại sản xuất hạt nhựa chất lượng cao cấp"
       },
       "SELLING": {
         "TITLE": "Chúng Tôi Bán:",
-        "DESC": "Hạt nhựa tái chế chất lượng cao: PET, HDPE, PP và hợp chất tùy chỉnh cho sản xuất."
+        "DESC": "Hạt tái chế chất lượng gần nguyên sinh, hợp chất tùy chỉnh, vật liệu khớp màu"
       }
     },
-    "MACHINERY": {
-      "TITLE": "Máy Móc Xây Dựng & Nông Nghiệp",
-      "DESCRIPTION": "Chúng tôi mua bán máy móc xây dựng và thiết bị nông nghiệp. Từ máy xúc đến máy kéo, chúng tôi xử lý xuất khẩu sang các thị trường Đông Nam Á.",
-      "EXCAVATORS": {
-        "TITLE": "Máy Xúc",
-        "DESC": "Các model CAT, Komatsu, Hitachi. Chúng tôi mua máy cũ và máy tân trang để xuất khẩu."
-      },
-      "TRACTORS": {
-        "TITLE": "Máy Kéo & Máy Gặt",
-        "DESC": "Máy móc nông nghiệp bao gồm máy kéo, máy gặt đập liên hợp và thiết bị cày xới."
-      },
-      "PARTS": {
-        "TITLE": "Phụ Tùng & Linh Kiện",
-        "DESC": "Phụ tùng thay thế, động cơ, linh kiện thủy lực và phụ kiện gắn kèm."
-      },
-      "QUOTE": "Xuất khẩu toàn cầu sang Campuchia, Việt Nam và các thị trường Đông Nam Á khác."
+    
+    "PLASTIC_TYPES": {
+      "TITLE": "Các Loại Nhựa Chúng Tôi Xử Lý",
+      "VIEW_ALL": "Xem Tất Cả Các Loại Nhựa",
+      "CLICK_DETAILS": "Nhấn để xem chi tiết",
+      "VIEW_DETAILS": "Xem Chi Tiết"
     },
+    
+    "METAL": {
+      "TITLE": "Kinh Doanh Kim Loại",
+      "SUBTITLE": "Mua Bán Kim Loại | Chuyên Đồng & Nhôm",
+      "COPPER": {
+        "TITLE": "Đồng",
+        "DESC": "Mua bán dây đồng, ống, tấm và phế liệu đồng. Giá trị cao với mức giá cạnh tranh. Có cả chất lượng tái chế và nguyên sinh."
+      },
+      "ALUMINUM": {
+        "TITLE": "Nhôm",
+        "DESC": "Lon, tấm, profile, ép đùn và phế liệu công nghiệp. Xử lý cả vật liệu tái chế và sản phẩm nhôm nguyên sinh cho nhiều ngành."
+      }
+    },
+    
+    "MACHINERY": {
+      "TITLE": "Máy Xây Dựng & Nông Nghiệp",
+      "SUBTITLE": "Máy Xây Dựng & Máy Nông Nghiệp | Mua, Tân Trang, Bán",
+      "QUOTE": "Xuất khẩu toàn cầu sang Campuchia, Việt Nam và các thị trường Đông Nam Á khác. Mua từ đấu giá, bán trực tiếp và đổi máy.",
+      "MORE_EQUIPMENT": "Thiết bị khác"
+    },
+    
     "GALLERY": {
       "TITLE": "Sản Phẩm & Nguyên Liệu Của Chúng Tôi",
-      "SUBTITLE": "Các Sản Phẩm Chúng Tôi Xử Lý",
-      "VIEW_MORE": "Xem Tất Cả Sản Phẩm"
+      "SUBTITLE": "Sản Phẩm & Nguyên Liệu Chúng Tôi Xử Lý",
+      "VIEW_ALL": "Xem Tất Cả Sản Phẩm"
     }
+  },
+
+  "COPPER": {
+    "PAGE_TITLE": "Kinh Doanh Đồng",
+    "PAGE_SUBTITLE": "Mua Bán Đồng | Phế Liệu & Sản Phẩm Đồng Cao Cấp",
+    "BACK_TO_SERVICES": "Quay lại Dịch Vụ",
+    
+    "HERO": {
+      "TITLE": "Kinh Doanh Đồng Giá Trị Cao",
+      "DESCRIPTION": "Chúng tôi chuyên mua bán tất cả các loại phế liệu và sản phẩm đồng. Từ dây phế liệu công nghiệp đến cathode cao cấp, giá cạnh tranh và dịch vụ đáng tin cậy cho thị trường nội địa và xuất khẩu.",
+      "PURITY": "Độ Tinh Khiết Cao",
+      "GRADE": "Tiêu Chuẩn Toàn Cầu",
+      "PRICE": "Giá Tốt Nhất"
+    },
+    
+    "PRODUCTS": {
+      "TITLE": "Sản Phẩm Đồng Của Chúng Tôi",
+      "REQUEST_QUOTE": "Yêu Cầu Báo Giá"
+    },
+    
+    "SERVICES": {
+      "BUY": {
+        "TITLE": "Chúng Tôi Mua Đồng",
+        "DESC": "Mua tất cả các loại phế liệu đồng từ công nghiệp, thương mại và cá nhân. Thanh toán ngay và nhận hàng tại chỗ."
+      },
+      "SELL": {
+        "TITLE": "Chúng Tôi Bán Đồng",
+        "DESC": "Sản phẩm đồng cao cấp cho sản xuất, xây dựng và xuất khẩu. Chấp nhận thông số tùy chỉnh và đơn hàng lớn."
+      },
+      "EXPORT": {
+        "TITLE": "Dịch Vụ Xuất Khẩu",
+        "DESC": "Đóng container và vận chuyển quốc tế đến Đông Nam Á, Trung Quốc và các thị trường toàn cầu. Cung cấp đầy đủ chứng từ."
+      }
+    },
+    
+    "PROCESS": {
+      "TITLE": "Quy Trình Tái Chế Đồng Của Chúng Tôi",
+      "STEP_1": {
+        "TITLE": "Thu Gom & Phân Loại",
+        "DESC": "Thu gom phế liệu đồng từ nhiều nguồn và phân loại theo cấp độ và độ tinh khiết."
+      },
+      "STEP_2": {
+        "TITLE": "Xử Lý",
+        "DESC": "Tách vỏ dây, nghiền và làm sạch để loại bỏ lớp cách điện và tạp chất."
+      },
+      "STEP_3": {
+        "TITLE": "Nấu Chảy & Tinh Chế",
+        "DESC": "Nấu chảy ở nhiệt độ cao trong lò với chất trợ dung để loại bỏ tạp chất."
+      },
+      "STEP_4": {
+        "TITLE": "Đúc & Tạo Hình",
+        "DESC": "Đúc thành thỏi, billet hoặc thanh dây để sử dụng sản xuất."
+      }
+    },
+    
+    "CTA": {
+      "TITLE": "Sẵn Sàng Giao Dịch Đồng?",
+      "DESCRIPTION": "Dù bạn muốn bán phế liệu đồng hay mua sản phẩm đồng cao cấp, chúng tôi cung cấp giá cạnh tranh và dịch vụ chuyên nghiệp.",
+      "GET_QUOTE": "Nhận Báo Giá",
+      "VIEW_PRICING": "Xem Giá"
+    }
+  },
+
+  "ALUMINUM": {
+    "PAGE_TITLE": "Kinh Doanh Nhôm",
+    "PAGE_SUBTITLE": "Mua Bán Nhôm | Phế Liệu & Sản Phẩm Nhôm Cao Cấp",
+    "BACK_TO_SERVICES": "Quay lại Dịch Vụ",
+    
+    "HERO": {
+      "TITLE": "Kinh Doanh Nhôm Chuyên Nghiệp",
+      "DESCRIPTION": "Chúng tôi kinh doanh mọi dạng phế liệu và sản phẩm nhôm, từ lon UBC thông thường đến hợp kim hàng không cao cấp. Cơ sở của chúng tôi xử lý phân loại, chế biến và chuẩn bị cho sử dụng nội địa và xuất khẩu quốc tế.",
+      "PURITY": "Độ Tinh Khiết Cao",
+      "ALLOYS": "Loạt 1000-7000",
+      "EXPORT": "Vận Chuyển Toàn Cầu"
+    },
+    
+    "PRODUCTS": {
+      "TITLE": "Sản Phẩm Nhôm Của Chúng Tôi",
+      "REQUEST_QUOTE": "Yêu Cầu Báo Giá"
+    },
+    
+    "SERVICES": {
+      "BUY": {
+        "TITLE": "Chúng Tôi Mua Nhôm",
+        "DESC": "Mua tất cả các loại nhôm bao gồm UBC, ép đùn, bánh xe và đúc. Giá cạnh tranh dựa trên tỷ giá LME."
+      },
+      "SELL": {
+        "TITLE": "Chúng Tôi Bán Nhôm",
+        "DESC": "Sản phẩm nhôm sơ cấp và thứ cấp bao gồm thỏi, billet và hợp kim tùy chỉnh cho sản xuất."
+      },
+      "EXPORT": {
+        "TITLE": "Dịch Vụ Xuất Khẩu",
+        "DESC": "Vận chuyển container đến các thị trường châu Á với phân loại, đóng gói và chứng từ xuất khẩu đầy đủ."
+      }
+    },
+    
+    "PROCESS": {
+      "TITLE": "Quy Trình Tái Chế Nhôm Của Chúng Tôi",
+      "STEP_1": {
+        "TITLE": "Thu Gom & Phân Loại",
+        "DESC": "Phân loại theo loại hợp kim và loại bỏ tạp chất như thép, nhựa và cao su."
+      },
+      "STEP_2": {
+        "TITLE": "Nghiền & Tẩy Lớp Phủ",
+        "DESC": "Nghiền cơ học và tẩy nhiệt để loại bỏ sơn và vecni."
+      },
+      "STEP_3": {
+        "TITLE": "Nấu Chảy & Tinh Chế",
+        "DESC": "Nấu chảy trong lò quay với chất trợ dung để loại bỏ tạp chất và xỉ."
+      },
+      "STEP_4": {
+        "TITLE": "Đúc & Cán",
+        "DESC": "Đúc thành thỏi hoặc đúc nguội trực tiếp thành tấm cán."
+      }
+    },
+    
+    "CTA": {
+      "TITLE": "Giao Dịch Nhôm Với Chúng Tôi",
+      "DESCRIPTION": "Từ lon nước ngọt đến hợp kim hàng không, chúng tôi xử lý mọi loại nhôm. Nhận giá cạnh tranh cho phế liệu của bạn hoặc nguồn nguyên liệu chất lượng cho sản xuất.",
+      "GET_QUOTE": "Nhận Báo Giá",
+      "VIEW_PRICING": "Xem Giá"
+    }
+  },
+
+  "EXCAVATORS": {
+    "PAGE_TITLE": "Máy Xúc",
+    "PAGE_SUBTITLE": "Máy Xúc Thủy Lực | Mua, Tân Trang, Xuất Khẩu",
+    "BACK_TO_SERVICES": "Quay lại Dịch Vụ",
+    
+    "HERO": {
+      "TITLE": "Máy Xúc Thủy Lực",
+      "DESCRIPTION": "Chúng tôi chuyên kinh doanh máy xúc thủy lực từ 20 tấn đến 50 tấn. Kho hàng bao gồm các mẫu phổ biến từ Caterpillar, Komatsu, Hitachi và Kobelco. Tất cả máy đều được kiểm tra, tân trang nếu cần và chuẩn bị xuất khẩu sang thị trường Đông Nam Á.",
+      "CLASS": "Lớp 20-50 Tấn",
+      "INSPECTION": "Báo Cáo Kiểm Tra",
+      "DOCUMENTATION": "Chứng Từ Xuất Khẩu"
+    },
+    
+    "MODELS": {
+      "TITLE": "Các Mẫu Phổ Biến Chúng Tôi Xử Lý"
+    },
+    
+    "SERVICES": {
+      "BUY": {
+        "TITLE": "Chúng Tôi Mua Máy Xúc",
+        "DESC": "Mua máy xúc đã qua sử dụng từ công ty xây dựng, đội xe cho thuê và đấu giá. Đánh giá công bằng và thanh toán ngay."
+      },
+      "REFURBISHMENT": {
+        "TITLE": "Tân Trang",
+        "DESC": "Dịch vụ sửa chữa và sơn chuyên nghiệp để chuẩn bị máy cho xuất khẩu. Đại tu động cơ và tái tạo hệ thống thủy lực có sẵn."
+      },
+      "EXPORT": {
+        "TITLE": "Sẵn Sàng Xuất Khẩu",
+        "DESC": "Chứng từ đầy đủ, đóng container và vận chuyển đến Campuchia, Việt Nam, Myanmar và các điểm đến khác."
+      }
+    },
+    
+    "PROCESS": {
+      "TITLE": "Quy Trình Hoạt Động",
+      "STEP_1": {
+        "TITLE": "Đánh Giá",
+        "DESC": "Gửi ảnh và thông số để nhận báo giá"
+      },
+      "STEP_2": {
+        "TITLE": "Kiểm Tra",
+        "DESC": "Kiểm tra tại chỗ và thử nghiệm"
+      },
+      "STEP_3": {
+        "TITLE": "Mua",
+        "DESC": "Giá công bằng với thanh toán ngay"
+      },
+      "STEP_4": {
+        "TITLE": "Xuất Khẩu",
+        "DESC": "Xử lý chứng từ và vận chuyển"
+      }
+    },
+    
+    "CTA": {
+      "TITLE": "Bạn Có Máy Xúc Để Bán?",
+      "DESCRIPTION": "Chúng tôi đang tích cực tìm kiếm máy xúc chất lượng. Liên hệ với chi tiết máy để nhận ưu đãi cạnh tranh. Chúng tôi xử lý nhận hàng, chứng từ và xuất khẩu.",
+      "CONTACT": "Liên Hệ Chúng Tôi",
+      "SCHEDULE": "Lên Lịch Kiểm Tra"
+    }
+  },
+
+  "TRACTORS": {
+    "PAGE_TITLE": "Máy Kéo & Máy Nông Nghiệp",
+    "PAGE_SUBTITLE": "Máy Kéo & Thiết Bị Nông Nghiệp | Kinh Doanh Thiết Bị Nông Nghiệp",
+    "BACK_TO_SERVICES": "Quay lại Dịch Vụ",
+    
+    "HERO": {
+      "TITLE": "Chuyên Gia Thiết Bị Nông Nghiệp",
+      "DESCRIPTION": "Chúng tôi mua bán máy kéo, máy gặt đập liên hợp và thiết bị nông nghiệp. Từ máy kéo vườn nhỏ gọn đến máy gặt lớn, chúng tôi xử lý mọi loại máy nông nghiệp cho thị trường Đông Nam Á.",
+      "TRACTOR_RANGE": "Máy Kéo 20-200 Mã Lực",
+      "COMBINES": "Máy Gặt Đập Liên Hợp",
+      "IMPLEMENTS": "Thiết Bị Gắn Kèm"
+    },
+    
+    "CATEGORIES": {
+      "TITLE": "Danh Mục Thiết Bị"
+    },
+    
+    "IMPLEMENTS": {
+      "TITLE": "Thiết Bị Gắn Kèm Nông Nghiệp",
+      "DESCRIPTION": "Chúng tôi cũng kinh doanh nhiều loại thiết bị gắn kèm và phụ kiện cho máy kéo và máy gặt."
+    },
+    
+    "SERVICES": {
+      "BUY": {
+        "TITLE": "Chúng Tôi Mua Thiết Bị",
+        "DESC": "Mua máy kéo và thiết bị nông nghiệp đã qua sử dụng từ nông dân, đại lý và đấu giá."
+      },
+      "MAINTENANCE": {
+        "TITLE": "Bảo Dưỡng",
+        "DESC": "Dịch vụ bảo dưỡng, sửa chữa chuyên nghiệp và chuẩn bị cho điều kiện khí hậu nhiệt đới."
+      },
+      "EXPORT": {
+        "TITLE": "Sẵn Sàng Xuất Khẩu",
+        "DESC": "Đóng container và vận chuyển đến Campuchia, Việt Nam, Myanmar và Lào."
+      }
+    },
+    
+    "CTA": {
+      "TITLE": "Cần Thiết Bị Nông Nghiệp?",
+      "DESCRIPTION": "Dù bạn muốn bán thiết bị đã qua sử dụng hay cần máy kéo chất lượng cho trang trại, chúng tôi cung cấp giá cạnh tranh và dịch vụ đáng tin cậy.",
+      "CONTACT": "Liên Hệ Chúng Tôi"
+    }
+  },
+
+  "PARTS": {
+    "PAGE_TITLE": "Phụ Tùng & Linh Kiện",
+    "PAGE_SUBTITLE": "Phụ Tùng & Linh Kiện | Phụ Tùng Chính Hãng & Thay Thế",
+    "BACK_TO_SERVICES": "Quay lại Dịch Vụ",
+    
+    "HERO": {
+      "TITLE": "Nhà Cung Cấp Phụ Tùng Thiết Bị Nặng",
+      "DESCRIPTION": "Chúng tôi cung cấp phụ tùng chính hãng và chất lượng thay thế cho máy xây dựng và nông nghiệp. Từ linh kiện động cơ đến hệ thống thủy lực, chúng tôi có hàng ngàn mặt hàng sẵn sàng giao ngay hoặc có thể tìm nguồn linh kiện đặc thù theo nhu cầu.",
+      "GENUINE": "Phụ Tùng Chính Hãng",
+      "AFTERMARKET": "Phụ Tùng Thay Thế",
+      "OEM": "Chất Lượng OEM"
+    },
+    
+    "CATEGORIES": {
+      "TITLE": "Danh Mục Phụ Tùng"
+    },
+    
+    "BRANDS": {
+      "TITLE": "Thương Hiệu Chúng Tôi Hỗ Trợ"
+    },
+    
+    "SERVICES": {
+      "SOURCING": {
+        "TITLE": "Tìm Nguồn Phụ Tùng",
+        "DESC": "Không tìm thấy phụ tùng? Chúng tôi tìm nguồn linh kiện khó tìm từ mạng lưới nhà cung cấp."
+      },
+      "BULK": {
+        "TITLE": "Đơn Hàng Số Lượng Lớn",
+        "DESC": "Giá sỉ cho đại lý và xưởng sửa chữa. Gửi container có sẵn."
+      },
+      "SUPPORT": {
+        "TITLE": "Hỗ Trợ Kỹ Thuật",
+        "DESC": "Tư vấn chuyên gia về lựa chọn phụ tùng và tính tương thích cho máy cụ thể của bạn."
+      }
+    },
+    
+    "CTA": {
+      "TITLE": "Cần Phụ Tùng?",
+      "DESCRIPTION": "Gửi số phụ tùng hoặc model máy để nhận báo giá nhanh. Chúng tôi có sẵn phụ tùng phổ biến và có thể tìm nguồn linh kiện đặc biệt.",
+      "REQUEST_QUOTE": "Yêu Cầu Báo Giá"
+    }
+  },
+
+  "PLASTIC_DETAIL": {
+    "BACK_TO_SERVICES": "Quay lại Dịch Vụ",
+    "ABOUT": "Giới Thiệu",
+    "PROPERTIES": {
+      "TITLE": "Tính Chất Chính"
+    },
+    "APPLICATIONS": {
+      "TITLE": "Ứng Dụng Phổ Biến"
+    },
+    "PROCESS": {
+      "TITLE": "Quy Trình Tái Chế Của Chúng Tôi"
+    },
+    "GALLERY": {
+      "TITLE": "Thư Viện Sản Phẩm"
+    },
+    "BUY": {
+      "TITLE": "Chúng Tôi Mua",
+      "GET_QUOTE": "Nhận Báo Giá"
+    },
+    "SELL": {
+      "TITLE": "Chúng Tôi Bán Hạt Nhựa",
+      "REQUEST_SAMPLE": "Yêu Cầu Mẫu"
+    }
+  },
+
+  "PRODUCTS": {
+    "PAGE_TITLE": "Tất Cả Sản Phẩm",
+    "PAGE_SUBTITLE": "Tất Cả Sản Phẩm | Duyệt Toàn Bộ Kho Hàng",
+    "BACK_TO_SERVICES": "Quay lại Dịch Vụ",
+    "FILTER": "Lọc",
+    "INQUIRY": "Hỏi Hàng",
+    "NO_PRODUCTS": "Không tìm thấy sản phẩm trong danh mục này.",
+    "CONTACT_PROMPT": "Không thấy sản phẩm bạn cần? Liên hệ chúng tôi để đặt hàng đặc biệt.",
+    "CONTACT_US": "Liên Hệ Chúng Tôi"
+  },
+
+  "COMMON": {
+    "BACK_TO_SERVICES": "Quay lại Dịch Vụ",
+    "VIEW_DETAILS": "Xem Chi Tiết"
   }
+
+
+
 }

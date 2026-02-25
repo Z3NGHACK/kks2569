@@ -74,13 +74,15 @@
     "INFO": {
       "TITLE": "Company Information",
       "COMPANY_NAME": "Company Name",
-      "COMPANY_NAME_VALUE": "Khmer Kansai Co., Ltd.",
-      "REPRESENTATIVE": "Representative",
-      "REPRESENTATIVE_VALUE": "Haruhisa Sugimoto",
-      "LOCATION": "Location",
-      "LOCATION_VALUE": "Osaka Prefecture, Japan",
+      "CO_FOUNDERS": "Co-Founders",
+      "PRESIDENT": "President",
+      "VICE_PRESIDENT": "Vice President",
+      "HEAD_OFFICE_BRANCH": "Head Office / Branch",
+      "CONTACT": "Contact",
+      "TEL_PRESIDENT": "TEL (President)",
+      "TEL_VICE_PRESIDENT": "TEL (Vice President)",
       "EMAIL": "Email",
-      "EMAIL_VALUE": "info@kks2026.com",
+      "WEBSITE": "Website",
       "BUSINESS": "Business Activities",
       "BUSINESS_ITEMS": [
         "Recycling business (appliances, plastics, metals)",
@@ -89,6 +91,7 @@
         "Estate clearance and special cleaning"
       ]
     }
+
   },
   "PLAN": {
     "PAGE_TITLE": "Pricing Plans",
@@ -279,66 +282,372 @@
     "EN": "English",
     "VI": "Vietnamese"
   },
+  
+  
   "SERVICE": {
     "PAGE_TITLE": "Our Services",
     "PAGE_SUBTITLE": "Recycling & Trading",
-    "SCRAP": {
-      "TITLE": "Scrap Metal & Materials Trading",
-      "DESCRIPTION": "We specialize in buying and selling various scrap metals and recyclable materials. From copper wires to aluminum sheets, we offer competitive prices and professional handling.",
-      "COPPER": {
-        "TITLE": "Copper",
-        "DESC": "Copper wires, pipes, and scrap. High market value."
-      },
-      "ALUMINUM": {
-        "TITLE": "Aluminum",
-        "DESC": "Cans, sheets, profiles, and industrial scrap."
-      },
-      "IRON": {
-        "TITLE": "Iron & Steel",
-        "DESC": "Heavy machinery, structural steel, and mixed scrap."
-      },
-      "BRASS": {
-        "TITLE": "Brass & Bronze",
-        "DESC": "Fittings, valves, and decorative items."
-      }
-    },
+    
     "PLASTIC_RECYCLE": {
-      "TITLE": "Plastic Recycling & Pelletizing",
-      "DESCRIPTION": "We buy old and waste plastic, then process it into high-quality reusable plastic pellets. These pellets serve as raw materials for manufacturing new plastic products.",
+      "TITLE": "Plastic Recycling & Manufacturing",
+      "DESCRIPTION": "We are a leading plastic recycling manufacturer. We purchase various types of waste plastic, process them through advanced sorting, cleaning, shredding, and pelletizing to produce high-quality reusable plastic pellets for industrial manufacturing.",
       "BUYING": {
-        "TITLE": "We Buy:",
-        "DESC": "PET bottles, HDPE containers, PP products, industrial plastic waste, and mixed plastics."
+        "TITLE": "We Buy All Types:",
+        "DESC": "Industrial waste, post-consumer plastic, mixed plastics, factory scraps"
       },
-      "PROCESS": {
-        "TITLE": "Processing:",
-        "DESC": "Sorting, cleaning, shredding, melting, and pelletizing into uniform plastic granules."
+      "MANUFACTURING": {
+        "TITLE": "Manufacturing:",
+        "DESC": "State-of-the-art pelletizing facilities producing premium quality granules"
       },
       "SELLING": {
         "TITLE": "We Sell:",
-        "DESC": "High-quality recycled pellets: PET, HDPE, PP, and custom compounds for manufacturing."
+        "DESC": "Virgin-quality recycled pellets, custom compounds, color-matched materials"
       }
     },
+    
+    "PLASTIC_TYPES": {
+      "TITLE": "Plastic Types We Handle",
+      "VIEW_ALL": "View All Plastic Types",
+      "CLICK_DETAILS": "クリックして詳細を見る",
+      "VIEW_DETAILS": "View Details"
+    },
+    
+    "METAL": {
+      "TITLE": "Metal Trading",
+      "SUBTITLE": "金属買取・販売 | Copper & Aluminum Specialists",
+      "COPPER": {
+        "TITLE": "Copper",
+        "DESC": "We buy and sell copper wires, pipes, sheets, and scrap. High market value with competitive pricing. Both recycled and prime quality available."
+      },
+      "ALUMINUM": {
+        "TITLE": "Aluminum",
+        "DESC": "Cans, sheets, profiles, extrusions, and industrial scrap. We handle both recycled materials and prime aluminum products for various industries."
+      }
+    },
+    
     "MACHINERY": {
       "TITLE": "Construction & Agricultural Machinery",
-      "DESCRIPTION": "We buy and sell construction machinery and agricultural equipment. From excavators to tractors, we handle export to Southeast Asian markets.",
-      "EXCAVATORS": {
-        "TITLE": "Excavators",
-        "DESC": "CAT, Komatsu, Hitachi models. We buy used and refurbished units for export."
-      },
-      "TRACTORS": {
-        "TITLE": "Tractors & Combines",
-        "DESC": "Agricultural machinery including tractors, harvesters, and tillage equipment."
-      },
-      "PARTS": {
-        "TITLE": "Parts & Components",
-        "DESC": "Spare parts, engines, hydraulic components, and attachments."
-      },
-      "QUOTE": "Global export to Cambodia, Vietnam, and other Southeast Asian markets."
+      "SUBTITLE": "建設機械・農機具 | Buy, Refurbish, Sell",
+      "QUOTE": "Global export to Cambodia, Vietnam, and other Southeast Asian markets. We buy from auctions, direct sales, and trade-ins.",
+      "MORE_EQUIPMENT": "More Equipment / その他の設備"
     },
+    
     "GALLERY": {
       "TITLE": "Our Products & Materials",
-      "SUBTITLE": "Products We Handle",
-      "VIEW_MORE": "View All Products"
+      "SUBTITLE": "取扱商品・素材 | Products We Handle",
+      "VIEW_ALL": "View All Products"
     }
+  },
+
+  "COPPER": {
+    "PAGE_TITLE": "Copper Trading",
+    "PAGE_SUBTITLE": "銅買取・販売 | Premium Copper Scrap & Products",
+    "BACK_TO_SERVICES": "Back to Services",
+    
+    "HERO": {
+      "TITLE": "High-Value Copper Trading",
+      "DESCRIPTION": "We specialize in buying and selling all grades of copper scrap and products. From industrial wire scrap to premium cathodes, we offer competitive pricing and reliable service for both domestic and export markets.",
+      "PURITY": "High Purity",
+      "GRADE": "Global Standards",
+      "PRICE": "Best Prices"
+    },
+    
+    "PRODUCTS": {
+      "TITLE": "Our Copper Products",
+      "REQUEST_QUOTE": "Request Quote"
+    },
+    
+    "SERVICES": {
+      "BUY": {
+        "TITLE": "We Buy Copper",
+        "DESC": "Purchasing all grades of copper scrap from industrial, commercial, and individual sellers. Immediate payment and pickup available."
+      },
+      "SELL": {
+        "TITLE": "We Sell Copper",
+        "DESC": "Premium copper products for manufacturing, construction, and export. Custom specifications and bulk orders accepted."
+      },
+      "EXPORT": {
+        "TITLE": "Export Services",
+        "DESC": "Container loading and international shipping to Southeast Asia, China, and other global markets. Full documentation provided."
+      }
+    },
+    
+    "PROCESS": {
+      "TITLE": "Our Copper Recycling Process",
+      "STEP_1": {
+        "TITLE": "Collection & Sorting",
+        "DESC": "We collect copper scrap from various sources and sort by grade and purity level."
+      },
+      "STEP_2": {
+        "TITLE": "Processing",
+        "DESC": "Wire stripping, shredding, and cleaning to remove insulation and contaminants."
+      },
+      "STEP_3": {
+        "TITLE": "Melting & Refining",
+        "DESC": "High-temperature melting in furnaces with flux to remove impurities."
+      },
+      "STEP_4": {
+        "TITLE": "Casting & Forming",
+        "DESC": "Casting into ingots, billets, or wire rods for manufacturing use."
+      }
+    },
+    
+    "CTA": {
+      "TITLE": "Ready to Trade Copper?",
+      "DESCRIPTION": "Whether you want to sell copper scrap or purchase premium copper products, we offer competitive prices and professional service.",
+      "GET_QUOTE": "Get a Quote",
+      "VIEW_PRICING": "View Pricing"
+    }
+  },
+
+  "ALUMINUM": {
+    "PAGE_TITLE": "Aluminum Trading",
+    "PAGE_SUBTITLE": "アルミニウム買取・販売 | Premium Aluminum Scrap & Products",
+    "BACK_TO_SERVICES": "Back to Services",
+    
+    "HERO": {
+      "TITLE": "Professional Aluminum Trading",
+      "DESCRIPTION": "We trade all forms of aluminum scrap and products, from common UBC cans to high-grade aerospace alloys. Our facilities handle sorting, processing, and preparation for both domestic use and international export.",
+      "PURITY": "High Purity",
+      "ALLOYS": "1000-7000 Series",
+      "EXPORT": "Global Shipping"
+    },
+    
+    "PRODUCTS": {
+      "TITLE": "Our Aluminum Products",
+      "REQUEST_QUOTE": "Request Quote"
+    },
+    
+    "SERVICES": {
+      "BUY": {
+        "TITLE": "We Buy Aluminum",
+        "DESC": "Purchasing all aluminum grades including UBC, extrusion, wheels, and cast. Competitive pricing based on LME rates."
+      },
+      "SELL": {
+        "TITLE": "We Sell Aluminum",
+        "DESC": "Primary and secondary aluminum products including ingots, billets, and customized alloys for manufacturing."
+      },
+      "EXPORT": {
+        "TITLE": "Export Services",
+        "DESC": "Containerized shipping to Asian markets with proper sorting, packaging, and full export documentation."
+      }
+    },
+    
+    "PROCESS": {
+      "TITLE": "Our Aluminum Recycling Process",
+      "STEP_1": {
+        "TITLE": "Collection & Sorting",
+        "DESC": "Segregation by alloy type and removal of contaminants like steel, plastic, and rubber."
+      },
+      "STEP_2": {
+        "TITLE": "Shredding & Decoating",
+        "DESC": "Mechanical shredding and thermal decoating to remove paints and lacquers."
+      },
+      "STEP_3": {
+        "TITLE": "Melting & Refining",
+        "DESC": "Melting in rotary furnaces with flux to remove impurities and dross."
+      },
+      "STEP_4": {
+        "TITLE": "Casting & Rolling",
+        "DESC": "Casting into ingots or direct chill casting into rolling slabs."
+      }
+    },
+    
+    "CTA": {
+      "TITLE": "Trade Aluminum With Us",
+      "DESCRIPTION": "From beverage cans to aerospace alloys, we handle all types of aluminum. Get competitive pricing for your scrap or source quality materials for your production.",
+      "GET_QUOTE": "Get a Quote",
+      "VIEW_PRICING": "View Pricing"
+    }
+  },
+
+  "EXCAVATORS": {
+    "PAGE_TITLE": "Excavators",
+    "PAGE_SUBTITLE": "油圧ショベル | Buy, Refurbish, Export",
+    "BACK_TO_SERVICES": "Back to Services",
+    
+    "HERO": {
+      "TITLE": "Hydraulic Excavators",
+      "DESCRIPTION": "We specialize in trading hydraulic excavators from 20-ton to 50-ton class. Our inventory includes popular models from Caterpillar, Komatsu, Hitachi, and Kobelco. All machines are inspected, refurbished as needed, and prepared for export to Southeast Asian markets.",
+      "CLASS": "20-50 Ton Class",
+      "INSPECTION": "Inspection Report",
+      "DOCUMENTATION": "Export Documentation"
+    },
+    
+    "MODELS": {
+      "TITLE": "Popular Models We Handle"
+    },
+    
+    "SERVICES": {
+      "BUY": {
+        "TITLE": "We Buy Excavators",
+        "DESC": "Purchasing used excavators from construction companies, rental fleets, and auctions. Fair evaluation and immediate payment."
+      },
+      "REFURBISHMENT": {
+        "TITLE": "Refurbishment",
+        "DESC": "Professional repair and painting services to prepare machines for export. Engine overhaul and hydraulic system rebuilds available."
+      },
+      "EXPORT": {
+        "TITLE": "Export Ready",
+        "DESC": "Complete documentation, container loading, and shipping to Cambodia, Vietnam, Myanmar, and other destinations."
+      }
+    },
+    
+    "PROCESS": {
+      "TITLE": "How It Works",
+      "STEP_1": {
+        "TITLE": "Evaluation",
+        "DESC": "Send photos and specs for price quote"
+      },
+      "STEP_2": {
+        "TITLE": "Inspection",
+        "DESC": "On-site inspection and testing"
+      },
+      "STEP_3": {
+        "TITLE": "Purchase",
+        "DESC": "Fair price with immediate payment"
+      },
+      "STEP_4": {
+        "TITLE": "Export",
+        "DESC": "Documentation and shipping"
+      }
+    },
+    
+    "CTA": {
+      "TITLE": "Have Excavators to Sell?",
+      "DESCRIPTION": "We are actively looking for quality used excavators. Contact us with machine details for a competitive offer. We handle pickup, documentation, and export.",
+      "CONTACT": "Contact Us",
+      "SCHEDULE": "Schedule Inspection"
+    }
+  },
+
+  "TRACTORS": {
+    "PAGE_TITLE": "Tractors & Agricultural Machinery",
+    "PAGE_SUBTITLE": "トラクター・農機具 | Farm Equipment Trading",
+    "BACK_TO_SERVICES": "Back to Services",
+    
+    "HERO": {
+      "TITLE": "Agricultural Equipment Specialists",
+      "DESCRIPTION": "We buy and sell tractors, combines, and agricultural implements. From compact orchard tractors to large combine harvesters, we handle all types of farm machinery for the Southeast Asian market.",
+      "TRACTOR_RANGE": "20-200 HP Tractors",
+      "COMBINES": "Combine Harvesters",
+      "IMPLEMENTS": "Implements"
+    },
+    
+    "CATEGORIES": {
+      "TITLE": "Equipment Categories"
+    },
+    
+    "IMPLEMENTS": {
+      "TITLE": "Agricultural Implements",
+      "DESCRIPTION": "We also trade various implements and attachments for tractors and combines."
+    },
+    
+    "SERVICES": {
+      "BUY": {
+        "TITLE": "We Buy Equipment",
+        "DESC": "Purchasing used tractors and farm equipment from farmers, dealers, and auctions."
+      },
+      "MAINTENANCE": {
+        "TITLE": "Maintenance",
+        "DESC": "Professional servicing, repairs, and preparation for tropical climate conditions."
+      },
+      "EXPORT": {
+        "TITLE": "Export Ready",
+        "DESC": "Container loading and shipping to Cambodia, Vietnam, Myanmar, and Laos."
+      }
+    },
+    
+    "CTA": {
+      "TITLE": "Farm Equipment Needed?",
+      "DESCRIPTION": "Whether you want to sell used equipment or need quality tractors for your farm, we provide competitive pricing and reliable service.",
+      "CONTACT": "Contact Us"
+    }
+  },
+
+  "PARTS": {
+    "PAGE_TITLE": "Parts & Components",
+    "PAGE_SUBTITLE": "部品・コンポーネント | Genuine & Aftermarket Parts",
+    "BACK_TO_SERVICES": "Back to Services",
+    
+    "HERO": {
+      "TITLE": "Heavy Equipment Parts Supplier",
+      "DESCRIPTION": "We supply genuine and quality aftermarket parts for construction and agricultural machinery. From engine components to hydraulic systems, we stock thousands of parts for immediate shipment or can source specific items for your needs.",
+      "GENUINE": "Genuine Parts",
+      "AFTERMARKET": "Aftermarket",
+      "OEM": "OEM Quality"
+    },
+    
+    "CATEGORIES": {
+      "TITLE": "Part Categories"
+    },
+    
+    "BRANDS": {
+      "TITLE": "Brands We Support"
+    },
+    
+    "SERVICES": {
+      "SOURCING": {
+        "TITLE": "Parts Sourcing",
+        "DESC": "Can't find a part? We source hard-to-find components from our network of suppliers."
+      },
+      "BULK": {
+        "TITLE": "Bulk Orders",
+        "DESC": "Wholesale pricing for dealers and repair shops. Container shipments available."
+      },
+      "SUPPORT": {
+        "TITLE": "Technical Support",
+        "DESC": "Expert advice on part selection and compatibility for your specific machine."
+      }
+    },
+    
+    "CTA": {
+      "TITLE": "Need Parts?",
+      "DESCRIPTION": "Send us your part number or machine model for a quick quote. We stock common parts and can source specialized components.",
+      "REQUEST_QUOTE": "Request Quote"
+    }
+  },
+
+  "PLASTIC_DETAIL": {
+    "BACK_TO_SERVICES": "Back to Services",
+    "ABOUT": "About",
+    "PROPERTIES": {
+      "TITLE": "Key Properties"
+    },
+    "APPLICATIONS": {
+      "TITLE": "Common Applications"
+    },
+    "PROCESS": {
+      "TITLE": "Our Recycling Process"
+    },
+    "GALLERY": {
+      "TITLE": "Product Gallery"
+    },
+    "BUY": {
+      "TITLE": "We Buy",
+      "GET_QUOTE": "Get a Quote"
+    },
+    "SELL": {
+      "TITLE": "We Sell Pellets",
+      "REQUEST_SAMPLE": "Request Sample"
+    }
+  },
+
+  "PRODUCTS": {
+    "PAGE_TITLE": "All Products",
+    "PAGE_SUBTITLE": "全商品 | Browse Our Complete Inventory",
+    "BACK_TO_SERVICES": "Back to Services",
+    "FILTER": "Filter",
+    "INQUIRY": "Inquiry",
+    "NO_PRODUCTS": "No products found in this category.",
+    "CONTACT_PROMPT": "Don't see what you're looking for? Contact us for special orders.",
+    "CONTACT_US": "Contact Us"
+  },
+
+  "COMMON": {
+    "BACK_TO_SERVICES": "Back to Services",
+    "VIEW_DETAILS": "View Details"
   }
+
+  
 }

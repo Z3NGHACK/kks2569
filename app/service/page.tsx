@@ -1,22 +1,139 @@
-// app/service/page.tsx
 'use client';
 
 import Image from 'next/image';
-import { Recycle, ShoppingBag, Factory, Hammer, Package, Truck } from 'lucide-react';
+import Link from 'next/link';
+import { Recycle, ShoppingBag, Factory, ArrowRight, ChevronRight, ExternalLink } from 'lucide-react';
 import Hero from '@/components/Hero';
 import { useTranslation } from '@/components/LanguageProvider';
 
+// Product Gallery Images
 const serviceImages = [
-  { src: "/images/i3.jpg", alt: "Construction Machinery" },
-  { src: "/images/i2.png", alt: "Aluminum Products" },
-  { src: "/images/i4.jpg", alt: "Dinnerware" },
-  { src: "/images/i5.jpg", alt: "Automotive Parts" },
-  { src: "/images/i6.jpg", alt: "Recycling Materials" },
-  { src: "/images/i7.jpg", alt: "Construction Vehicle" },
-  { src: "/images/i8.jpg", alt: "Used Bicycle" },
-  { src: "/images/i9.png", alt: "Aluminum Can" },
-  { src: "/images/i10.jpg", alt: "Car Parts" },
+  { src: "/images/i3.jpg", alt: "Construction Machinery", title: "Construction Machinery", description: "Heavy equipment for construction projects" },
+  { src: "/images/i2.png", alt: "Aluminum Products", title: "Aluminum Products", description: "Various aluminum materials and scrap" },
+  { src: "/images/i4.jpg", alt: "Dinnerware", title: "Plastic Dinnerware", description: "Recycled plastic household items" },
+  { src: "/images/i5.jpg", alt: "Automotive Parts", title: "Automotive Parts", description: "Vehicle components and spare parts" },
+  { src: "/images/i6.jpg", alt: "Recycling Materials", title: "Recycling Materials", description: "Raw materials for recycling process" },
+  { src: "/images/i7.jpg", alt: "Construction Vehicle", title: "Construction Vehicles", description: "Heavy machinery and vehicles" },
+  { src: "/images/i8.jpg", alt: "Used Bicycle", title: "Used Bicycles", description: "Refurbished bicycles for resale" },
+  { src: "/images/i9.png", alt: "Aluminum Can", title: "Aluminum Cans", description: "Recycled aluminum packaging" },
+  { src: "/images/i10.jpg", alt: "Car Parts", title: "Car Parts", description: "Automotive spare parts and components" },
 ];
+
+// Plastic Types Data
+const plasticTypes = [
+  { 
+    code: 'PET', 
+    name: 'Polyethylene Terephthalate', 
+    jaName: 'ポリエチレンテレフタレート',
+    desc: 'Bottles, containers, packaging materials',
+    jaDesc: 'ボトル・容器・包装材料',
+    color: 'from-green-400 to-green-600',
+    bgColor: 'bg-green-50',
+    borderColor: 'border-green-200'
+  },
+  { 
+    code: 'HDPE', 
+    name: 'High-Density Polyethylene', 
+    jaName: '高密度ポリエチレン',
+    desc: 'Milk jugs, detergent bottles, pipes',
+    jaDesc: 'ミルク瓶・洗剤ボトル・パイプ',
+    color: 'from-blue-400 to-blue-600',
+    bgColor: 'bg-blue-50',
+    borderColor: 'border-blue-200'
+  },
+  { 
+    code: 'PP', 
+    name: 'Polypropylene', 
+    jaName: 'ポリプロピレン',
+    desc: 'Food containers, auto parts, textiles',
+    jaDesc: '食品容器・自動車部品・繊維',
+    color: 'from-orange-400 to-orange-600',
+    bgColor: 'bg-orange-50',
+    borderColor: 'border-orange-200'
+  },
+  { 
+    code: 'PVC', 
+    name: 'Polyvinyl Chloride', 
+    jaName: '塩化ビニル',
+    desc: 'Pipes, windows, flooring, cables',
+    jaDesc: 'パイプ・窓・床材・ケーブル',
+    color: 'from-purple-400 to-purple-600',
+    bgColor: 'bg-purple-50',
+    borderColor: 'border-purple-200'
+  },
+  { 
+    code: 'LDPE', 
+    name: 'Low-Density Polyethylene', 
+    jaName: '低密度ポリエチレン',
+    desc: 'Plastic bags, films, wraps',
+    jaDesc: 'ビニール袋・フィルム・ラップ',
+    color: 'from-pink-400 to-pink-600',
+    bgColor: 'bg-pink-50',
+    borderColor: 'border-pink-200'
+  },
+  { 
+    code: 'PS', 
+    name: 'Polystyrene', 
+    jaName: 'ポリスチレン',
+    desc: 'Foam packaging, disposable cups',
+    jaDesc: '発泡包装・使い捨てカップ',
+    color: 'from-yellow-400 to-yellow-600',
+    bgColor: 'bg-yellow-50',
+    borderColor: 'border-yellow-200'
+  },
+  { 
+    code: 'ABS', 
+    name: 'Acrylonitrile Butadiene Styrene', 
+    jaName: 'ABS樹脂',
+    desc: 'Lego bricks, electronics housings',
+    jaDesc: 'レゴ・電子機器外装',
+    color: 'from-red-400 to-red-600',
+    bgColor: 'bg-red-50',
+    borderColor: 'border-red-200'
+  },
+  { 
+    code: 'PC', 
+    name: 'Polycarbonate', 
+    jaName: 'ポリカーボネート',
+    desc: 'Eyeglasses, CDs, bulletproof glass',
+    jaDesc: '眼鏡・CD・防弾ガラス',
+    color: 'from-cyan-400 to-cyan-600',
+    bgColor: 'bg-cyan-50',
+    borderColor: 'border-cyan-200'
+  },
+];
+
+// Machinery Data
+const machineryItems = [
+  {
+    id: 'excavators',
+    title: 'Excavators',
+    jaTitle: '油圧ショベル',
+    description: 'CAT, Komatsu, Hitachi, Kobelco models. We buy used and refurbished units for export to Southeast Asia.',
+    jaDescription: 'キャタピラー、コマツ、日立、コベルコモデル。中古・再生機を東南アジアに輸出。',
+    image: '/images/constr/excavator.png',
+    link: '/service/excavators'
+  },
+  {
+    id: 'tractors',
+    title: 'Tractors & Combines',
+    jaTitle: 'トラクター・コンバイン',
+    description: 'Agricultural machinery including tractors, harvesters, tillage equipment from major brands.',
+    jaDescription: '主要メーカーのトラクター、コンバイン、耕耘機などの農業機械。',
+    image: '/images/constr/tractor.png',
+    link: '/service/tractors'
+  },
+  {
+    id: 'parts',
+    title: 'Parts & Components',
+    jaTitle: '部品・コンポーネント',
+    description: 'Spare parts, engines, hydraulic components, attachments, and accessories.',
+    jaDescription: '予備部品、エンジン、油圧部品、アタッチメント、アクセサリー。',
+    image: '/images/constr/partsC.png',
+    link: '/service/parts'
+  }
+];
+
 
 export default function ServicePage() {
   const { t } = useTranslation();
@@ -34,305 +151,295 @@ export default function ServicePage() {
         subtitle={getString('SERVICE.PAGE_SUBTITLE')}
       />
 
-      <div className="container mx-auto px-4 py-16 max-w-6xl space-y-24">
+      <div className="container mx-auto px-4 py-16 max-w-7xl space-y-28">
         
-        {/* Scrap Metal & Materials Buying/Selling */}
-        <section>
-          <div className="flex items-center mb-8">
-            <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center mr-4 shadow-lg">
-              <Hammer className="text-white" size={28} />
+        {/* ===== PLASTIC RECYCLING - PRIORITY SECTION ===== */}
+        <section className="relative">
+          <div className="absolute -top-4 left-0 bg-green-500 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg">
+            MAIN BUSINESS / 主力事業
+          </div>
+          
+          <div className="flex items-center mb-8 mt-4">
+            <div className="w-14 h-14 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center mr-4 shadow-xl">
+              <Factory className="text-white" size={32} />
             </div>
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
-                {getString('SERVICE.SCRAP.TITLE') || 'Scrap Metal & Materials Trading'}
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
+                {getString('SERVICE.PLASTIC_RECYCLE.TITLE')}
               </h2>
-              <p className="text-gray-500 mt-1">高価買取・販売 | High-Value Purchase & Sales</p>
+              <p className="text-gray-500 mt-2 text-lg">
+                プラスチック再生・製造 | From Waste to Premium Pellets
+              </p>
             </div>
           </div>
           
-
-
-          <div className="bg-white rounded-2xl shadow-lg p-8 md:p-10">
-            <p className="text-gray-700 leading-relaxed mb-8 text-lg">
-              {getString('SERVICE.SCRAP.DESCRIPTION') || 
-                'We specialize in buying and selling various scrap metals and recyclable materials. From copper wires to aluminum sheets, we offer competitive prices and professional handling.'}
-            </p>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {/* Copper */}
-              <div className="group relative bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col h-full">
-                <div className="relative h-48 md:h-56 flex-shrink-0">
-                  <Image
-                    src="/images/copper.png"
-                    alt="Copper scrap"
-                    fill
-                    className="object-cover transition-transform duration-500"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  />
-                  {/* Gradient overlay for text readability */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
-                  {/* Optional subtle blur on image itself (if your copper.png is too sharp) */}
-                  {/* <div className="absolute inset-0 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity" /> */}
-                </div>
-                
-                <div className="relative p-6 flex flex-col flex-grow bg-gradient-to-b from-transparent to-black/30">
-                  <h3 className="text-xl font-bold text-white mb-2">
-                    {getString('SERVICE.SCRAP.COPPER.TITLE') || 'Copper'}
-                  </h3>
-                  <p className="text-gray-200 text-sm mb-4 flex-grow">
-                    {getString('SERVICE.SCRAP.COPPER.DESC') || 'Copper wires, pipes, and scrap. High market value.'}
-                  </p>
-                  <div className="flex items-center text-orange-400 font-semibold text-sm">
-                    <span>高価買取</span>
-                    <span className="ml-2">→</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Aluminum - same structure, change src later */}
-              <div className="group relative bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col h-full">
-                <div className="relative h-48 md:h-56 flex-shrink-0">
-                  <Image
-                    src="/images/aluminum.png"  // ← replace with /images/aluminum.png later
-                    alt="Aluminum scrap"
-                    fill
-                    className="object-cover transition-transform duration-500"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
-                </div>
-                <div className="relative p-6 flex flex-col flex-grow bg-gradient-to-b from-transparent to-black/30">
-                  <h3 className="text-xl font-bold text-white mb-2">
-                    {getString('SERVICE.SCRAP.ALUMINUM.TITLE') || 'Aluminum'}
-                  </h3>
-                  <p className="text-gray-200 text-sm mb-4 flex-grow">
-                    {getString('SERVICE.SCRAP.ALUMINUM.DESC') || 'Cans, sheets, profiles, and industrial scrap.'}
-                  </p>
-                  <div className="flex items-center text-gray-300 font-semibold text-sm">
-                    <span>高価買取</span>
-                    <span className="ml-2">→</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Iron/Steel */}
-              <div className="group relative bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col h-full">
-                <div className="relative h-48 md:h-56 flex-shrink-0">
-                  <Image
-                    src="/images/iron.png"  // ← replace with /images/iron.png later
-                    alt="Iron and steel scrap"
-                    fill
-                    className="object-cover transition-transform duration-500"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
-                </div>
-                <div className="relative p-6 flex flex-col flex-grow bg-gradient-to-b from-transparent to-black/30">
-                  <h3 className="text-xl font-bold text-white mb-2">
-                    {getString('SERVICE.SCRAP.IRON.TITLE') || 'Iron & Steel'}
-                  </h3>
-                  <p className="text-gray-200 text-sm mb-4 flex-grow">
-                    {getString('SERVICE.SCRAP.IRON.DESC') || 'Heavy machinery, structural steel, and mixed scrap.'}
-                  </p>
-                  <div className="flex items-center text-blue-300 font-semibold text-sm">
-                    <span>高価買取</span>
-                    <span className="ml-2">→</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Brass/Bronze */}
-              <div className="group relative bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col h-full">
-                <div className="relative h-48 md:h-56 flex-shrink-0">
-                  <Image
-                    src="/images/brass.png"  // ← replace with /images/brass.png later
-                    alt="Brass and bronze scrap"
-                    fill
-                    className="object-cover transition-transform duration-500"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
-                </div>
-                <div className="relative p-6 flex flex-col flex-grow bg-gradient-to-b from-transparent to-black/30">
-                  <h3 className="text-xl font-bold text-white mb-2">
-                    {getString('SERVICE.SCRAP.BRASS.TITLE') || 'Brass & Bronze'}
-                  </h3>
-                  <p className="text-gray-200 text-sm mb-4 flex-grow">
-                    {getString('SERVICE.SCRAP.BRASS.DESC') || 'Fittings, valves, and decorative items.'}
-                  </p>
-                  <div className="flex items-center text-yellow-300 font-semibold text-sm">
-                    <span>高価買取</span>
-                    <span className="ml-2">→</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-        </section>
-
-        {/* Plastic Recycling */}
-        <section>
-          <div className="flex items-center mb-8">
-            <div className="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center mr-4 shadow-lg">
-              <Factory className="text-white" size={28} />
-            </div>
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
-                {getString('SERVICE.PLASTIC_RECYCLE.TITLE') || 'Plastic Recycling & Pelletizing'}
-              </h2>
-              <p className="text-gray-500 mt-1">プラスチック再生・ペレット化 | Plastic to Reusable Pellets</p>
-            </div>
-          </div>
-          
-          <div className="bg-white rounded-2xl shadow-lg p-8 md:p-10">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
+          {/* Main Description */}
+          <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12 mb-10">
+            <div className="grid lg:grid-cols-2 gap-10 items-center">
               <div>
                 <p className="text-gray-700 leading-relaxed mb-6 text-lg">
-                  {getString('SERVICE.PLASTIC_RECYCLE.DESCRIPTION') || 
-                    'We buy old and waste plastic, then process it into high-quality reusable plastic pellets. These pellets serve as raw materials for manufacturing new plastic products.'}
+                  {getString('SERVICE.PLASTIC_RECYCLE.DESCRIPTION')}
                 </p>
                 
                 <div className="space-y-4">
-                  <div className="flex items-start space-x-3">
-                    <Package className="text-green-500 mt-1 flex-shrink-0" size={20} />
+                  <div className="flex items-start space-x-4 p-4 bg-green-50 rounded-xl">
+                    <div className="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Recycle className="text-white" size={20} />
+                    </div>
                     <div>
-                      <h4 className="font-semibold text-gray-800">
-                        {getString('SERVICE.PLASTIC_RECYCLE.BUYING.TITLE') || 'We Buy:'}
+                      <h4 className="font-bold text-gray-800">
+                        {getString('SERVICE.PLASTIC_RECYCLE.BUYING.TITLE')}
                       </h4>
-                      <p className="text-gray-600 text-sm">
-                        {getString('SERVICE.PLASTIC_RECYCLE.BUYING.DESC') || 
-                          'PET bottles, HDPE containers, PP products, industrial plastic waste, and mixed plastics.'}
+                      <p className="text-gray-600 text-sm mt-1">
+                        {getString('SERVICE.PLASTIC_RECYCLE.BUYING.DESC')}
                       </p>
                     </div>
                   </div>
                   
-                  <div className="flex items-start space-x-3">
-                    <Recycle className="text-green-500 mt-1 flex-shrink-0" size={20} />
+                  <div className="flex items-start space-x-4 p-4 bg-blue-50 rounded-xl">
+                    <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Factory className="text-white" size={20} />
+                    </div>
                     <div>
-                      <h4 className="font-semibold text-gray-800">
-                        {getString('SERVICE.PLASTIC_RECYCLE.PROCESS.TITLE') || 'Processing:'}
+                      <h4 className="font-bold text-gray-800">
+                        {getString('SERVICE.PLASTIC_RECYCLE.MANUFACTURING.TITLE')}
                       </h4>
-                      <p className="text-gray-600 text-sm">
-                        {getString('SERVICE.PLASTIC_RECYCLE.PROCESS.DESC') || 
-                          'Sorting, cleaning, shredding, melting, and pelletizing into uniform plastic granules.'}
+                      <p className="text-gray-600 text-sm mt-1">
+                        {getString('SERVICE.PLASTIC_RECYCLE.MANUFACTURING.DESC')}
                       </p>
                     </div>
                   </div>
                   
-                  <div className="flex items-start space-x-3">
-                    <Truck className="text-green-500 mt-1 flex-shrink-0" size={20} />
+                  <div className="flex items-start space-x-4 p-4 bg-orange-50 rounded-xl">
+                    <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <ShoppingBag className="text-white" size={20} />
+                    </div>
                     <div>
-                      <h4 className="font-semibold text-gray-800">
-                        {getString('SERVICE.PLASTIC_RECYCLE.SELLING.TITLE') || 'We Sell:'}
+                      <h4 className="font-bold text-gray-800">
+                        {getString('SERVICE.PLASTIC_RECYCLE.SELLING.TITLE')}
                       </h4>
-                      <p className="text-gray-600 text-sm">
-                        {getString('SERVICE.PLASTIC_RECYCLE.SELLING.DESC') || 
-                          'High-quality recycled pellets: PET, HDPE, PP, and custom compounds for manufacturing.'}
+                      <p className="text-gray-600 text-sm mt-1">
+                        {getString('SERVICE.PLASTIC_RECYCLE.SELLING.DESC')}
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
               
-              {/* Plastic Types Grid */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-green-50 rounded-xl p-4 text-center border border-green-200">
-                  <span className="text-3xl font-bold text-green-600 block mb-2">PET</span>
-                  <p className="text-xs text-gray-600">Polyethylene Terephthalate</p>
-                  <p className="text-xs text-gray-500 mt-1">ボトル・容器</p>
-                </div>
-                <div className="bg-blue-50 rounded-xl p-4 text-center border border-blue-200">
-                  <span className="text-3xl font-bold text-blue-600 block mb-2">HDPE</span>
-                  <p className="text-xs text-gray-600">High-Density Polyethylene</p>
-                  <p className="text-xs text-gray-500 mt-1">硬質プラスチック</p>
-                </div>
-                <div className="bg-orange-50 rounded-xl p-4 text-center border border-orange-200">
-                  <span className="text-3xl font-bold text-orange-600 block mb-2">PP</span>
-                  <p className="text-xs text-gray-600">Polypropylene</p>
-                  <p className="text-xs text-gray-500 mt-1">容器・自動車部品</p>
-                </div>
-                <div className="bg-purple-50 rounded-xl p-4 text-center border border-purple-200">
-                  <span className="text-3xl font-bold text-purple-600 block mb-2">PVC</span>
-                  <p className="text-xs text-gray-600">Polyvinyl Chloride</p>
-                  <p className="text-xs text-gray-500 mt-1">パイプ・建材</p>
+              {/* Process Image */}
+              <div className="relative h-80 rounded-2xl overflow-hidden shadow-lg">
+                <Image
+                  src="/services/manufac.png"
+                  alt="Plastic Recycling Process"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+                  <div className="text-white">
+                    <p className="font-bold text-xl">Manufacturing Process</p>
+                    <p className="text-sm opacity-90">From raw waste to premium pellets</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
+          {/* Plastic Types Grid - 8 Types */}
+          <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+            <span className="w-8 h-1 bg-green-500 rounded-full mr-3"></span>
+            {getString('SERVICE.PLASTIC_TYPES.TITLE')}
+            <span className="ml-3 text-sm font-normal text-gray-500">クリックして詳細を見る</span>
+          </h3>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {plasticTypes.map((plastic, index) => (
+              <Link 
+                key={plastic.code}
+                href={`/service/plastic/${plastic.code.toLowerCase()}`}
+                className={`group relative ${plastic.bgColor} ${plastic.borderColor} border-2 rounded-2xl p-5 hover:shadow-xl transition-all duration-300 hover:-translate-y-1`}
+              >
+                <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${plastic.color} rounded-t-2xl`}></div>
+                <div className="flex justify-between items-start mb-3">
+                  <span className={`text-3xl font-black bg-gradient-to-r ${plastic.color} bg-clip-text text-transparent`}>
+                    {plastic.code}
+                  </span>
+                  <ArrowRight className="text-gray-400 group-hover:text-gray-600 transition-colors" size={20} />
+                </div>
+                <h4 className="font-bold text-gray-800 text-sm mb-1">{plastic.name}</h4>
+                <p className="text-xs text-gray-500 mb-2">{plastic.jaName}</p>
+                <p className="text-xs text-gray-600 line-clamp-2">{plastic.desc}</p>
+                <p className="text-[10px] text-gray-400 mt-1">{plastic.jaDesc}</p>
+                
+                <div className="mt-4 flex items-center text-xs font-semibold text-gray-500 group-hover:text-gray-800 transition-colors">
+                  <span>View Details</span>
+                  <ChevronRight size={14} className="ml-1 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* View All Plastics Button */}
+          <div className="text-center mt-8">
+            <Link 
+              href="/service/plastics"
+              className="inline-flex items-center space-x-2 bg-green-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+            >
+              <span>{getString('SERVICE.PLASTIC_TYPES.VIEW_ALL')}</span>
+              <span>→</span>
+            </Link>
+          </div>
         </section>
 
-        {/* Construction & Agricultural Machinery */}
+        {/* ===== METAL TRADING - SECONDARY SECTION ===== */}
         <section>
           <div className="flex items-center mb-8">
-            <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center mr-4 shadow-lg">
+            <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-red-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+              <Recycle className="text-white" size={28} />
+            </div>
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
+                {getString('SERVICE.METAL.TITLE')}
+              </h2>
+              <p className="text-gray-500 mt-1">金属買取・販売 | Copper & Aluminum Specialists</p>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Copper Card */}
+            <Link 
+              href="/service/copper"
+              className="group relative bg-gray-900 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col h-full"
+            >
+              <div className="relative h-64">
+                <Image
+                  src="/images/copper.png"
+                  alt="Copper scrap and products"
+                  fill
+                  className="object-cover transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                <div className="absolute top-4 right-4 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                  <ExternalLink className="text-white" size={20} />
+                </div>
+              </div>
+              <div className="relative p-8 flex flex-col flex-grow">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-2xl font-bold text-white">
+                    {getString('SERVICE.METAL.COPPER.TITLE')}
+                  </h3>
+                  <span className="text-3xl font-bold text-orange-400">Cu</span>
+                </div>
+                <p className="text-gray-300 mb-4 flex-grow">
+                  {getString('SERVICE.METAL.COPPER.DESC')}
+                </p>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center text-orange-400 font-semibold">
+                    <span>高価買取・販売</span>
+                  </div>
+                  <div className="flex items-center text-white group-hover:translate-x-2 transition-transform">
+                    <span className="text-sm mr-2">View Details</span>
+                    <ArrowRight size={18} />
+                  </div>
+                </div>
+              </div>
+            </Link>
+
+            {/* Aluminum Card */}
+            <Link 
+              href="/service/aluminum"
+              className="group relative bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col h-full"
+            >
+              <div className="relative h-64">
+                <Image
+                  src="/images/aluminum.png"
+                  alt="Aluminum scrap and products"
+                  fill
+                  className="object-cover transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                <div className="absolute top-4 right-4 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                  <ExternalLink className="text-white" size={20} />
+                </div>
+              </div>
+              <div className="relative p-8 flex flex-col flex-grow">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-2xl font-bold text-white">
+                    {getString('SERVICE.METAL.ALUMINUM.TITLE')}
+                  </h3>
+                  <span className="text-3xl font-bold text-gray-400">Al</span>
+                </div>
+                <p className="text-gray-300 mb-4 flex-grow">
+                  {getString('SERVICE.METAL.ALUMINUM.DESC')}
+                </p>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center text-gray-300 font-semibold">
+                    <span>高価買取・販売</span>
+                  </div>
+                  <div className="flex items-center text-white group-hover:translate-x-2 transition-transform">
+                    <span className="text-sm mr-2">View Details</span>
+                    <ArrowRight size={18} />
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </section>
+
+        {/* ===== MACHINERY - WITH IMAGES ===== */}
+        <section>
+          <div className="flex items-center">
+            <div className="w-12 h-12 bg-gradient-to-br from-primary to-dark rounded-2xl flex items-center justify-center mr-4 shadow-lg">
               <ShoppingBag className="text-white" size={28} />
             </div>
             <div>
               <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
-                {getString('SERVICE.MACHINERY.TITLE') || 'Construction & Agricultural Machinery'}
+                {getString('SERVICE.MACHINERY.TITLE')}
               </h2>
-              <p className="text-gray-500 mt-1">建設機械・農機具 | Heavy Equipment Trading</p>
+              <p className="text-gray-500 mt-1">建設機械・農機具 | Buy, Refurbish, Sell</p>
             </div>
           </div>
-          
-          <div className="bg-white rounded-2xl shadow-lg p-8 md:p-10">
-            <p className="text-gray-700 leading-relaxed mb-8 text-lg">
-              {getString('SERVICE.MACHINERY.DESCRIPTION') || 
-                'We buy and sell construction machinery and agricultural equipment. From excavators to tractors, we handle export to Southeast Asian markets.'}
-            </p>
-            
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-gradient-to-br from-light to-white border border-green-100 rounded-xl p-6">
-                <h3 className="text-lg font-bold text-primary mb-3">
-                  {getString('SERVICE.MACHINERY.EXCAVATORS.TITLE') || 'Excavators'}
-                </h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  {getString('SERVICE.MACHINERY.EXCAVATORS.DESC') || 
-                    'CAT, Komatsu, Hitachi models. We buy used and refurbished units for export.'}
-                </p>
-              </div>
-              
-              <div className="bg-gradient-to-br from-light to-white border border-green-100 rounded-xl p-6">
-                <h3 className="text-lg font-bold text-primary mb-3">
-                  {getString('SERVICE.MACHINERY.TRACTORS.TITLE') || 'Tractors & Combines'}
-                </h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  {getString('SERVICE.MACHINERY.TRACTORS.DESC') || 
-                    'Agricultural machinery including tractors, harvesters, and tillage equipment.'}
-                </p>
-              </div>
-              
-              <div className="bg-gradient-to-br from-light to-white border border-green-100 rounded-xl p-6">
-                <h3 className="text-lg font-bold text-primary mb-3">
-                  {getString('SERVICE.MACHINERY.PARTS.TITLE') || 'Parts & Components'}
-                </h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  {getString('SERVICE.MACHINERY.PARTS.DESC') || 
-                    'Spare parts, engines, hydraulic components, and attachments.'}
-                </p>
-              </div>
-            </div>
-            
-            <div className="mt-8 p-6 bg-primary text-white rounded-xl text-center">
-              <p className="text-lg font-medium">
-                {getString('SERVICE.MACHINERY.QUOTE') || 
-                  'Global export to Cambodia, Vietnam, and other Southeast Asian markets.'}
-              </p>
-            </div>
+
+          {/* Featured Machinery with Images */}
+          <div className="grid md:grid-cols-3 gap-6 mb-10">
+            {machineryItems.map((item) => (
+              <Link
+                key={item.id}
+                href={item.link}
+                className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+              >
+                <div className="relative h-48 overflow-hidden">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <span className="inline-flex items-center text-white text-sm font-semibold">
+                      View Details <ArrowRight size={16} className="ml-1" />
+                    </span>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-lg font-bold text-gray-800 mb-1">{item.title}</h3>
+                  <p className="text-xs text-gray-500 mb-3">{item.jaTitle}</p>
+                  <p className="text-sm text-gray-600 line-clamp-2">{item.description}</p>
+                </div>
+              </Link>
+            ))}
           </div>
         </section>
 
-        {/* Product Gallery Section */}
-        <section className="py-10">
+        {/* ===== PRODUCT GALLERY ===== */}
+        <section className="pb-10">
           <div className="flex items-center justify-center mb-10">
             <div className="text-center">
               <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
-                {getString('SERVICE.GALLERY.TITLE') || 'Our Products & Materials'}
+                {getString('SERVICE.GALLERY.TITLE')}
               </h2>
               <p className="text-gray-500">
-                {getString('SERVICE.GALLERY.SUBTITLE') || '取扱商品・素材 | Products We Handle'}
+                {getString('SERVICE.GALLERY.SUBTITLE')}
               </p>
               <div className="w-24 h-1 bg-primary mx-auto mt-4 rounded-full"></div>
             </div>
@@ -342,10 +449,7 @@ export default function ServicePage() {
             {serviceImages.map((image, index) => (
               <div
                 key={index}
-                className="relative h-64 rounded-2xl overflow-hidden shadow-lg group cursor-pointer"
-                style={{ 
-                  animationDelay: `${index * 100}ms`,
-                }}
+                className="group relative h-64 rounded-2xl overflow-hidden shadow-lg cursor-pointer bg-white"
               >
                 <Image
                   src={image.src}
@@ -356,14 +460,17 @@ export default function ServicePage() {
                 />
                 
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
                 
                 {/* Content */}
                 <div className="absolute inset-0 flex flex-col justify-end p-5">
-                  <p className="text-white font-bold text-lg opacity-100 transform translate-y-0 transition-all duration-300">
-                    {image.alt}
+                  <h3 className="text-white font-bold text-lg mb-1 transform translate-y-0 transition-transform">
+                    {image.title}
+                  </h3>
+                  <p className="text-white/80 text-sm line-clamp-2 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                    {image.description}
                   </p>
-                  <div className="h-0.5 w-0 bg-white mt-2 group-hover:w-full transition-all duration-500"></div>
+                  <div className="h-0.5 w-0 bg-white mt-3 group-hover:w-full transition-all duration-500"></div>
                 </div>
 
                 {/* Hover Icon */}
@@ -376,13 +483,22 @@ export default function ServicePage() {
 
           {/* View More Button */}
           <div className="text-center mt-10">
-            <button className="inline-flex items-center space-x-2 bg-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-dark transition-colors duration-300 shadow-lg hover:shadow-xl">
-              <span>{getString('SERVICE.GALLERY.VIEW_MORE') || 'View All Products'}</span>
-              <span>→</span>
-            </button>
+            <Link 
+              href="/products"
+              className="inline-flex items-center space-x-2 bg-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-dark transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+            >
+              <span>{getString('SERVICE.GALLERY.VIEW_ALL')}</span>
+              <ArrowRight size={18} />
+            </Link>
+          </div>
+
+          {/* Global Export Banner */}
+          <div className="mt-8 p-6 bg-gradient-to-r from-primary to-dark text-white rounded-2xl text-center shadow-lg">
+            <p className="text-lg font-medium">
+              {getString('SERVICE.MACHINERY.QUOTE')}
+            </p>
           </div>
         </section>
-
       </div>
     </div>
   );

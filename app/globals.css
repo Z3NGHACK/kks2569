@@ -46,3 +46,32 @@ body {
 .slide-in-from-top-2 {
   animation-name: slide-in-from-top;
 }
+@keyframes hero-slide {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  8% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  /* Hold visible for ~4 seconds */
+  32% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  /* Fast exit — starts while next image is already entering */
+  40% {
+    opacity: 0;
+    transform: translateX(-60%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-60%);
+  }
+}
+
+.animate-hero-slide {
+  animation: hero-slide 15s infinite ease-in-out;
+  will-change: transform, opacity;
+}
