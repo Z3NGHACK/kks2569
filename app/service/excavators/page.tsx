@@ -11,26 +11,89 @@ const excavatorModels = [
     brand: 'Caterpillar',
     models: ['320D', '320E', '320-07A', '330D', '336E', '349E'],
     description: 'Popular CAT models known for reliability and fuel efficiency. We handle both standard and LGP configurations.',
-    image: '/images/cat-excavator.jpg'
+    image: '/images/excavator/ex1.jpg'
   },
   {
-    brand: 'Komatsu',
-    models: ['PC200-8', 'PC220-8', 'PC300-8', 'PC400-8'],
-    description: 'Japanese quality with excellent hydraulic performance. Low hour units preferred for export.',
-    image: '/images/komatsu-excavator.jpg'
+    brand: 'Caterpillar',
+    models: ['320D', '320E', '320-07A', '330D', '336E', '349E'],
+    description: 'Popular CAT models known for reliability and fuel efficiency. We handle both standard and LGP configurations.',
+    // brand: 'Komatsu',
+    // models: ['PC200-8', 'PC220-8', 'PC300-8', 'PC400-8'],
+    // description: 'Japanese quality with excellent hydraulic performance. Low hour units preferred for export.',
+    image: '/images/excavator/ex2.jpg'
   },
   {
-    brand: 'Hitachi',
-    models: ['ZX200', 'ZX210', 'ZX350', 'ZX470'],
-    description: 'ZX series with Isuzu engines. We purchase both standard and long-reach configurations.',
-    image: '/images/hitachi-excavator.jpg'
+    brand: 'Caterpillar',
+    models: ['320D', '320E', '320-07A', '330D', '336E', '349E'],
+    description: 'Popular CAT models known for reliability and fuel efficiency. We handle both standard and LGP configurations.',
+    // brand: 'Hitachi',
+    // models: ['ZX200', 'ZX210', 'ZX350', 'ZX470'],
+    // description: 'ZX series with Isuzu engines. We purchase both standard and long-reach configurations.',
+    image: '/images/excavator/ex3.jpg'
   },
   {
-    brand: 'Kobelco',
-    models: ['SK200', 'SK210', 'SK350', 'SK480'],
-    description: 'Fuel-efficient models with advanced hydraulics. Popular in Southeast Asian markets.',
-    image: '/images/kobelco-excavator.jpg'
-  }
+    brand: 'Caterpillar',
+    models: ['320D', '320E', '320-07A', '330D', '336E', '349E'],
+    description: 'Popular CAT models known for reliability and fuel efficiency. We handle both standard and LGP configurations.',
+    // brand: 'Kobelco',
+    // models: ['SK200', 'SK210', 'SK350', 'SK480'],
+    // description: 'Fuel-efficient models with advanced hydraulics. Popular in Southeast Asian markets.',
+    image: '/images/excavator/ex4.jpg'
+  },
+  {
+    brand: 'Caterpillar',
+    models: ['320D', '320E', '320-07A', '330D', '336E', '349E'],
+    description: 'Popular CAT models known for reliability and fuel efficiency. We handle both standard and LGP configurations.',
+    // brand: 'Caterpillar',
+    // models: ['320D', '320E', '320-07A', '330D', '336E', '349E'],
+    // description: 'Popular CAT models known for reliability and fuel efficiency. We handle both standard and LGP configurations.',
+    image: '/images/excavator/ex5.jpg'
+  },
+  {
+    brand: 'Caterpillar',
+    models: ['320D', '320E', '320-07A', '330D', '336E', '349E'],
+    description: 'Popular CAT models known for reliability and fuel efficiency. We handle both standard and LGP configurations.',
+    // brand: 'Komatsu',
+    // models: ['PC200-8', 'PC220-8', 'PC300-8', 'PC400-8'],
+    // description: 'Japanese quality with excellent hydraulic performance. Low hour units preferred for export.',
+    image: '/images/excavator/ex6.jpg'
+  },
+  {
+    brand: 'Caterpillar',
+    models: ['320D', '320E', '320-07A', '330D', '336E', '349E'],
+    description: 'Popular CAT models known for reliability and fuel efficiency. We handle both standard and LGP configurations.',
+    // brand: 'Hitachi',
+    // models: ['ZX200', 'ZX210', 'ZX350', 'ZX470'],
+    // description: 'ZX series with Isuzu engines. We purchase both standard and long-reach configurations.',
+    image: '/images/excavator/ex7.jpg'
+  },
+  {
+    brand: 'Caterpillar',
+    models: ['320D', '320E', '320-07A', '330D', '336E', '349E'],
+    description: 'Popular CAT models known for reliability and fuel efficiency. We handle both standard and LGP configurations.',
+    // brand: 'Kobelco',
+    // models: ['SK200', 'SK210', 'SK350', 'SK480'],
+    // description: 'Fuel-efficient models with advanced hydraulics. Popular in Southeast Asian markets.',
+    image: '/images/excavator/ex8.jpg'
+  },
+  {
+    brand: 'Caterpillar',
+    models: ['320D', '320E', '320-07A', '330D', '336E', '349E'],
+    description: 'Popular CAT models known for reliability and fuel efficiency. We handle both standard and LGP configurations.',
+    // brand: 'Caterpillar',
+    // models: ['320D', '320E', '320-07A', '330D', '336E', '349E'],
+    // description: 'Popular CAT models known for reliability and fuel efficiency. We handle both standard and LGP configurations.',
+    image: '/images/excavator/ex9.jpg'
+  },
+  {
+    brand: 'Caterpillar',
+    models: ['320D', '320E', '320-07A', '330D', '336E', '349E'],
+    description: 'Popular CAT models known for reliability and fuel efficiency. We handle both standard and LGP configurations.',
+    // brand: 'Komatsu',
+    // models: ['PC200-8', 'PC220-8', 'PC300-8', 'PC400-8'],
+    // description: 'Japanese quality with excellent hydraulic performance. Low hour units preferred for export.',
+    image: '/images/excavator/ex10.jpg'
+  },
 ];
 
 export default function ExcavatorsPage() {
@@ -60,7 +123,7 @@ export default function ExcavatorsPage() {
           <div className="grid md:grid-cols-2">
             <div className="relative h-64 md:h-auto">
               <Image
-                src="/images/excavator-hero.jpg"
+                src="/images/excavator/excavator-hero.jpg"
                 alt="Excavators"
                 fill
                 className="object-cover"
@@ -86,7 +149,7 @@ export default function ExcavatorsPage() {
           <div className="grid md:grid-cols-2 gap-6">
             {excavatorModels.map((item, index) => (
               <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden">
-                <div className="relative h-48">
+                <div className="relative h-64">
                   <Image
                     src={item.image}
                     alt={item.brand}

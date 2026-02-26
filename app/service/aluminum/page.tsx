@@ -10,25 +10,25 @@ const aluminumProducts = [
   {
     title: 'Aluminum UBC (Used Beverage Cans)',
     description: 'Clean, empty aluminum cans without steel or significant contamination. Most common form of recycled aluminum.',
-    image: '/images/aluminum-ubc.jpg',
+    image: '/images/aluminum/alu1.jpg',
     grade: 'UBC'
   },
   {
     title: 'Aluminum Extrusion 6063',
     description: 'Clean aluminum extrusions including window frames, door frames, and structural profiles. No steel or plastic attachments.',
-    image: '/images/aluminum-extrusion.jpg',
+    image: '/images/aluminum/alu2.jpg',
     grade: '6063'
   },
   {
     title: 'Aluminum Wheels',
     description: 'Clean aluminum wheel rims without tires, valve stems, or lead weights. High-grade automotive aluminum.',
-    image: '/images/aluminum-wheel.jpg',
+    image: '/images/aluminum/alu3.jpg',
     grade: 'Tense'
   },
   {
     title: 'Aluminum Ingot A7',
     description: 'Primary aluminum ingots with 99.7% purity. Standard for remelting and manufacturing applications.',
-    image: '/images/aluminum-ingot.jpg',
+    image: '/images/aluminum/alu4.jpg',
     grade: 'A7'
   }
 ];
@@ -80,7 +80,7 @@ export default function AluminumPage() {
             </div>
             <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden">
               <Image
-                src="/images/aluminum-hero.jpg"
+                src="/images/aluminum.png"
                 alt="Aluminum products"
                 fill
                 className="object-cover"

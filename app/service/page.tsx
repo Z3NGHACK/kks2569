@@ -279,7 +279,7 @@ export default function ServicePage() {
           </div>
 
           {/* View All Plastics Button */}
-          <div className="text-center mt-8">
+          {/* <div className="text-center mt-8">
             <Link 
               href="/service/plastics"
               className="inline-flex items-center space-x-2 bg-green-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
@@ -287,7 +287,7 @@ export default function ServicePage() {
               <span>{getString('SERVICE.PLASTIC_TYPES.VIEW_ALL')}</span>
               <span>→</span>
             </Link>
-          </div>
+          </div> */}
         </section>
 
         {/* ===== METAL TRADING - SECONDARY SECTION ===== */}
@@ -400,7 +400,7 @@ export default function ServicePage() {
           </div>
 
           {/* Featured Machinery with Images */}
-          <div className="grid md:grid-cols-3 gap-6 mb-10">
+          <div className="grid md:grid-cols-3 gap-6 mb-10 mt-6">
             {machineryItems.map((item) => (
               <Link
                 key={item.id}

@@ -10,27 +10,27 @@ import { useTranslation } from '@/components/LanguageProvider';
 // Product data - easy to add more items
 const allProducts = [
   // Plastic Pellets
-  { id: 1, category: 'Plastic Pellets', name: 'PET Clear Pellets', description: 'Virgin-quality recycled PET for bottle manufacturing', image: '/images/pet-pellets.jpg', price: 'Contact for price' },
-  { id: 2, category: 'Plastic Pellets', name: 'HDPE Natural Pellets', description: 'High-density polyethylene for blow molding', image: '/images/hdpe-pellets.jpg', price: 'Contact for price' },
-  { id: 3, category: 'Plastic Pellets', name: 'PP Injection Grade', description: 'Polypropylene for injection molding applications', image: '/images/pp-pellets.jpg', price: 'Contact for price' },
-  { id: 4, category: 'Plastic Pellets', name: 'PVC Compound', description: 'Flexible and rigid PVC compounds', image: '/images/pvc-pellets.jpg', price: 'Contact for price' },
+  { id: 1, category: 'Plastic Pellets', name: 'PET Clear Pellets', description: 'Virgin-quality recycled PET for bottle manufacturing', image: '/images/products/i1.jpg', price: 'Contact for price' },
+  { id: 2, category: 'Plastic Pellets', name: 'HDPE Natural Pellets', description: 'High-density polyethylene for blow molding', image: '/images/products/i1.jpg', price: 'Contact for price' },
+  { id: 3, category: 'Plastic Pellets', name: 'PP Injection Grade', description: 'Polypropylene for injection molding applications', image: '/images/products/i1.jpg', price: 'Contact for price' },
+  { id: 4, category: 'Plastic Pellets', name: 'PVC Compound', description: 'Flexible and rigid PVC compounds', image: '/images/products/i1.jpg', price: 'Contact for price' },
   
   // Metal Scrap
-  { id: 5, category: 'Metal', name: 'Copper Wire Scrap', description: 'Millberry grade copper wire, 99.9% purity', image: '/images/copper-wire.jpg', price: 'Contact for price' },
-  { id: 6, category: 'Metal', name: 'Aluminum UBC', description: 'Used beverage cans, clean and sorted', image: '/images/aluminum-ubc.jpg', price: 'Contact for price' },
-  { id: 7, category: 'Metal', name: 'Aluminum Extrusion 6063', description: 'Clean extrusion scrap without steel', image: '/images/aluminum-extrusion.jpg', price: 'Contact for price' },
-  { id: 8, category: 'Metal', name: 'Brass Scrap', description: 'Yellow brass from fittings and valves', image: '/images/brass-scrap.jpg', price: 'Contact for price' },
+  { id: 5, category: 'Metal', name: 'Copper Wire Scrap', description: 'Millberry grade copper wire, 99.9% purity', image: '/images/products/i1.jpg', price: 'Contact for price' },
+  { id: 6, category: 'Metal', name: 'Aluminum UBC', description: 'Used beverage cans, clean and sorted', image: '/images/products/i1.jpg', price: 'Contact for price' },
+  { id: 7, category: 'Metal', name: 'Aluminum Extrusion 6063', description: 'Clean extrusion scrap without steel', image: '/images/products/i1.jpg', price: 'Contact for price' },
+  { id: 8, category: 'Metal', name: 'Brass Scrap', description: 'Yellow brass from fittings and valves', image: '/images/products/i1.jpg', price: 'Contact for price' },
   
   // Machinery
-  { id: 9, category: 'Machinery', name: 'CAT 320D Excavator', description: '2015 model, 4500 hours, excellent condition', image: '/images/cat-320d.jpg', price: 'Contact for price' },
-  { id: 10, category: 'Machinery', name: 'Komatsu PC200-8', description: '2012 model, 6800 hours, ready to work', image: '/images/komatsu-pc200.jpg', price: 'Contact for price' },
-  { id: 11, category: 'Machinery', name: 'Kubota Tractor L3608', description: '36HP, 4WD, with rotary tiller', image: '/images/kubota-tractor.jpg', price: 'Contact for price' },
-  { id: 12, category: 'Machinery', name: 'Yanmar Combine', description: 'Rice combine harvester, head-feeder type', image: '/images/yanmar-combine.jpg', price: 'Contact for price' },
+  { id: 9, category: 'Machinery', name: 'CAT 320D Excavator', description: '2015 model, 4500 hours, excellent condition', image: '/images/products/i1.jpg', price: 'Contact for price' },
+  { id: 10, category: 'Machinery', name: 'Komatsu PC200-8', description: '2012 model, 6800 hours, ready to work', image: '/images/products/i1.jpg', price: 'Contact for price' },
+  { id: 11, category: 'Machinery', name: 'Kubota Tractor L3608', description: '36HP, 4WD, with rotary tiller', image: '/images/products/i1.jpg', price: 'Contact for price' },
+  { id: 12, category: 'Machinery', name: 'Yanmar Combine', description: 'Rice combine harvester, head-feeder type', image: '/images/products/i1.jpg', price: 'Contact for price' },
   
   // Parts
-  { id: 13, category: 'Parts', name: 'Hydraulic Pump', description: 'Main pump for excavators, various brands', image: '/images/hydraulic-pump.jpg', price: 'Contact for price' },
-  { id: 14, category: 'Parts', name: 'Engine Rebuild Kit', description: 'Complete kit for CAT C7 engine', image: '/images/engine-kit.jpg', price: 'Contact for price' },
-  { id: 15, category: 'Parts', name: 'Track Link Assembly', description: 'Undercarriage parts for 20-ton class', image: '/images/track-link.jpg', price: 'Contact for price' },
+  { id: 13, category: 'Parts', name: 'Hydraulic Pump', description: 'Main pump for excavators, various brands', image: '/images/products/i1.jpg', price: 'Contact for price' },
+  { id: 14, category: 'Parts', name: 'Engine Rebuild Kit', description: 'Complete kit for CAT C7 engine', image: '/images/products/i1.jpg', price: 'Contact for price' },
+  { id: 15, category: 'Parts', name: 'Track Link Assembly', description: 'Undercarriage parts for 20-ton class', image: '/images/products/i1.jpg', price: 'Contact for price' },
 ];
 
 const categories = ['All', 'Plastic Pellets', 'Metal', 'Machinery', 'Parts'];

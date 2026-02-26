@@ -10,25 +10,25 @@ const copperProducts = [
   {
     title: 'Copper Wire Scrap',
     description: 'Clean, uncoated copper wire without insulation. Highest grade copper scrap with maximum recovery value.',
-    image: '/images/copper-wire.jpg',
+    image: '/images/copper/cop1.jpg',
     grade: 'Millberry'
   },
   {
     title: 'Copper Pipe & Tube',
     description: 'Plumbing and industrial copper pipes, clean without solder or paint. Includes both hard and soft copper tubing.',
-    image: '/images/copper-pipe.jpg',
+    image: '/images/copper/cop2.jpg',
     grade: 'No.1 Copper'
   },
   {
     title: 'Copper Sheets & Plates',
     description: 'Industrial copper sheets, roofing copper, and decorative plates. Clean material with minimal oxidation.',
-    image: '/images/copper-sheet.jpg',
+    image: '/images/copper/cop3.jpg',
     grade: 'No.2 Copper'
   },
   {
     title: 'Copper Cathodes',
     description: 'Electrolytic copper cathodes with 99.99% purity. Premium grade for industrial manufacturing and export.',
-    image: '/images/copper-cathode.jpg',
+    image: '/images/copper/cop4.jpg',
     grade: 'A Grade'
   }
 ];
@@ -80,7 +80,7 @@ export default function CopperPage() {
             </div>
             <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden">
               <Image
-                src="/images/copper-hero.jpg"
+                src="/images/copper.png"
                 alt="Copper products"
                 fill
                 className="object-cover"
