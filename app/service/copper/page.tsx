@@ -16,13 +16,13 @@ const copperProducts = [
   {
     title: 'Copper Pipe & Tube',
     description: 'Plumbing and industrial copper pipes, clean without solder or paint. Includes both hard and soft copper tubing.',
-    image: '/images/copper/cop2.jpg',
+    image: '/images/copper/cop3.jpg',
     grade: 'No.1 Copper'
   },
   {
     title: 'Copper Sheets & Plates',
     description: 'Industrial copper sheets, roofing copper, and decorative plates. Clean material with minimal oxidation.',
-    image: '/images/copper/cop3.jpg',
+    image: '/images/copper/cop2.jpg',
     grade: 'No.2 Copper'
   },
   {
