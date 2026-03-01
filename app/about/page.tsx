@@ -1,8 +1,9 @@
-// app/about/page.tsx
 'use client';
 
 import Hero from '@/components/Hero';
 import { useTranslation } from '@/components/LanguageProvider';
+import Link from 'next/link';
+import { Mail } from 'lucide-react';
 
 export default function AboutPage() {
   const { t } = useTranslation();
@@ -16,6 +17,26 @@ export default function AboutPage() {
     const value = t(key);
     return Array.isArray(value) ? value : [];
   };
+
+  // Email configuration for each person
+  const emailContacts = [
+    {
+      id: 'Sophan',
+      name: 'SOK SOPHANN',
+      role: 'ABOUT.INFO.PRESIDENT',
+      email: 's.phann@kks2026.com',
+      phone: '+855 85 998 299 / +855 90 995 6999',
+      apiKey: 'Sophan'
+    },
+    {
+      id: 'Sokhan',
+      name: 'KEAN SOKKKHAN',
+      role: 'ABOUT.INFO.VICE_PRESIDENT',
+      email: 'kks2026@k.sokhan.com',
+      phone: '+81 90 8521 5588',
+      apiKey: 'Sokhan'
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -63,41 +84,42 @@ export default function AboutPage() {
                   {getString('ABOUT.INFO.COMPANY_NAME')}
                 </dt>
                 <dd className="mt-1 text-gray-900 sm:col-span-2 sm:mt-0">
-                  {getString('ABOUT.INFO.COMPANY_NAME_VALUE')}  {/* ← add this key too if you want to translate company name */}
+                  {getString('ABOUT.INFO.COMPANY_NAME_VALUE')}
                 </dd>
               </div>
 
-              {/* Co-Founders */}
+              {/* Co-Founders with Email Buttons */}
               <div className="px-6 py-6 sm:grid sm:grid-cols-3 sm:gap-6 hover:bg-gray-50/50 transition-colors">
                 <dt className="text-base font-semibold text-gray-700 sm:col-span-1 pt-1">
                   {getString('ABOUT.INFO.CO_FOUNDERS')}
                 </dt>
                 <dd className="mt-1 sm:col-span-2 sm:mt-0 space-y-6">
-                  {/* President */}
-                  <div>
-                    <div className="flex items-baseline gap-3">
-                      <span className="font-medium text-gray-800 min-w-[127px]">
-                        {getString('ABOUT.INFO.PRESIDENT')}:
-                      </span>
-                      <span className="text-gray-900">SOK SOPHANN</span>
+                  {emailContacts.map((contact) => (
+                    <div key={contact.id} className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                      <div>
+                        <div className="flex items-baseline gap-3">
+                          <span className="font-medium text-gray-800 min-w-[127px]">
+                            {getString(contact.role)}:
+                          </span>
+                          <span className="text-gray-900">{contact.name}</span>
+                        </div>
+                        <p className="text-sm text-gray-600 mt-1 pl-[140px]">
+                          {contact.email}
+                        </p>
+                        <p className="text-sm text-gray-500 mt-1 pl-[140px]">
+                          {contact.phone}
+                        </p>
+                      </div>
+                      {/* Email Button */}
+                      <Link
+                        href={`/contact?to=${contact.id}&email=${encodeURIComponent(contact.email)}`}
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-dark transition-colors text-sm font-medium whitespace-nowrap"
+                      >
+                        <Mail size={16} />
+                        {getString('ABOUT.EMAIL_BUTTON')} {contact.name.split(' ').pop()}
+                      </Link>
                     </div>
-                    <p className="text-sm text-gray-600 mt-1 pl-[140px]">
-                      s.phann@kks2026.com
-                    </p>
-                  </div>
-
-                  {/* Vice President */}
-                  <div>
-                    <div className="flex items-baseline gap-3">
-                      <span className="font-medium text-gray-800 min-w-[127px]">
-                        {getString('ABOUT.INFO.VICE_PRESIDENT')}:
-                      </span>
-                      <span className="text-gray-900">KEAN SOKKKHAN</span>
-                    </div>
-                    <p className="text-sm text-gray-600 mt-1 pl-[140px]">
-                      kks2026@k.sokhan.com • info@kks2026.com
-                    </p>
-                  </div>
+                  ))}
                 </dd>
               </div>
 
@@ -116,37 +138,29 @@ export default function AboutPage() {
                 </dd>
               </div>
 
-              {/* Contact */}
+              {/* Contact - Info Email (Default) */}
               <div className="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-6 hover:bg-gray-50/50 transition-colors">
                 <dt className="text-base font-semibold text-gray-700 sm:col-span-1">
                   {getString('ABOUT.INFO.CONTACT')}
                 </dt>
                 <dd className="mt-1 sm:col-span-2 sm:mt-0 space-y-3">
-                  <div className="flex flex-col sm:flex-row sm:gap-8">
-                    <div>
+                  <div className="flex flex-col gap-2">
+                    <div className="flex items-center gap-2">
                       <span className="font-medium text-gray-700">
-                        {getString('ABOUT.INFO.TEL_PRESIDENT')}:
-                      </span>{' '}
-                      +855 85 998 299 / +855 90 995 6999
+                        {getString('ABOUT.INFO.EMAIL')}:
+                      </span>
+                      <a href="mailto:info@kks2026.com" className="text-primary hover:underline">
+                        info@kks2026.com
+                      </a>
+                      {/* Default Contact Button */}
+                      <Link
+                        href="/contact"
+                        className="inline-flex items-center gap-1 px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 transition-colors text-xs font-medium ml-2"
+                      >
+                        <Mail size={12} />
+                        {getString('ABOUT.EMAIL_BUTTON_DEFAULT')}
+                      </Link>
                     </div>
-                    <div>
-                      <span className="font-medium text-gray-700">
-                        {getString('ABOUT.INFO.TEL_VICE_PRESIDENT')}:
-                      </span>{' '}
-                      +81 90 8521 5588
-                    </div>
-                  </div>
-                  <div>
-                    <span className="font-medium text-gray-700">
-                      {getString('ABOUT.INFO.EMAIL')}:
-                    </span>{' '}
-                    <a href="mailto:info@kks2026.com" className="text-primary hover:underline">
-                      info@kks2026.com
-                    </a>
-                    {' • '}
-                    <a href="mailto:s.phann@kks2026.com" className="text-primary hover:underline">
-                      s.phann@kks2026.com
-                    </a>
                   </div>
                   <div>
                     <span className="font-medium text-gray-700">

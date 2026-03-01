@@ -62,11 +62,22 @@
   "ABOUT": {
     "PAGE_TITLE": "Giới thiệu",
     "PAGE_SUBTITLE": "Hồ sơ công ty",
+    "EMAIL_BUTTON": "Gửi email",
+    "EMAIL_BUTTON_DEFAULT": "Liên hệ",
+    "CONTACT": {
+      "SENDING_TO": "Gửi tin nhắn đến:",
+      "SWITCH_TO_GENERAL": "Chuyển sang liên hệ chung",
+      "FORM": {
+        "SUCCESS": "Tin nhắn đã được gửi thành công! Chúng tôi sẽ liên hệ lại với bạn sớm.",
+        "ERROR": "Gửi tin nhắn thất bại. Vui lòng thử lại hoặc liên hệ trực tiếp với chúng tôi.",
+        "SENDING": "Đang gửi..."
+      }
+    },
     "MESSAGE": {
       "TITLE": "Thông điệp từ Chủ tịch",
-      "P1": "Cảm ơn quý khách đã truy cập website của Công ty TNHH Khmer Kansai.",
-      "P2": "Chúng tôi hướng tới việc hiện thực hóa xã hội tuần hoàn coi trọng tài nguyên. Thông qua việc thu gom đồ điện, nhựa, nhôm, sắt, xe đạp, máy móc xây dựng và thiết bị nông nghiệp không còn sử dụng, chúng tôi đóng góp vào việc giảm thiểu tác động môi trường đồng thời hỗ trợ cuộc sống của khách hàng thông qua kinh doanh mua lại và dịch vụ dọn dẹp di sản.",
-      "P3": "Ngay cả những vật dụng bạn nghĩ không còn sử dụng được cũng có thể tạo ra giá trị mới. Thay vì đơn giản là vứt bỏ rác thải, chúng tôi đề xuất những cách tốt nhất để 'kết nối với tương lai' và liên kết với một tương lai bền vững.",
+      "P1": "Cảm ơn bạn đã truy cập trang web của Công ty TNHH Khmer Kansai.",
+      "P2": "Chúng tôi hướng đến việc hiện thực hóa một xã hội tuần hoàn coi trọng tài nguyên. Thông qua việc thu gom đồ điện, nhựa, nhôm, sắt, xe đạy không còn sử dụng, máy móc xây dựng và thiết bị nông nghiệp, chúng tôi góp phần giảm thiểu tác động môi trường đồng thời hỗ trợ cuộc sống của khách hàng thông qua dịch vụ mua lại và dọn dẹp di sản.",
+      "P3": "Ngay cả những vật dụng bạn nghĩ không thể sử dụng được nữa cũng có thể tạo ra giá trị mới. Thay vì chỉ đơn thuần vứt bỏ rác thải, chúng tôi đề xuất những cách tốt nhất để 'kết nối với tương lai' và hướng đến một tương lai bền vững.",
       "P4": "Chúng tôi sẽ tiếp tục đồng hành cùng cộng đồng địa phương, cung cấp các dịch vụ thân thiện với môi trường và đáng tin cậy. Chúng tôi mong nhận được sự ủng hộ tiếp tục của quý khách đối với Công ty TNHH Khmer Kansai.",
       "COMPANY": "Công ty TNHH Khmer Kansai",
       "PRESIDENT": "Chủ tịch: Haruhisa Sugimoto"
@@ -74,22 +85,121 @@
     "INFO": {
       "TITLE": "Thông tin công ty",
       "COMPANY_NAME": "Tên công ty",
+      "COMPANY_NAME_VALUE": "Công ty TNHH Khmer Kansai",
       "CO_FOUNDERS": "Đồng sáng lập",
       "PRESIDENT": "Chủ tịch",
-      "VICE_PRESIDENT": "Phó Chủ tịch",
+      "VICE_PRESIDENT": "Phó chủ tịch",
       "HEAD_OFFICE_BRANCH": "Trụ sở chính / Chi nhánh",
       "CONTACT": "Liên hệ",
-      "TEL_PRESIDENT": "ĐT (Chủ tịch)",
-      "TEL_VICE_PRESIDENT": "ĐT (Phó Chủ tịch)",
+      "TEL_PRESIDENT": "Điện thoại (Chủ tịch)",
+      "TEL_VICE_PRESIDENT": "Điện thoại (Phó chủ tịch)",
       "EMAIL": "Email",
       "WEBSITE": "Website",
       "BUSINESS": "Lĩnh vực kinh doanh",
       "BUSINESS_ITEMS": [
         "Kinh doanh tái chế (đồ điện, nhựa, kim loại)",
         "Kinh doanh mua lại (sản phẩm điện, ô tô, đồ da)",
-        "Mua lại và xuất khẩu máy móc xây dựng và thiết bị nông nghiệp",
+        "Mua và xuất khẩu máy móc xây dựng và thiết bị nông nghiệp",
         "Dọn dẹp di sản và vệ sinh đặc biệt"
-      ]
+      ],
+      "REPRESENTATIVE_VALUE": "Haruhisa Sugimoto"
+    }
+  },
+  "CONTACT": {
+    "PAGE_TITLE": "Báo giá & Liên hệ",
+    "PAGE_SUBTITLE": "Liên hệ với chúng tôi",
+    "SENDING_TO": "Gửi tin nhắn đến:",
+    "SWITCH_TO_GENERAL": "Chuyển sang liên hệ chung",
+    "FORM": {
+      "TITLE": "Mẫu liên hệ",
+      "NAME": "Họ và tên",
+      "NAME_PLACEHOLDER": "Nguyễn Văn A",
+      "EMAIL": "Địa chỉ email",
+      "EMAIL_PLACEHOLDER": "example@email.com",
+      "PHONE": "Số điện thoại",
+      "PHONE_PLACEHOLDER": "090-1234-5678",
+      "TYPE": "Loại yêu cầu",
+      "TYPE_OPTIONS": {
+        "SELECT": "Vui lòng chọn",
+        "BUYING": "Tư vấn mua hàng",
+        "RECYCLE": "Tư vấn tái chế",
+        "QUOTE": "Yêu cầu báo giá",
+        "OTHER": "Khác"
+      },
+      "MESSAGE": "Nội dung yêu cầu",
+      "MESSAGE_PLACEHOLDER": "Vui lòng nhập nội dung yêu cầu của bạn...",
+      "PRIVACY": "Tôi đồng ý với Chính sách bảo mật",
+      "PRIVACY_LINK": "Chính sách bảo mật",
+      "SUBMIT": "Gửi",
+      "NOTE": "Chúng tôi trả lời các yêu cầu theo thứ tự, nhưng tùy thuộc vào nội dung, có thể mất thời gian. Cảm ơn sự thông cảm của bạn.",
+      "SUCCESS": "Tin nhắn đã được gửi thành công! Chúng tôi sẽ liên hệ lại với bạn sớm.",
+      "ERROR": "Gửi tin nhắn thất bại. Vui lòng thử lại hoặc liên hệ trực tiếp với chúng tôi.",
+      "SENDING": "Đang gửi..."
+    },
+    "INFO": {
+      "TITLE": "Thông tin liên hệ",
+      "EMAIL_LABEL": "Địa chỉ email",
+      "PHONE_LABEL": "Điện thoại",
+      "PHONE_DESC": "Chúng tôi cũng tiếp nhận yêu cầu qua điện thoại",
+      "LOCATION_LABEL": "Địa điểm",
+      "HOURS_LABEL": "Giờ làm việc",
+      "HOURS_VALUE": "Thứ 2 - Thứ 6: 9:00 - 18:00"
+    },
+    "URGENT": {
+      "TITLE": "Trường hợp khẩn cấp",
+      "DESC": "Để được phản hồi nhanh hơn, vui lòng liên hệ với chúng tôi qua điện thoại hoặc LINE.",
+      "PHONE_BUTTON": "Gọi điện",
+      "LINE_BUTTON": "Liên hệ qua LINE"
+    },
+    "PRIVACY_POLICY": {
+      "TITLE": "Chính sách bảo mật",
+      "INTRO": "Công ty TNHH Khmer Kansai (sau đây gọi là 'Công ty') nhận thức được tầm quan trọng của việc bảo vệ thông tin cá nhân trong các dịch vụ cung cấp trên trang web này, tuân thủ Luật Bảo vệ Thông tin Cá nhân và thiết lập Chính sách Bảo mật sau đây (sau đây gọi là 'Chính sách này').",
+      "SECTION1": {
+        "TITLE": "Điều 1 (Thông tin cá nhân)",
+        "CONTENT": "'Thông tin cá nhân' đề cập đến 'thông tin cá nhân' theo định nghĩa trong Luật Bảo vệ Thông tin Cá nhân, là thông tin về một cá nhân còn sống có thể xác định được danh tính cụ thể thông qua tên, ngày sinh, địa chỉ, số điện thoại, thông tin liên hệ hoặc các mô tả khác có trong thông tin đó, cũng như dữ liệu liên quan đến ngoại hình, dấu vân tay, dấu giọng nói và số bảo hiểm y tế có thể xác định được danh tính cụ thể từ thông tin đơn lẻ (thông tin nhận dạng cá nhân)."
+      },
+      "SECTION2": {
+        "TITLE": "Điều 2 (Thông tin doanh nghiệp)",
+        "COMPANY_NAME": "Tên công ty",
+        "REPRESENTATIVE": "Người đại diện"
+      },
+      "SECTION3": {
+        "TITLE": "Điều 3 (Phương thức thu thập thông tin cá nhân)",
+        "CONTENT": "Công ty có thể yêu cầu thông tin cá nhân như tên, ngày sinh, địa chỉ, số điện thoại và địa chỉ email khi người dùng đăng ký sử dụng."
+      },
+      "SECTION4": {
+        "TITLE": "Điều 4 (Mục đích thu thập và sử dụng thông tin cá nhân)",
+        "CONTENT": "Mục đích thu thập và sử dụng thông tin cá nhân của Công ty như sau:",
+        "PURPOSES": [
+          "Cung cấp và vận hành dịch vụ của Công ty",
+          "Phản hồi yêu cầu từ khách hàng (bao gồm xác minh danh tính)",
+          "Cung cấp thông tin về dịch vụ đang sử dụng và hướng dẫn về các dịch vụ khác do Công ty cung cấp",
+          "Liên hệ về bảo trì, thông báo quan trọng, v.v.",
+          "Xác định khách hàng vi phạm điều khoản sử dụng hoặc sử dụng dịch vụ cho mục đích gian lận hoặc bất hợp lý, và từ chối sử dụng",
+          "Xác nhận và xem thông tin đã đăng ký, thay đổi, xóa và xem trạng thái sử dụng",
+          "Thanh toán phí sử dụng cho dịch vụ trả phí",
+          "Các mục đích liên quan đến các mục đích sử dụng nêu trên"
+        ]
+      },
+      "SECTION5": {
+        "TITLE": "Điều 5 (Biện pháp an ninh thông tin cá nhân)",
+        "CONTENT": "Để bảo vệ thông tin cá nhân, Công ty thực hiện các biện pháp như quản lý thông tin cá nhân, chỉ định phương pháp thực hiện thông tin cá nhân và ngăn chặn truy cập trái phép từ bên thứ ba dựa trên các quy định về an ninh thông tin, đồng thời nỗ lực ngăn ngừa rò rỉ, mất mát, giả mạo và phá hủy thông tin cá nhân."
+      },
+      "SECTION6": {
+        "TITLE": "Điều 6 (Tiết lộ thông tin cá nhân)",
+        "CONTENT": "Khi được cá nhân yêu cầu tiết lộ thông tin cá nhân và hồ sơ cung cấp cho bên thứ ba, Công ty sẽ tiết lộ cho cá nhân đó mà không chậm trễ."
+      },
+      "SECTION7": {
+        "TITLE": "Điều 7 (Sửa đổi và xóa thông tin cá nhân)",
+        "CONTENT": "Nếu thông tin cá nhân do Công ty nắm giữ không chính xác, khách hàng có thể yêu cầu sửa đổi, bổ sung hoặc xóa (sau đây gọi là 'sửa đổi, v.v.') thông tin cá nhân theo thủ tục do Công ty quy định."
+      },
+      "SECTION8": {
+        "TITLE": "Điều 8 (Liên hệ)",
+        "CONTENT": "Đối với câu hỏi, thắc mắc, khiếu nại và các yêu cầu khác liên quan đến việc xử lý thông tin cá nhân của Công ty, vui lòng liên hệ:",
+        "COMPANY_LABEL": "Tên công ty",
+        "EMAIL_LABEL": "Email"
+      },
+      "DATE": "Ban hành: 2024"
     }
   },
   "PLAN": {
@@ -178,97 +288,6 @@
       "TITLE": "Hãy Liên hệ Với Chúng tôi Trước",
       "DESC": "Giá mua lại thay đổi tùy theo tình trạng vật dụng và thị trường. Chúng tôi cung cấp dịch vụ thẩm định miễn phí, vui lòng tham khảo ý kiến chúng tôi.",
       "BUTTON": "Yêu cầu Thẩm định Miễn phí"
-    }
-  },
-  "CONTACT": {
-    "PAGE_TITLE": "Báo giá & Liên hệ",
-    "PAGE_SUBTITLE": "Liên hệ với chúng tôi",
-    "FORM": {
-      "TITLE": "Mẫu Liên hệ",
-      "NAME": "Họ tên",
-      "NAME_PLACEHOLDER": "Nguyễn Văn A",
-      "EMAIL": "Địa chỉ Email",
-      "EMAIL_PLACEHOLDER": "example@email.com",
-      "PHONE": "Số điện thoại",
-      "PHONE_PLACEHOLDER": "090-1234-5678",
-      "TYPE": "Loại Liên hệ",
-      "TYPE_OPTIONS": {
-        "SELECT": "Vui lòng chọn",
-        "BUYING": "Tư vấn Mua lại",
-        "RECYCLE": "Tư vấn Tái chế",
-        "QUOTE": "Yêu cầu Báo giá",
-        "OTHER": "Khác"
-      },
-      "MESSAGE": "Chi tiết Liên hệ",
-      "MESSAGE_PLACEHOLDER": "Vui lòng nhập chi tiết liên hệ của bạn...",
-      "PRIVACY": "Tôi đồng ý với Chính sách Bảo mật",
-      "PRIVACY_LINK": "Chính sách Bảo mật",
-      "SUBMIT": "Gửi",
-      "NOTE": "Chúng tôi trả lời các liên hệ theo thứ tự, nhưng tùy theo nội dung, có thể mất thời gian. Cảm ơn sự thông cảm của quý khách."
-    },
-    "INFO": {
-      "TITLE": "Thông tin Liên hệ",
-      "EMAIL_LABEL": "Địa chỉ Email",
-      "PHONE_LABEL": "Điện thoại",
-      "PHONE_DESC": "Chúng tôi cũng tiếp nhận liên hệ qua điện thoại",
-      "LOCATION_LABEL": "Địa điểm",
-      "HOURS_LABEL": "Giờ làm việc",
-      "HOURS_VALUE": "Thứ 2 - Thứ 6 9:00 - 18:00"
-    },
-    "URGENT": {
-      "TITLE": "Cho các vấn đề Khẩn cấp",
-      "DESC": "Để phản hồi nhanh hơn, vui lòng liên hệ với chúng tôi qua điện thoại hoặc LINE.",
-      "PHONE_BUTTON": "Gọi điện",
-      "LINE_BUTTON": "Liên hệ qua LINE"
-    },
-    "PRIVACY_POLICY": {
-      "TITLE": "Chính sách Bảo mật",
-      "INTRO": "Công ty TNHH Khmer Kansai (sau đây gọi là 'Công ty') nhận thức được tầm quan trọng của việc bảo vệ thông tin cá nhân trong các dịch vụ cung cấp trên website này, tuân thủ Luật Bảo vệ Thông tin Cá nhân và thiết lập Chính sách Bảo mật sau đây (sau đây gọi là 'Chính sách này').",
-      "SECTION1": {
-        "TITLE": "Điều 1 (Thông tin Cá nhân)",
-        "CONTENT": "'Thông tin Cá nhân' đề cập đến 'thông tin cá nhân' theo định nghĩa trong Luật Bảo vệ Thông tin Cá nhân, và là thông tin về cá nhân còn sống có thể xác định cá nhân cụ thể bằng tên, ngày sinh, địa chỉ, số điện thoại, thông tin liên hệ hoặc các mô tả khác có trong thông tin, cũng như dữ liệu liên quan đến ngoại hình, dấu vân tay, giọng nói và số bảo hiểm y tế có thể xác định cá nhân cụ thể từ thông tin đơn lẻ (thông tin nhận dạng cá nhân)."
-      },
-      "SECTION2": {
-        "TITLE": "Điều 2 (Thông tin Doanh nghiệp)",
-        "COMPANY_NAME": "Tên công ty",
-        "REPRESENTATIVE": "Người đại diện"
-      },
-      "SECTION3": {
-        "TITLE": "Điều 3 (Phương thức Thu thập Thông tin Cá nhân)",
-        "CONTENT": "Công ty có thể yêu cầu thông tin cá nhân như tên, ngày sinh, địa chỉ, số điện thoại và địa chỉ email khi người dùng đăng ký sử dụng."
-      },
-      "SECTION4": {
-        "TITLE": "Điều 4 (Mục đích Thu thập và Sử dụng Thông tin Cá nhân)",
-        "PURPOSES": [
-          "Cung cấp và vận hành dịch vụ của Công ty",
-          "Phản hồi liên hệ từ khách hàng (bao gồm xác minh danh tính)",
-          "Cung cấp thông tin về dịch vụ đang sử dụng và hướng dẫn về các dịch vụ khác do Công ty cung cấp",
-          "Liên hệ về bảo trì, thông báo quan trọng, v.v.",
-          "Xác định khách hàng vi phạm điều khoản sử dụng hoặc sử dụng dịch vụ cho mục đích gian lận hoặc phi lý, và từ chối sử dụng",
-          "Xác nhận và xem thông tin đăng ký, thay đổi, xóa và xem tình trạng sử dụng",
-          "Thanh toán phí sử dụng cho dịch vụ trả phí",
-          "Các mục đích liên quan đến các mục đích sử dụng nêu trên"
-        ]
-      },
-      "SECTION5": {
-        "TITLE": "Điều 5 (Biện pháp An ninh Thông tin Cá nhân)",
-        "CONTENT": "Để bảo vệ thông tin cá nhân, Công ty thực hiện các biện pháp như quản lý thông tin cá nhân, chỉ định phương thức mang thông tin cá nhân ra ngoài và ngăn chặn truy cập trái phép từ bên thứ ba dựa trên các quy định về an ninh thông tin, và nỗ lực ngăn chặn rò rỉ, mất mát, giả mạo và phá hủy thông tin cá nhân."
-      },
-      "SECTION6": {
-        "TITLE": "Điều 6 (Tiết lộ Thông tin Cá nhân)",
-        "CONTENT": "Khi được cá nhân yêu cầu tiết lộ thông tin cá nhân và hồ sơ cung cấp cho bên thứ ba, Công ty sẽ tiết lộ cho cá nhân đó không chậm trễ."
-      },
-      "SECTION7": {
-        "TITLE": "Điều 7 (Sửa đổi và Xóa Thông tin Cá nhân)",
-        "CONTENT": "Nếu thông tin cá nhân do Công ty nắm giữ không chính xác, khách hàng có thể yêu cầu sửa đổi, bổ sung hoặc xóa thông tin cá nhân (sau đây gọi là 'sửa đổi, v.v.') theo thủ tục do Công ty thiết lập."
-      },
-      "SECTION8": {
-        "TITLE": "Điều 8 (Liên hệ)",
-        "CONTENT": "Đối với câu hỏi, thắc mắc, khiếu nại và các liên hệ khác về việc xử lý thông tin cá nhân của Công ty, vui lòng liên hệ:",
-        "COMPANY_LABEL": "Tên công ty",
-        "EMAIL_LABEL": "Email"
-      },
-      "DATE": "Ban hành: 2024"
     }
   },
   "ROLES": {

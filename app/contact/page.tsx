@@ -1,11 +1,16 @@
-// app/contact/page.tsx
 'use client';
 
 import { Mail, Phone, MapPin, Clock, HelpCircle } from 'lucide-react';
 import Hero from '@/components/Hero';
 import { useTranslation } from '@/components/LanguageProvider';
+import { useSearchParams, useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { Suspense } from 'react';
 
-export default function ContactPage() {
+// Component that uses searchParams
+function ContactForm() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const { t } = useTranslation();
 
   const getString = (key: string): string => {
@@ -18,13 +23,225 @@ export default function ContactPage() {
     return Array.isArray(value) ? value : [];
   };
 
-  // Safe object access for inquiry types
+  // Get recipient from URL query
+  const recipientId = searchParams.get('to') || 'info';
+  const recipientEmail = searchParams.get('email') || 'info@kks2026.com';
+  
+  // Form state
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    type: '',
+    message: '',
+    privacy: false
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  // Recipient display names
+  const recipientNames: Record<string, string> = {
+    Sophan: 'SOK SOPHANN (President)',
+    Sokhan: 'KEAN SOKKKHAN (Vice President)',
+    hasimoto: 'HASHIMOTO',
+    info: 'KKS2026 (General Info)'
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          recipient: recipientId,
+          toEmail: recipientEmail
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', phone: '', type: '', message: '', privacy: false });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const getInquiryType = (key: string): string => {
     const types = t('CONTACT.FORM.TYPE_OPTIONS');
     if (typeof types === 'object' && types !== null && !Array.isArray(types)) {
       return (types as Record<string, string>)[key] || key;
     }
     return key;
+  };
+
+  const privacySections = [
+    'SECTION1', 'SECTION2', 'SECTION3', 'SECTION4', 
+    'SECTION5', 'SECTION6', 'SECTION7', 'SECTION8'
+  ] as const;
+
+  return (
+    <>
+      {/* Recipient Banner */}
+      {recipientId !== 'info' && (
+        <div className="bg-primary text-white p-4 rounded-xl mb-6 flex items-center justify-between">
+          <div>
+            <p className="text-sm opacity-90">{getString('CONTACT.SENDING_TO')}</p>
+            <p className="font-bold">{recipientNames[recipientId] || recipientEmail}</p>
+          </div>
+          <button
+            onClick={() => router.push('/contact')}
+            className="text-sm bg-white/20 hover:bg-white/30 px-3 py-1 rounded transition-colors"
+          >
+            {getString('CONTACT.SWITCH_TO_GENERAL')}
+          </button>
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Hidden field for recipient */}
+        <input type="hidden" name="recipient" value={recipientId} />
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            {getString('CONTACT.FORM.NAME')} <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            required
+            value={formData.name}
+            onChange={(e) => setFormData({...formData, name: e.target.value})}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+            placeholder={getString('CONTACT.FORM.NAME_PLACEHOLDER')}
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            {getString('CONTACT.FORM.EMAIL')} <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="email"
+            required
+            value={formData.email}
+            onChange={(e) => setFormData({...formData, email: e.target.value})}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+            placeholder={getString('CONTACT.FORM.EMAIL_PLACEHOLDER')}
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            {getString('CONTACT.FORM.PHONE')}
+          </label>
+          <input
+            type="tel"
+            value={formData.phone}
+            onChange={(e) => setFormData({...formData, phone: e.target.value})}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+            placeholder={getString('CONTACT.FORM.PHONE_PLACEHOLDER')}
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            {getString('CONTACT.FORM.TYPE')} <span className="text-red-500">*</span>
+          </label>
+          <select
+            required
+            value={formData.type}
+            onChange={(e) => setFormData({...formData, type: e.target.value})}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+          >
+            <option value="">{getInquiryType('SELECT')}</option>
+            <option value="buying">{getInquiryType('BUYING')}</option>
+            <option value="recycle">{getInquiryType('RECYCLE')}</option>
+            <option value="quote">{getInquiryType('QUOTE')}</option>
+            <option value="other">{getInquiryType('OTHER')}</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            {getString('CONTACT.FORM.MESSAGE')} <span className="text-red-500">*</span>
+          </label>
+          <textarea
+            required
+            rows={5}
+            value={formData.message}
+            onChange={(e) => setFormData({...formData, message: e.target.value})}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-none"
+            placeholder={getString('CONTACT.FORM.MESSAGE_PLACEHOLDER')}
+          ></textarea>
+        </div>
+
+        <div className="flex items-start space-x-3">
+          <input
+            type="checkbox"
+            id="privacy"
+            required
+            checked={formData.privacy}
+            onChange={(e) => setFormData({...formData, privacy: e.target.checked})}
+            className="mt-1 w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
+          />
+          <label htmlFor="privacy" className="text-sm text-gray-600">
+            <a href="#privacy-policy" className="text-primary underline hover:no-underline">
+              {getString('CONTACT.FORM.PRIVACY_LINK')}
+            </a>
+            {getString('CONTACT.FORM.PRIVACY')} <span className="text-red-500">*</span>
+          </label>
+        </div>
+
+        {/* Status Messages */}
+        {submitStatus === 'success' && (
+          <div className="bg-green-50 text-green-700 p-4 rounded-lg">
+            {getString('CONTACT.FORM.SUCCESS')}
+          </div>
+        )}
+        {submitStatus === 'error' && (
+          <div className="bg-red-50 text-red-700 p-4 rounded-lg">
+            {getString('CONTACT.FORM.ERROR')}
+          </div>
+        )}
+
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full bg-primary text-white py-4 rounded-lg font-bold hover:bg-dark transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {isSubmitting ? getString('CONTACT.FORM.SENDING') : getString('CONTACT.FORM.SUBMIT')}
+        </button>
+      </form>
+    </>
+  );
+}
+
+// Loading fallback
+function ContactFormSkeleton() {
+  return <div className="animate-pulse space-y-4"><div className="h-10 bg-gray-200 rounded"></div><div className="h-10 bg-gray-200 rounded"></div></div>;
+}
+
+// Main page component
+export default function ContactPage() {
+  const { t } = useTranslation();
+
+  const getString = (key: string): string => {
+    const value = t(key);
+    return typeof value === 'string' ? value : key;
+  };
+
+  const getArray = (key: string): string[] => {
+    const value = t(key);
+    return Array.isArray(value) ? value : [];
   };
 
   const privacySections = [
@@ -49,99 +266,16 @@ export default function ContactPage() {
               {getString('CONTACT.FORM.TITLE')}
             </h2>
             
-            <form className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {getString('CONTACT.FORM.NAME')} <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
-                  placeholder={getString('CONTACT.FORM.NAME_PLACEHOLDER')}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {getString('CONTACT.FORM.EMAIL')} <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="email"
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
-                  placeholder={getString('CONTACT.FORM.EMAIL_PLACEHOLDER')}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {getString('CONTACT.FORM.PHONE')}
-                </label>
-                <input
-                  type="tel"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
-                  placeholder={getString('CONTACT.FORM.PHONE_PLACEHOLDER')}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {getString('CONTACT.FORM.TYPE')} <span className="text-red-500">*</span>
-                </label>
-                <select
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
-                >
-                  <option value="">{getInquiryType('SELECT')}</option>
-                  <option value="buying">{getInquiryType('BUYING')}</option>
-                  <option value="recycle">{getInquiryType('RECYCLE')}</option>
-                  <option value="quote">{getInquiryType('QUOTE')}</option>
-                  <option value="other">{getInquiryType('OTHER')}</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {getString('CONTACT.FORM.MESSAGE')} <span className="text-red-500">*</span>
-                </label>
-                <textarea
-                  required
-                  rows={5}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-none"
-                  placeholder={getString('CONTACT.FORM.MESSAGE_PLACEHOLDER')}
-                ></textarea>
-              </div>
-
-              <div className="flex items-start space-x-3">
-                <input
-                  type="checkbox"
-                  id="privacy"
-                  required
-                  className="mt-1 w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
-                />
-                <label htmlFor="privacy" className="text-sm text-gray-600">
-                  <a href="#privacy-policy" className="text-primary underline hover:no-underline">
-                    {getString('CONTACT.FORM.PRIVACY_LINK')}
-                  </a>
-                  {getString('CONTACT.FORM.PRIVACY')} <span className="text-red-500">*</span>
-                </label>
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-primary text-white py-4 rounded-lg font-bold hover:bg-dark transition-colors duration-200"
-              >
-                {getString('CONTACT.FORM.SUBMIT')}
-              </button>
-            </form>
+            <Suspense fallback={<ContactFormSkeleton />}>
+              <ContactForm />
+            </Suspense>
 
             <p className="text-sm text-gray-500 mt-4 text-center">
               {getString('CONTACT.FORM.NOTE')}
             </p>
           </div>
 
-          {/* Contact Info */}
+          {/* Contact Info - Rest of your existing code */}
           <div className="space-y-8">
             <div className="bg-white rounded-2xl shadow-lg p-8">
               <h3 className="text-xl font-bold text-gray-800 mb-6">
