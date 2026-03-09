@@ -43,7 +43,7 @@ function ContactForm() {
   const recipientNames: Record<string, string> = {
     Sophan: 'SOK SOPHANN (President)',
     Sokhan: 'KEAN SOKKKHAN (Vice President)',
-    hasimoto: 'HASHIMOTO',
+    sugimoto: 'HASHIMOTO',
     info: 'KKS2026 (General Info)'
   };
 

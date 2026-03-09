@@ -1,19 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 // API key mapping from .env - each key sends to its corresponding email
-const apiKeys: Record<string, string> = {
-  Sophan: process.env.PHANN_API_KEY || '',
-  Sokhan: process.env.SOKKHAN_API_KEY || '',
-  hasimoto: process.env.HASIMOTO_API_KEY || '',
-  info: process.env.INFO_API_KEY || '',
-};
+// const apiKeys: Record<string, string> = {
+//   Sophan: process.env.PHANN_API_KEY || '',
+//   Sokhan: process.env.SOKKHAN_API_KEY || '',
+//   sugimoto: process.env.HASIMOTO_API_KEY || '',
+//   info: process.env.INFO_API_KEY || '',
+// };
 
 // Email mapping - actual recipient emails
 const emailAddresses: Record<string, string> = {
-  Sophan: 's.phann@kks2026.com',
-  Sokhan: 'kks2026@k.sokhan.com',
-  hasimoto: 'hasimoto@kks2026.com',
+  Sophan: 's.sophan@kks2569.com',
+  Sokhan: 'k.sokkhan@kks2569.com',
+  sugimoto: 'h.sugimoto@kks2569.com',
   info: 'info@kks2026.com',
+};
+
+const fromAddresses: Record<string, { name: string; email: string }> = {
+  Sophan: { name: 'Sok Sophan', email: 's.sophan@kks2569.com' },
+  Sokhan: { name: 'Kean Sokkhan', email: 'k.sokkhan@kks2569.com' },
+  hasimoto: { name: 'Haruhisa Sugimoto', email: 'h.sugimoto@kks2569.com' },
+  info: { name: 'KKS Info', email: 'info@kks2569.com' },
 };
 
 // Send email using Resend REST API
@@ -51,14 +58,18 @@ export async function POST(request: NextRequest) {
     }
 
     // Get API key and target email for recipient
-    const apiKey = apiKeys[recipient];
+    const apiKey = process.env.RESEND_API_KEY;
     const targetEmail = emailAddresses[recipient];
+    const sender = fromAddresses[recipient];
 
-    if (!apiKey || !targetEmail) {
-      return NextResponse.json(
-        { error: 'Invalid recipient' },
-        { status: 400 }
-      );
+    if (!sender) {
+      return NextResponse.json({ error: 'Invalid recipient' }, { status: 400 });
+    }
+    if (!apiKey) {
+      return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
+    }
+    if (!targetEmail) {
+      return NextResponse.json({ error: 'Invalid recipient' }, { status: 400 });
     }
 
     // Log submission
@@ -78,11 +89,11 @@ export async function POST(request: NextRequest) {
 
     // Send email
     const emailResponse = await sendEmail(apiKey, {
-      from: 'KKS2026 Contact <onboarding@resend.dev>',
+      from: `${sender.name} <${sender.email}>`,   // ← Now uses your real emails
       to: [targetEmail],
-      subject: `[KKS2026] ${type ? capitalize(type) : 'New'} Inquiry from ${name}`,
+      subject: `[KKS] ${type ? capitalize(type) : 'New'} Inquiry from ${name}`,
       html: emailHtml,
-      reply_to: email,
+      reply_to: email,   // customer can reply directly
     });
 
     if (emailResponse.ok) {
