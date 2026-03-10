@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Get API key and target email for recipient
-    const apiKey = process.env.RESEND_API_KEY;
+    const apiKey = 're_f4EKNTjf_N7ihxB7XeTf3E9wbSU7C2av8';
     const targetEmail = emailAddresses[recipient];
     const sender = fromAddresses[recipient];
 
