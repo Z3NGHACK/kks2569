@@ -10,14 +10,14 @@ import { NextRequest, NextResponse } from 'next/server';
 
 // Email mapping - actual recipient emails
 const emailAddresses: Record<string, string> = {
-  Sophan: 's.sophan@kks2569.com',
+  Sophan: 's.sophann@kks2569.com',
   Sokhan: 'k.sokkhan@kks2569.com',
   sugimoto: 'h.sugimoto@kks2569.com',
   info: 'info@kks2026.com',
 };
 
 const fromAddresses: Record<string, { name: string; email: string }> = {
-  Sophan: { name: 'Sok Sophan', email: 's.sophan@kks2569.com' },
+  Sophan: { name: 'Sok Sophan', email: 's.sophann@kks2569.com' },
   Sokhan: { name: 'Kean Sokkhan', email: 'k.sokkhan@kks2569.com' },
   hasimoto: { name: 'Haruhisa Sugimoto', email: 'h.sugimoto@kks2569.com' },
   info: { name: 'KKS Info', email: 'info@kks2569.com' },
