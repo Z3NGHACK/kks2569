@@ -24,7 +24,7 @@ export default function AboutPage() {
       id: 'Sophan',
       name: 'SOK SOPHANN',
       role: 'ABOUT.INFO.PRESIDENT',
-      email: 's.phann@kks2026.com',
+      email: 's.sophann@kks2569.com',
       phone: '+855 85 998 299 / +855 90 995 6999',
       apiKey: 'Sophan'
     },
