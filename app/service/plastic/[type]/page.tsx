@@ -51,7 +51,9 @@ const plasticData: Record<string, {
     ],
     buyingInfo: 'We purchase all forms of PET waste including bottles, containers, factory scraps, and post-industrial waste. Competitive pricing based on quality and quantity.',
     sellingInfo: 'We sell premium recycled PET pellets suitable for bottle-to-bottle recycling, fiber production, and sheet manufacturing. Available in various grades and colors.',
-    images: ['/images/pet/pet1.jpg', '/images/pet/pet2.jpg', '/images/pet/pet3.jpg'],
+    images: ['/images/pet/pet1.jpg', '/images/pet/pet2.jpg', '/images/pet/pet3.jpg', 
+      '/images/pet/pet4.jpg', '/images/pet/pet5.jpg', '/images/pet/pet6.jpg', 
+      '/images/pet/pet7.jpg', '/images/pet/pet8.jpg', '/images/pet/pet9.jpg'],
     color: 'from-green-400 to-green-600'
   },
   hdpe: {
@@ -85,7 +87,9 @@ const plasticData: Record<string, {
     ],
     buyingInfo: 'Buying HDPE in all forms: bottles, pipes, containers, film, and industrial scrap. Best prices for clean, sorted material.',
     sellingInfo: 'High-quality HDPE pellets for blow molding, injection molding, and pipe extrusion. Custom compounds available upon request.',
-    images: ['/images/hdpe/hdpe1.jpg', '/images/hdpe/hdpe2.jpg', '/images/hdpe/hdpe3.jpg'],
+    images: ['/images/hdpe/hdpe1.jpg', '/images/hdpe/hdpe2.jpg', '/images/hdpe/hdpe3.jpg',
+      '/images/hdpe/hdpe4.png', '/images/hdpe/hdpe5.jpg', '/images/hdpe/hdpe6.jpg',
+    ],
     color: 'from-blue-400 to-blue-600'
   },
   pp: {
@@ -187,7 +191,9 @@ const plasticData: Record<string, {
     ],
     buyingInfo: 'We buy LDPE film, bags, and flexible packaging waste. Best prices for clean, dry material without excessive contamination.',
     sellingInfo: 'Recycled LDPE pellets for film extrusion, injection molding, and compounding. Suitable for garbage bags, agricultural film, and packaging.',
-    images: ['/images/ldpe/ldpe1.jpg', '/images/ldpe/ldpe2.jpg', '/images/ldpe/ldpe3.jpg'],
+    images: ['/images/ldpe/ldpe1.jpg', '/images/ldpe/ldpe2.jpg', '/images/ldpe/ldpe3.jpg',
+      '/images/ldpe/ldpe4.jpg', '/images/ldpe/ldpe5.jpg', '/images/ldpe/ldpe6.jpg'
+    ],
     color: 'from-pink-400 to-pink-600'
   },
   ps: {
