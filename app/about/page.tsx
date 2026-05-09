@@ -30,11 +30,19 @@ export default function AboutPage() {
     },
     {
       id: 'Sokhan',
-      name: 'KEAN SOKKKHAN',
+      name: 'KEAN SOKKHAN',
       role: 'ABOUT.INFO.VICE_PRESIDENT',
-      email: 'kks2026@k.sokhan.com',
+      email: 'k.sokkhan@kks2569.com',
       phone: '+81 90 8521 5588',
       apiKey: 'Sokhan'
+    },
+    {
+      id: 'Sugumoto',
+      name: 'HARUHISA SUGIMOTO',
+      role: 'ABOUT.INFO.VICE_PRESIDENT',
+      email: 'h.sugimoto@kks2569.com',
+      phone: '+81 90 6660 9093',
+      apiKey: 'Sugimoto'
     }
   ];
 
