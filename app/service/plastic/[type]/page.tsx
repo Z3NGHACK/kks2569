@@ -20,78 +20,78 @@ const plasticData: Record<string, {
   images: string[];
   color: string;
 }> = {
-  pet: {
-    code: 'PET',
-    name: 'PET',
-    fullName: 'Polyethylene Terephthalate',
-    description: 'PET is a clear, strong, and lightweight plastic that is widely used for packaging foods and beverages, especially convenience-sized soft drinks, juices and water. It is also popular for packaging salad dressings, peanut butter, cooking oils, cosmetics and household cleaners.',
-    properties: [
-      'Excellent clarity and transparency',
-      'Strong and lightweight',
-      'Good barrier against gases and moisture',
-      'Resistant to impact',
-      'Recyclable and environmentally friendly',
-      'FDA approved for food contact'
-    ],
-    applications: [
-      'Beverage bottles (water, soda, juice)',
-      'Food containers and trays',
-      'Cosmetic packaging',
-      'Household cleaning product bottles',
-      'Textile fibers (polyester)',
-      'Film and sheet applications'
-    ],
-    recyclingProcess: [
-      'Collection and sorting of PET waste',
-      'Washing and removal of labels/caps',
-      'Shredding into small flakes',
-      'Float-sink separation to remove contaminants',
-      'Melting and extrusion into pellets',
-      'Quality testing and packaging'
-    ],
-    buyingInfo: 'We purchase all forms of PET waste including bottles, containers, factory scraps, and post-industrial waste. Competitive pricing based on quality and quantity.',
-    sellingInfo: 'We sell premium recycled PET pellets suitable for bottle-to-bottle recycling, fiber production, and sheet manufacturing. Available in various grades and colors.',
-    images: ['/images/pet/pet1.jpg', '/images/pet/pet2.jpg', '/images/pet/pet3.jpg', 
-      '/images/pet/pet4.jpg', '/images/pet/pet5.jpg', '/images/pet/pet6.jpg', 
-      '/images/pet/pet7.jpg', '/images/pet/pet8.jpg', '/images/pet/pet9.jpg'],
-    color: 'from-green-400 to-green-600'
-  },
-  hdpe: {
-    code: 'HDPE',
-    name: 'HDPE',
-    fullName: 'High-Density Polyethylene',
-    description: 'HDPE is a versatile thermoplastic with excellent strength-to-density ratio. It is resistant to many different solvents and has a wide variety of applications including plastic bottles, corrosion-resistant piping, and plastic lumber.',
-    properties: [
-      'High strength-to-density ratio',
-      'Excellent chemical resistance',
-      'Low moisture absorption',
-      'Good impact resistance',
-      'Easy to process and mold',
-      'UV resistant grades available'
-    ],
-    applications: [
-      'Milk and juice jugs',
-      'Detergent and bleach bottles',
-      'Pipe and fittings',
-      'Plastic lumber and decking',
-      'Garbage bins and containers',
-      'Fuel tanks and industrial packaging'
-    ],
-    recyclingProcess: [
-      'Sorting by grade and color',
-      'Grinding into flakes',
-      'Washing and separation',
-      'Melt filtration to remove contaminants',
-      'Pelletizing with additives if needed',
-      'Cooling and quality control'
-    ],
-    buyingInfo: 'Buying HDPE in all forms: bottles, pipes, containers, film, and industrial scrap. Best prices for clean, sorted material.',
-    sellingInfo: 'High-quality HDPE pellets for blow molding, injection molding, and pipe extrusion. Custom compounds available upon request.',
-    images: ['/images/hdpe/hdpe1.jpg', '/images/hdpe/hdpe2.jpg', '/images/hdpe/hdpe3.jpg',
-      '/images/hdpe/hdpe4.png', '/images/hdpe/hdpe5.jpg', '/images/hdpe/hdpe6.jpg',
-    ],
-    color: 'from-blue-400 to-blue-600'
-  },
+  // pet: {
+  //   code: 'PET',
+  //   name: 'PET',
+  //   fullName: 'Polyethylene Terephthalate',
+  //   description: 'PET is a clear, strong, and lightweight plastic that is widely used for packaging foods and beverages, especially convenience-sized soft drinks, juices and water. It is also popular for packaging salad dressings, peanut butter, cooking oils, cosmetics and household cleaners.',
+  //   properties: [
+  //     'Excellent clarity and transparency',
+  //     'Strong and lightweight',
+  //     'Good barrier against gases and moisture',
+  //     'Resistant to impact',
+  //     'Recyclable and environmentally friendly',
+  //     'FDA approved for food contact'
+  //   ],
+  //   applications: [
+  //     'Beverage bottles (water, soda, juice)',
+  //     'Food containers and trays',
+  //     'Cosmetic packaging',
+  //     'Household cleaning product bottles',
+  //     'Textile fibers (polyester)',
+  //     'Film and sheet applications'
+  //   ],
+  //   recyclingProcess: [
+  //     'Collection and sorting of PET waste',
+  //     'Washing and removal of labels/caps',
+  //     'Shredding into small flakes',
+  //     'Float-sink separation to remove contaminants',
+  //     'Melting and extrusion into pellets',
+  //     'Quality testing and packaging'
+  //   ],
+  //   buyingInfo: 'We purchase all forms of PET waste including bottles, containers, factory scraps, and post-industrial waste. Competitive pricing based on quality and quantity.',
+  //   sellingInfo: 'We sell premium recycled PET pellets suitable for bottle-to-bottle recycling, fiber production, and sheet manufacturing. Available in various grades and colors.',
+  //   images: ['/images/pet/pet1.jpg', '/images/pet/pet2.jpg', '/images/pet/pet3.jpg', 
+  //     '/images/pet/pet4.jpg', '/images/pet/pet5.jpg', '/images/pet/pet6.jpg', 
+  //     '/images/pet/pet7.jpg', '/images/pet/pet8.jpg', '/images/pet/pet9.jpg'],
+  //   color: 'from-green-400 to-green-600'
+  // },
+  // hdpe: {
+  //   code: 'HDPE',
+  //   name: 'HDPE',
+  //   fullName: 'High-Density Polyethylene',
+  //   description: 'HDPE is a versatile thermoplastic with excellent strength-to-density ratio. It is resistant to many different solvents and has a wide variety of applications including plastic bottles, corrosion-resistant piping, and plastic lumber.',
+  //   properties: [
+  //     'High strength-to-density ratio',
+  //     'Excellent chemical resistance',
+  //     'Low moisture absorption',
+  //     'Good impact resistance',
+  //     'Easy to process and mold',
+  //     'UV resistant grades available'
+  //   ],
+  //   applications: [
+  //     'Milk and juice jugs',
+  //     'Detergent and bleach bottles',
+  //     'Pipe and fittings',
+  //     'Plastic lumber and decking',
+  //     'Garbage bins and containers',
+  //     'Fuel tanks and industrial packaging'
+  //   ],
+  //   recyclingProcess: [
+  //     'Sorting by grade and color',
+  //     'Grinding into flakes',
+  //     'Washing and separation',
+  //     'Melt filtration to remove contaminants',
+  //     'Pelletizing with additives if needed',
+  //     'Cooling and quality control'
+  //   ],
+  //   buyingInfo: 'Buying HDPE in all forms: bottles, pipes, containers, film, and industrial scrap. Best prices for clean, sorted material.',
+  //   sellingInfo: 'High-quality HDPE pellets for blow molding, injection molding, and pipe extrusion. Custom compounds available upon request.',
+  //   images: ['/images/hdpe/hdpe1.jpg', '/images/hdpe/hdpe2.jpg', '/images/hdpe/hdpe3.jpg',
+  //     '/images/hdpe/hdpe4.png', '/images/hdpe/hdpe5.jpg', '/images/hdpe/hdpe6.jpg',
+  //   ],
+  //   color: 'from-blue-400 to-blue-600'
+  // },
   pp: {
     code: 'PP',
     name: 'PP',
@@ -123,7 +123,9 @@ const plasticData: Record<string, {
     ],
     buyingInfo: 'We buy PP in all forms: injection molded parts, film, fiber, and industrial waste. Competitive pricing for homopolymer and copolymer grades.',
     sellingInfo: 'Recycled PP pellets for automotive, packaging, and consumer goods. Available in various melt flow indexes and with custom additives.',
-    images: ['/images/pp/pp1.jpg', '/images/pp/pp2.jpg', '/images/pp/pp3.jpg'],
+    images: ['/images/pp/pp1.jpg', '/images/pp/pp2.jpg', '/images/pp/pp3.jpg',
+      '/images/pp/pp4.jpg', '/images/pp/pp5.jpg', '/images/pp/pp6.jpg'
+    ],
     color: 'from-orange-400 to-orange-600'
   },
   pvc: {
@@ -157,45 +159,47 @@ const plasticData: Record<string, {
     ],
     buyingInfo: 'Purchasing PVC pipes, profiles, film, and industrial scrap. We handle both rigid and flexible PVC waste streams.',
     sellingInfo: 'Recycled PVC compounds for construction, wire/cable, and flooring applications. Custom formulations with specific additives available.',
-    images: ['/images/pvc/pvc1.jpg', '/images/pvc/pvc2.jpg', '/images/pvc/pvc3.jpg'],
+    images: ['/images/pvc/pvc1.jpg', '/images/pvc/pvc2.jpg', '/images/pvc/pvc3.jpg',
+      '/images/pvc/pvc4.jpg', '/images/pvc/pvc5.jpg', '/images/pvc/pvc6.jpeg'
+    ],
     color: 'from-purple-400 to-purple-600'
   },
-  ldpe: {
-    code: 'LDPE',
-    name: 'LDPE',
-    fullName: 'Low-Density Polyethylene',
-    description: 'LDPE is a flexible, lightweight plastic known for its excellent moisture barrier properties. It is commonly used for film applications, plastic bags, and flexible packaging.',
-    properties: [
-      'High flexibility and toughness',
-      'Excellent moisture barrier',
-      'Good chemical resistance',
-      'Low temperature resistance',
-      'Easy to process',
-      'Good clarity in film form'
-    ],
-    applications: [
-      'Plastic bags and shopping bags',
-      'Stretch wrap and shrink film',
-      'Squeeze bottles',
-      'Agricultural film',
-      'Coatings for paper and cardboard',
-      'Flexible lids and closures'
-    ],
-    recyclingProcess: [
-      'Collection of film and bags',
-      'Agglomeration to densify material',
-      'Washing to remove contaminants',
-      'Melt filtration',
-      'Pelletizing with antioxidant additives',
-      'Quality testing for film applications'
-    ],
-    buyingInfo: 'We buy LDPE film, bags, and flexible packaging waste. Best prices for clean, dry material without excessive contamination.',
-    sellingInfo: 'Recycled LDPE pellets for film extrusion, injection molding, and compounding. Suitable for garbage bags, agricultural film, and packaging.',
-    images: ['/images/ldpe/ldpe1.jpg', '/images/ldpe/ldpe2.jpg', '/images/ldpe/ldpe3.jpg',
-      '/images/ldpe/ldpe4.jpg', '/images/ldpe/ldpe5.jpg', '/images/ldpe/ldpe6.jpg'
-    ],
-    color: 'from-pink-400 to-pink-600'
-  },
+  // ldpe: {
+  //   code: 'LDPE',
+  //   name: 'LDPE',
+  //   fullName: 'Low-Density Polyethylene',
+  //   description: 'LDPE is a flexible, lightweight plastic known for its excellent moisture barrier properties. It is commonly used for film applications, plastic bags, and flexible packaging.',
+  //   properties: [
+  //     'High flexibility and toughness',
+  //     'Excellent moisture barrier',
+  //     'Good chemical resistance',
+  //     'Low temperature resistance',
+  //     'Easy to process',
+  //     'Good clarity in film form'
+  //   ],
+  //   applications: [
+  //     'Plastic bags and shopping bags',
+  //     'Stretch wrap and shrink film',
+  //     'Squeeze bottles',
+  //     'Agricultural film',
+  //     'Coatings for paper and cardboard',
+  //     'Flexible lids and closures'
+  //   ],
+  //   recyclingProcess: [
+  //     'Collection of film and bags',
+  //     'Agglomeration to densify material',
+  //     'Washing to remove contaminants',
+  //     'Melt filtration',
+  //     'Pelletizing with antioxidant additives',
+  //     'Quality testing for film applications'
+  //   ],
+  //   buyingInfo: 'We buy LDPE film, bags, and flexible packaging waste. Best prices for clean, dry material without excessive contamination.',
+  //   sellingInfo: 'Recycled LDPE pellets for film extrusion, injection molding, and compounding. Suitable for garbage bags, agricultural film, and packaging.',
+  //   images: ['/images/ldpe/ldpe1.jpg', '/images/ldpe/ldpe2.jpg', '/images/ldpe/ldpe3.jpg',
+  //     '/images/ldpe/ldpe4.jpg', '/images/ldpe/ldpe5.jpg', '/images/ldpe/ldpe6.jpg'
+  //   ],
+  //   color: 'from-pink-400 to-pink-600'
+  // },
   ps: {
     code: 'PS',
     name: 'PS',
@@ -230,40 +234,40 @@ const plasticData: Record<string, {
     images: ['/images/ps/ps1.jpg', '/images/ps/ps2.jpg', '/images/ps/ps3.jpg'],
     color: 'from-yellow-400 to-yellow-600'
   },
-  abs: {
-    code: 'ABS',
-    name: 'ABS',
-    fullName: 'Acrylonitrile Butadiene Styrene',
-    description: 'ABS is a tough, rigid thermoplastic with excellent impact resistance and machinability. It is widely used in automotive parts, electronics housings, and consumer goods.',
-    properties: [
-      'Excellent impact resistance',
-      'Good heat resistance',
-      'Easy to machine and finish',
-      'High surface quality',
-      'Good dimensional stability',
-      'Can be painted and glued'
-    ],
-    applications: [
-      'Automotive interior and exterior parts',
-      'Electronics housings (computers, TVs)',
-      'Lego bricks and toys',
-      'Luggage and cases',
-      'Kitchen appliances',
-      'Pipes and fittings'
-    ],
-    recyclingProcess: [
-      'Sorting by color and grade',
-      'Removal of metal inserts and coatings',
-      'Size reduction and washing',
-      'Melt filtration',
-      'Pelletizing with stabilization',
-      'Testing for impact strength'
-    ],
-    buyingInfo: 'We purchase ABS from automotive, electronics, and consumer goods waste. Premium prices for clean, sorted material.',
-    sellingInfo: 'High-quality recycled ABS for injection molding and extrusion. Available in natural, black, and custom colors with specified impact properties.',
-    images: ['/images/abs/abs1.jpg', '/images/abs/abs2.jpg', '/images/abs/abs3.jpg'],
-    color: 'from-red-400 to-red-600'
-  },
+  // abs: {
+  //   code: 'ABS',
+  //   name: 'ABS',
+  //   fullName: 'Acrylonitrile Butadiene Styrene',
+  //   description: 'ABS is a tough, rigid thermoplastic with excellent impact resistance and machinability. It is widely used in automotive parts, electronics housings, and consumer goods.',
+  //   properties: [
+  //     'Excellent impact resistance',
+  //     'Good heat resistance',
+  //     'Easy to machine and finish',
+  //     'High surface quality',
+  //     'Good dimensional stability',
+  //     'Can be painted and glued'
+  //   ],
+  //   applications: [
+  //     'Automotive interior and exterior parts',
+  //     'Electronics housings (computers, TVs)',
+  //     'Lego bricks and toys',
+  //     'Luggage and cases',
+  //     'Kitchen appliances',
+  //     'Pipes and fittings'
+  //   ],
+  //   recyclingProcess: [
+  //     'Sorting by color and grade',
+  //     'Removal of metal inserts and coatings',
+  //     'Size reduction and washing',
+  //     'Melt filtration',
+  //     'Pelletizing with stabilization',
+  //     'Testing for impact strength'
+  //   ],
+  //   buyingInfo: 'We purchase ABS from automotive, electronics, and consumer goods waste. Premium prices for clean, sorted material.',
+  //   sellingInfo: 'High-quality recycled ABS for injection molding and extrusion. Available in natural, black, and custom colors with specified impact properties.',
+  //   images: ['/images/abs/abs1.jpg', '/images/abs/abs2.jpg', '/images/abs/abs3.jpg'],
+  //   color: 'from-red-400 to-red-600'
+  // },
   pc: {
     code: 'PC',
     name: 'PC',

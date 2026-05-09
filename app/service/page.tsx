@@ -21,26 +21,26 @@ const serviceImages = [
 
 // Plastic Types Data
 const plasticTypes = [
-  { 
-    code: 'PET', 
-    name: 'Polyethylene Terephthalate', 
-    jaName: 'ポリエチレンテレフタレート',
-    desc: 'Bottles, containers, packaging materials',
-    jaDesc: 'ボトル・容器・包装材料',
-    color: 'from-green-400 to-green-600',
-    bgColor: 'bg-green-50',
-    borderColor: 'border-green-200'
-  },
-  { 
-    code: 'HDPE', 
-    name: 'High-Density Polyethylene', 
-    jaName: '高密度ポリエチレン',
-    desc: 'Milk jugs, detergent bottles, pipes',
-    jaDesc: 'ミルク瓶・洗剤ボトル・パイプ',
-    color: 'from-blue-400 to-blue-600',
-    bgColor: 'bg-blue-50',
-    borderColor: 'border-blue-200'
-  },
+  // { 
+  //   code: 'PET', 
+  //   name: 'Polyethylene Terephthalate', 
+  //   jaName: 'ポリエチレンテレフタレート',
+  //   desc: 'Bottles, containers, packaging materials',
+  //   jaDesc: 'ボトル・容器・包装材料',
+  //   color: 'from-green-400 to-green-600',
+  //   bgColor: 'bg-green-50',
+  //   borderColor: 'border-green-200'
+  // },
+  // { 
+  //   code: 'HDPE', 
+  //   name: 'High-Density Polyethylene', 
+  //   jaName: '高密度ポリエチレン',
+  //   desc: 'Milk jugs, detergent bottles, pipes',
+  //   jaDesc: 'ミルク瓶・洗剤ボトル・パイプ',
+  //   color: 'from-blue-400 to-blue-600',
+  //   bgColor: 'bg-blue-50',
+  //   borderColor: 'border-blue-200'
+  // },
   { 
     code: 'PP', 
     name: 'Polypropylene', 
@@ -61,16 +61,16 @@ const plasticTypes = [
     bgColor: 'bg-purple-50',
     borderColor: 'border-purple-200'
   },
-  { 
-    code: 'LDPE', 
-    name: 'Low-Density Polyethylene', 
-    jaName: '低密度ポリエチレン',
-    desc: 'Plastic bags, films, wraps',
-    jaDesc: 'ビニール袋・フィルム・ラップ',
-    color: 'from-pink-400 to-pink-600',
-    bgColor: 'bg-pink-50',
-    borderColor: 'border-pink-200'
-  },
+  // { 
+  //   code: 'LDPE', 
+  //   name: 'Low-Density Polyethylene', 
+  //   jaName: '低密度ポリエチレン',
+  //   desc: 'Plastic bags, films, wraps',
+  //   jaDesc: 'ビニール袋・フィルム・ラップ',
+  //   color: 'from-pink-400 to-pink-600',
+  //   bgColor: 'bg-pink-50',
+  //   borderColor: 'border-pink-200'
+  // },
   { 
     code: 'PS', 
     name: 'Polystyrene', 
@@ -81,16 +81,16 @@ const plasticTypes = [
     bgColor: 'bg-yellow-50',
     borderColor: 'border-yellow-200'
   },
-  { 
-    code: 'ABS', 
-    name: 'Acrylonitrile Butadiene Styrene', 
-    jaName: 'ABS樹脂',
-    desc: 'Lego bricks, electronics housings',
-    jaDesc: 'レゴ・電子機器外装',
-    color: 'from-red-400 to-red-600',
-    bgColor: 'bg-red-50',
-    borderColor: 'border-red-200'
-  },
+  // { 
+  //   code: 'ABS', 
+  //   name: 'Acrylonitrile Butadiene Styrene', 
+  //   jaName: 'ABS樹脂',
+  //   desc: 'Lego bricks, electronics housings',
+  //   jaDesc: 'レゴ・電子機器外装',
+  //   color: 'from-red-400 to-red-600',
+  //   bgColor: 'bg-red-50',
+  //   borderColor: 'border-red-200'
+  // },
   { 
     code: 'PC', 
     name: 'Polycarbonate', 

@@ -98,6 +98,8 @@
       "TEL_VICE_PRESIDENT": "電話（副社長）",
       "EMAIL": "メール",
       "WEBSITE": "ウェブサイト",
+      "ADDRESS_NARA": "〒630-0244 奈良県生駒市東松ヶ丘4-59-101",
+      "ADDRESS_OSAKA": "営業所 大阪府泉南郡熊取町久保2-1391-1-101",
       "BUSINESS": "事業内容",
       "BUSINESS_ITEMS": [
         "リサイクル事業（家電、プラスチック、金属）",
