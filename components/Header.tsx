@@ -7,6 +7,8 @@ import { Menu, X, Instagram, MessageCircle, ChevronDown, Check } from 'lucide-re
 import { useTranslation } from '@/components/LanguageProvider';
 import { languages, Language } from '@/lib/i18n';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -45,6 +47,7 @@ export default function Header() {
     { href: '/plan', label: getString('HEADER.NAV.PLAN') },
     { href: '/contact', label: getString('HEADER.NAV.CONTACT') },
   ];
+  const pathname = usePathname();
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
@@ -86,16 +89,29 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="relative text-gray-600 hover:text-primary transition-colors duration-200 text-sm font-medium py-2 group"
-              >
-                {item.label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const isActive = pathname === item.href;
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`relative text-sm font-medium py-2 transition-colors duration-200 group
+                    ${isActive 
+                      ? 'text-primary' 
+                      : 'text-gray-600 hover:text-primary'
+                    }`}
+                >
+                  {item.label}
+                  
+                  {/* Underline */}
+                  <span
+                    className={`absolute bottom-0 left-0 h-0.5 bg-primary transition-all duration-300
+                      ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`}
+                  />
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Right Side: Language + Social + Contact */}
