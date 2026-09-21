@@ -15,7 +15,7 @@
     "DESCRIPTION": "We collect and recycle unwanted appliances, plastics, aluminum, iron, bicycles, construction machinery, and agricultural equipment, contributing to resource circulation.",
     "MENU": "Menu",
     "CONTACT_INFO": "Contact Information",
-    "EMAIL": "info@kks2026.com",
+    "EMAIL": "info@kks2569.com",
     "PHONE": "Phone Inquiry",
     "LOCATION": "Osaka, Japan",
     "COPYRIGHT": "© 2024 Khmer Kansai Co., Ltd. All Rights Reserved."
@@ -24,38 +24,46 @@
     "HERO": {
       "TITLE_1": "Wait a moment!",
       "TITLE_2": "Choose to",
-      "TITLE_HIGHLIGHT": "Reuse",
-      "TITLE_3": "Rather Than Discard",
-      "DESCRIPTION": "Khmer Kansai Co., Ltd. collects and recycles unwanted appliances, plastics, aluminum, iron, bicycles, construction machinery, and agricultural equipment. We contribute to eco-friendly activities by reusing these resources in Southeast Asia.",
+      "TITLE_HIGHLIGHT": "Connect",
+      "TITLE_3": "with Japanese Quality",
+      "DESCRIPTION": "Khmer Kansai Co., Ltd. bridges Japan and Southeast Asia. We supply high-quality retail machinery (new and second-hand) and premium fertilizers from Japan to Cambodia and Vietnam. Committed to sustainability, we also recycle plastics, metals, and appliances to support a circular economy.",
       "BUTTON_PRIMARY": "Get a Quote / Contact Us",
       "BUTTON_SECONDARY": "View Services"
     },
     "MISSION": {
-      "TITLE": "Towards a Sustainable Future",
-      "SUBTITLE": "We aim to reduce environmental impact and realize a circular society for a sustainable future."
+      "TITLE": "Bridging Quality & Sustainability",
+      "SUBTITLE": "We aim to reduce environmental impact and realize a circular society while providing top-tier Japanese technology and resources to the region."
     },
     "SERVICES": {
-      "TITLE": "Our Services",
+      "TITLE": "Our Core Businesses",
       "RECYCLE": {
-        "TITLE": "Recycling Business",
-        "DESCRIPTION": "Collection and recycling of plastics, aluminum, iron, and other metal scraps"
+        "TITLE": "Plastic Recycling & Manufacturing",
+        "DESCRIPTION": "We purchase plastic waste and manufacture it into premium recycled pellets for industrial use, promoting a circular economy."
       },
-      "BUYING": {
-        "TITLE": "Purchase Business",
-        "DESCRIPTION": "Fair price purchase and recycling of appliances, cars, and leather products"
+      "FERTILIZER": {
+        "TITLE": "Premium Organic Fertilizers",
+        "DESCRIPTION": "Supplying special granula organic fertilizers directly from Japan to boost agricultural productivity in Cambodia and Vietnam."
       },
       "MACHINERY": {
-        "TITLE": "Construction & Agricultural Machinery",
-        "DESCRIPTION": "High-value purchase and export agency for construction machinery and agricultural equipment"
+        "TITLE": "Machinery & Equipment",
+        "DESCRIPTION": "Retail ofs new and second-hand construction and agricultural machinery sourced from Japanese auctions, exported to Cambodia and Vietnam."
+      },
+      "METAL": {
+        "TITLE": "Metal Trading",
+        "DESCRIPTION": "Specialists in buying and selling Copper and Aluminum scrap. High-value purchase and export of industrial metals."
+      },
+      "OTHER": {
+        "TITLE": "Used Goods & Auto Parts",
+        "DESCRIPTION": "Retail of quality used products including tires, automotive parts, bicycles, and home appliances for the Southeast Asian market."
       },
       "GLOBAL": {
-        "TITLE": "Global Expansion",
-        "DESCRIPTION": "Reuse and sales network in Southeast Asia"
+        "TITLE": "Regional Network",
+        "DESCRIPTION": "A strong, reliable supply chain connecting Japanese quality resources and technology to growing markets in Cambodia and Vietnam."
       }
     },
     "CTA": {
       "TITLE": "Feel Free to Contact Us First",
-      "SUBTITLE": "Even items you think are no longer usable may be able to create new value.",
+      "SUBTITLE": "Whether you need machinery, fertilizers, or recycling solutions, we are here to help you find value.",
       "BUTTON": "Contact Us Here"
     }
   },
@@ -314,6 +322,42 @@
   "SERVICE": {
     "PAGE_TITLE": "Our Services",
     "PAGE_SUBTITLE": "Recycling & Trading",
+    "FERTILIZER": {
+      "TITLE": "Fertilizer",
+      "SOLU": "High solubility observed within 45 minutes",
+      "SUBDESC": "Imported from Japan to Cambodia & Vietnam",
+      "DESCRIPTION": "We supply high-quality Japanese organic fertilizers (KA2-tt & NIB-pt) to Cambodia and Vietnam. Our granules are tested for solubility and nutrient content.",
+      "PAGE_TITLE": "Premium Organic Fertilizers",
+      "PAGE_SUBTITLE": "日本製有機肥料 | Imported from Japan",
+      "SPEC": "",
+      "BUTTON": "View Specifications",
+      "BACK_TO_SERVICES": "Back to Services",
+      "HERO": {
+        "TITLE": "Quality You Can Trust",
+        "DESCRIPTION": "We supply high-quality Japanese organic fertilizers (KA2-tt & NIB-pt) to Cambodia and Vietnam. Our granules are tested for solubility and nutrient content.",
+        "LAB_TESTED": "Lab Tested",
+        "ORGANIC": "100% Organic",
+        "JAPAN_ORIGIN": "Made in Japan"
+      },
+      "PRODUCTS": {
+        "TITLE": "Available Products"
+      },
+      "SERVICES": {
+        "TITLE": "Our Services",
+        "ANALYSIS": { "TITLE": "Lab Analysis", "DESC": "Rigorous testing for NPK levels." },
+        "PACKING": { "TITLE": "Granulation", "DESC": "Processed into special granules." },
+        "LOGISTICS": { "TITLE": "Direct Export", "DESC": "Efficient shipping to CAM & VN." }
+      },
+      "PROCESS": {
+        "TITLE": "Our Process"
+      },
+      "CTA": {
+        "TITLE": "Boost Your Crop Yield",
+        "DESCRIPTION": "Contact us today to discuss your fertilizer needs.",
+        "CONTACT": "Contact Us",
+        "QUOTE": "Get a Quote"
+      }
+    },
     
     "PLASTIC_RECYCLE": {
       "TITLE": "Plastic Recycling & Manufacturing",
@@ -674,7 +718,70 @@
   "COMMON": {
     "BACK_TO_SERVICES": "Back to Services",
     "VIEW_DETAILS": "View Details"
-  }
+  },
 
+  "FERTILIZERS": {
+    "PAGE_TITLE": "Premium Organic Fertilizers",
+    "PAGE_SUBTITLE": "日本製有機肥料 | Imported from Japan",
+    "BACK_TO_SERVICES": "Back to Services",
+    "HERO": {
+      "TITLE": "Quality You Can Trust",
+      "DESCRIPTION": "We supply high-quality Japanese organic fertilizers (KA2-tt & NIB-pt) to Cambodia and Vietnam. Our granules are tested for solubility and nutrient content to ensure maximum crop yield.",
+      "LAB_TESTED": "Lab Tested",
+      "ORGANIC": "100% Organic",
+      "JAPAN_ORIGIN": "Made in Japan"
+    },
+    "PRODUCTS": {
+      "TITLE": "Available Products"
+    },
+    "SERVICES": {
+      "TITLE": "Our Services",
+      "ANALYSIS": {
+        "TITLE": "Lab Analysis",
+        "DESC": "Rigorous testing for NPK levels, moisture, and solubility to guarantee quality."
+      },
+      "PACKING": {
+        "TITLE": "Granulation & Packing",
+        "DESC": "Processed into special granules for easy application and slow nutrient release."
+      },
+      "LOGISTICS": {
+        "TITLE": "Direct Export",
+        "DESC": "Efficient shipping logistics to Cambodia and Vietnam markets."
+      }
+    },
+    "PROCESS": {
+      "TITLE": "Our Process"
+    },
+    "CTA": {
+      "TITLE": "Boost Your Crop Yield",
+      "DESCRIPTION": "Contact us today to discuss your fertilizer needs. We offer competitive pricing for bulk orders.",
+      "CONTACT": "Contact Us",
+      "QUOTE": "Get a Quote"
+    }
+  },
+  "KA2_TT": {
+    "TYPE": "Special Granula",
+    "DESCRIPTION": "High-quality fermented chicken manure granules. Optimized for root development with balanced Phosphorus and Potassium.",
+    "HIGHLIGHT": "High Solubility"
+  },
+  "NIB_PT": {
+    "TYPE": "Special Granula",
+    "DESCRIPTION": "Premium organic fertilizer rich in Organic Matter. Ensures fast nutrient release and improved soil structure.",
+    "HIGHLIGHT": "Rich in Organic Matter"
+  },
+  "SPECS": {
+    "NITROGEN": "Nitrogen (N)",
+    "PHOSPHORUS": "Phosphorus (P₂O₅)",
+    "POTASSIUM": "Potassium (K₂O)",
+    "MOISTURE": "Moisture",
+    "CN_RATIO": "C/N Ratio",
+    "ORGANIC_MATTER": "Organic Matter"
+  },
+  "TABLE": {
+    "TECHNICAL_SPECS": "Technical Specifications"
+  },
+  "FERTILIZER": {
+    "SOLUBILITY_NOTE": "High solubility observed within 45 minutes"
+  }
   
 }

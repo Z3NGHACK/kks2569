@@ -1,425 +1,167 @@
 'use client';
 
-import { Mail, Phone, MapPin, Clock, HelpCircle } from 'lucide-react';
+import { Suspense, type ReactNode } from 'react';
+import { Mail, Phone, MapPin, Clock, MessageCircle, PhoneCall } from 'lucide-react';
 import Hero from '@/components/Hero';
-import { useTranslation } from '@/components/LanguageProvider';
-import { useSearchParams, useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
-import { Suspense } from 'react';
+import ContactForm from '@/components/contact/ContactForm';
+import PrivacyPolicy from '@/components/contact/PrivacyPolicy';
+import { Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal';
+import { useTr } from '@/lib/useTr';
+import { COMPANY, extractPhone, telHref } from '@/lib/company';
 
-// Component that uses searchParams
-function ContactForm() {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const { t } = useTranslation();
-
-  const getString = (key: string): string => {
-    const value = t(key);
-    return typeof value === 'string' ? value : key;
-  };
-
-  const getArray = (key: string): string[] => {
-    const value = t(key);
-    return Array.isArray(value) ? value : [];
-  };
-
-  // Get recipient from URL query
-  const recipientId = searchParams.get('to') || 'info';
-  const recipientEmail = searchParams.get('email') || 'info@kks2026.com';
-  
-  // Form state
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    type: '',
-    message: '',
-    privacy: false
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-
-  // Recipient display names
-  const recipientNames: Record<string, string> = {
-    Sophan: 'SOK SOPHANN (President)',
-    Sokhan: 'KEAN SOKKKHAN (Vice President)',
-    sugimoto: 'HASHIMOTO',
-    info: 'KKS2026 (General Info)'
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus('idle');
-
-    try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...formData,
-          recipient: recipientId,
-          toEmail: recipientEmail
-        }),
-      });
-
-      if (response.ok) {
-        setSubmitStatus('success');
-        setFormData({ name: '', email: '', phone: '', type: '', message: '', privacy: false });
-      } else {
-        setSubmitStatus('error');
-      }
-    } catch (error) {
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const getInquiryType = (key: string): string => {
-    const types = t('CONTACT.FORM.TYPE_OPTIONS');
-    if (typeof types === 'object' && types !== null && !Array.isArray(types)) {
-      return (types as Record<string, string>)[key] || key;
-    }
-    return key;
-  };
-
-  const privacySections = [
-    'SECTION1', 'SECTION2', 'SECTION3', 'SECTION4', 
-    'SECTION5', 'SECTION6', 'SECTION7', 'SECTION8'
-  ] as const;
-
+function ContactFormSkeleton() {
   return (
-    <>
-      {/* Recipient Banner */}
-      {recipientId !== 'info' && (
-        <div className="bg-primary text-white p-4 rounded-xl mb-6 flex items-center justify-between">
-          <div>
-            <p className="text-sm opacity-90">{getString('CONTACT.SENDING_TO')}</p>
-            <p className="font-bold">{recipientNames[recipientId] || recipientEmail}</p>
-          </div>
-          <button
-            onClick={() => router.push('/contact')}
-            className="text-sm bg-white/20 hover:bg-white/30 px-3 py-1 rounded transition-colors"
-          >
-            {getString('CONTACT.SWITCH_TO_GENERAL')}
-          </button>
+    <div className="animate-pulse space-y-6">
+      {[...Array(4)].map((_, i) => (
+        <div key={i} className="space-y-2">
+          <div className="h-4 w-24 rounded bg-gray-200" />
+          <div className="h-12 rounded-xl bg-gray-200" />
         </div>
-      )}
-
-      <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Hidden field for recipient */}
-        <input type="hidden" name="recipient" value={recipientId} />
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            {getString('CONTACT.FORM.NAME')} <span className="text-red-500">*</span>
-          </label>
-          <input
-            type="text"
-            required
-            value={formData.name}
-            onChange={(e) => setFormData({...formData, name: e.target.value})}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
-            placeholder={getString('CONTACT.FORM.NAME_PLACEHOLDER')}
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            {getString('CONTACT.FORM.EMAIL')} <span className="text-red-500">*</span>
-          </label>
-          <input
-            type="email"
-            required
-            value={formData.email}
-            onChange={(e) => setFormData({...formData, email: e.target.value})}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
-            placeholder={getString('CONTACT.FORM.EMAIL_PLACEHOLDER')}
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            {getString('CONTACT.FORM.PHONE')}
-          </label>
-          <input
-            type="tel"
-            value={formData.phone}
-            onChange={(e) => setFormData({...formData, phone: e.target.value})}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
-            placeholder={getString('CONTACT.FORM.PHONE_PLACEHOLDER')}
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            {getString('CONTACT.FORM.TYPE')} <span className="text-red-500">*</span>
-          </label>
-          <select
-            required
-            value={formData.type}
-            onChange={(e) => setFormData({...formData, type: e.target.value})}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
-          >
-            <option value="">{getInquiryType('SELECT')}</option>
-            <option value="buying">{getInquiryType('BUYING')}</option>
-            <option value="recycle">{getInquiryType('RECYCLE')}</option>
-            <option value="quote">{getInquiryType('QUOTE')}</option>
-            <option value="other">{getInquiryType('OTHER')}</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            {getString('CONTACT.FORM.MESSAGE')} <span className="text-red-500">*</span>
-          </label>
-          <textarea
-            required
-            rows={5}
-            value={formData.message}
-            onChange={(e) => setFormData({...formData, message: e.target.value})}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-none"
-            placeholder={getString('CONTACT.FORM.MESSAGE_PLACEHOLDER')}
-          ></textarea>
-        </div>
-
-        <div className="flex items-start space-x-3">
-          <input
-            type="checkbox"
-            id="privacy"
-            required
-            checked={formData.privacy}
-            onChange={(e) => setFormData({...formData, privacy: e.target.checked})}
-            className="mt-1 w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
-          />
-          <label htmlFor="privacy" className="text-sm text-gray-600">
-            <a href="#privacy-policy" className="text-primary underline hover:no-underline">
-              {getString('CONTACT.FORM.PRIVACY_LINK')}
-            </a>
-            {getString('CONTACT.FORM.PRIVACY')} <span className="text-red-500">*</span>
-          </label>
-        </div>
-
-        {/* Status Messages */}
-        {submitStatus === 'success' && (
-          <div className="bg-green-50 text-green-700 p-4 rounded-lg">
-            {getString('CONTACT.FORM.SUCCESS')}
-          </div>
-        )}
-        {submitStatus === 'error' && (
-          <div className="bg-red-50 text-red-700 p-4 rounded-lg">
-            {getString('CONTACT.FORM.ERROR')}
-          </div>
-        )}
-
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full bg-primary text-white py-4 rounded-lg font-bold hover:bg-dark transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {isSubmitting ? getString('CONTACT.FORM.SENDING') : getString('CONTACT.FORM.SUBMIT')}
-        </button>
-      </form>
-    </>
+      ))}
+    </div>
   );
 }
 
-// Loading fallback
-function ContactFormSkeleton() {
-  return <div className="animate-pulse space-y-4"><div className="h-10 bg-gray-200 rounded"></div><div className="h-10 bg-gray-200 rounded"></div></div>;
+function InfoRow({
+  icon,
+  label,
+  href,
+  children,
+}: {
+  icon: ReactNode;
+  label: string;
+  href?: string;
+  children: ReactNode;
+}) {
+  const content = (
+    <>
+      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-green-50 text-primary transition-all duration-300 group-hover:scale-110 group-hover:bg-primary group-hover:text-white">
+        {icon}
+      </div>
+      <div className="min-w-0">
+        <h4 className="mb-1 font-medium text-gray-800">{label}</h4>
+        <div className="break-words text-gray-600">{children}</div>
+      </div>
+    </>
+  );
+
+  return href ? (
+    <a href={href} className="group flex items-start gap-4 rounded-xl transition-colors">
+      {content}
+    </a>
+  ) : (
+    <div className="group flex items-start gap-4">{content}</div>
+  );
 }
 
-// Main page component
 export default function ContactPage() {
-  const { t } = useTranslation();
+  const tr = useTr();
 
-  const getString = (key: string): string => {
-    const value = t(key);
-    return typeof value === 'string' ? value : key;
-  };
-
-  const getArray = (key: string): string[] => {
-    const value = t(key);
-    return Array.isArray(value) ? value : [];
-  };
-
-  const privacySections = [
-    'SECTION1', 'SECTION2', 'SECTION3', 'SECTION4', 
-    'SECTION5', 'SECTION6', 'SECTION7', 'SECTION8'
-  ] as const;
+  const email = tr('FOOTER.EMAIL');
+  const phoneText = tr('FOOTER.PHONE');
+  const phone = extractPhone(phoneText);
+  const { line } = COMPANY.social;
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Hero 
-        variant="page" 
-        title={getString('CONTACT.PAGE_TITLE')}
-        subtitle={getString('CONTACT.PAGE_SUBTITLE')}
+      <Hero
+        variant="page"
+        title={tr('CONTACT.PAGE_TITLE')}
+        subtitle={tr('CONTACT.PAGE_SUBTITLE')}
       />
 
-      <div className="container mx-auto px-4 py-16 max-w-6xl">
-        <div className="grid lg:grid-cols-2 gap-12">
-          
-          {/* Contact Form */}
-          <div className="bg-white rounded-2xl shadow-lg p-8">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">
-              {getString('CONTACT.FORM.TITLE')}
-            </h2>
-            
-            <Suspense fallback={<ContactFormSkeleton />}>
-              <ContactForm />
-            </Suspense>
+      <div className="container mx-auto max-w-6xl px-4 py-16">
+        <div className="grid gap-10 lg:grid-cols-5 lg:gap-12">
+          {/* Form */}
+          <Reveal className="lg:col-span-3">
+            <div className="rounded-3xl bg-white p-6 shadow-xl md:p-10">
+              <h2 className="mb-8 text-2xl font-bold text-gray-800">{tr('CONTACT.FORM.TITLE')}</h2>
 
-            <p className="text-sm text-gray-500 mt-4 text-center">
-              {getString('CONTACT.FORM.NOTE')}
-            </p>
-          </div>
+              <Suspense fallback={<ContactFormSkeleton />}>
+                <ContactForm />
+              </Suspense>
 
-          {/* Contact Info - Rest of your existing code */}
-          <div className="space-y-8">
-            <div className="bg-white rounded-2xl shadow-lg p-8">
-              <h3 className="text-xl font-bold text-gray-800 mb-6">
-                {getString('CONTACT.INFO.TITLE')}
-              </h3>
-              
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-light rounded-full flex items-center justify-center flex-shrink-0">
-                    <Mail className="text-primary" size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-800 mb-1">{getString('CONTACT.INFO.EMAIL_LABEL')}</h4>
-                    <p className="text-primary font-medium">{getString('FOOTER.EMAIL')}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-light rounded-full flex items-center justify-center flex-shrink-0">
-                    <Phone className="text-primary" size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-800 mb-1">{getString('CONTACT.INFO.PHONE_LABEL')}</h4>
-                    <p className="text-gray-600">{getString('CONTACT.INFO.PHONE_DESC')}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-light rounded-full flex items-center justify-center flex-shrink-0">
-                    <MapPin className="text-primary" size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-800 mb-1">{getString('CONTACT.INFO.LOCATION_LABEL')}</h4>
-                    <p className="text-gray-600">{getString('FOOTER.LOCATION')}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-light rounded-full flex items-center justify-center flex-shrink-0">
-                    <Clock className="text-primary" size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-800 mb-1">{getString('CONTACT.INFO.HOURS_LABEL')}</h4>
-                    <p className="text-gray-600">{getString('CONTACT.INFO.HOURS_VALUE')}</p>
-                  </div>
-                </div>
-              </div>
+              <p className="mt-6 text-center text-sm text-gray-500">{tr('CONTACT.FORM.NOTE')}</p>
             </div>
+          </Reveal>
 
-            {/* Quick Contact */}
-            <div className="bg-gradient-to-br from-primary to-dark rounded-2xl shadow-lg p-8 text-white">
-              <h3 className="text-xl font-bold mb-4">{getString('CONTACT.URGENT.TITLE')}</h3>
-              <p className="text-green-100 mb-6">
-                {getString('CONTACT.URGENT.DESC')}
-              </p>
-              <div className="flex space-x-4">
-                <button className="flex-1 bg-white text-primary py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors">
-                  {getString('CONTACT.URGENT.PHONE_BUTTON')}
-                </button>
-                <button className="flex-1 bg-green-500 text-white py-3 rounded-lg font-bold hover:bg-green-600 transition-colors">
-                  {getString('CONTACT.URGENT.LINE_BUTTON')}
-                </button>
+          {/* Info column follows you down the page on desktop */}
+          <div className="space-y-6 lg:sticky lg:top-[calc(var(--header-offset,0px)+1.5rem)] lg:col-span-2 lg:self-start">
+            <Reveal delay={0.1}>
+              <div className="rounded-3xl bg-white p-8 shadow-lg">
+                <h3 className="mb-6 text-xl font-bold text-gray-800">{tr('CONTACT.INFO.TITLE')}</h3>
+
+                <Stagger className="space-y-6" stagger={0.1} delay={0.2}>
+                  <StaggerItem>
+                    <InfoRow
+                      icon={<Mail size={20} />}
+                      label={tr('CONTACT.INFO.EMAIL_LABEL')}
+                      href={email.includes('@') ? `mailto:${email}` : undefined}
+                    >
+                      <span className="font-medium text-primary">{email}</span>
+                    </InfoRow>
+                  </StaggerItem>
+
+                  <StaggerItem>
+                    <InfoRow
+                      icon={<Phone size={20} />}
+                      label={tr('CONTACT.INFO.PHONE_LABEL')}
+                      href={phone ? telHref(phone) : undefined}
+                    >
+                      {tr('CONTACT.INFO.PHONE_DESC')}
+                    </InfoRow>
+                  </StaggerItem>
+
+                  <StaggerItem>
+                    <InfoRow icon={<MapPin size={20} />} label={tr('CONTACT.INFO.LOCATION_LABEL')}>
+                      {tr('FOOTER.LOCATION')}
+                    </InfoRow>
+                  </StaggerItem>
+
+                  <StaggerItem>
+                    <InfoRow icon={<Clock size={20} />} label={tr('CONTACT.INFO.HOURS_LABEL')}>
+                      {tr('CONTACT.INFO.HOURS_VALUE')}
+                    </InfoRow>
+                  </StaggerItem>
+                </Stagger>
               </div>
-            </div>
+            </Reveal>
+
+            {/* Only shown if there's actually a way to act on it */}
+            {(phone || line) && (
+              <Reveal delay={0.2}>
+                <div className="rounded-3xl bg-gradient-to-br from-primary to-dark p-8 text-white shadow-lg">
+                  <h3 className="mb-3 text-xl font-bold">{tr('CONTACT.URGENT.TITLE')}</h3>
+                  <p className="mb-6 text-green-100">{tr('CONTACT.URGENT.DESC')}</p>
+                  <div className="flex flex-col gap-3 sm:flex-row">
+                    {phone && (
+                      <a
+                        href={telHref(phone)}
+                        className="group flex flex-1 items-center justify-center gap-2 rounded-xl bg-white py-3 font-bold text-primary transition-all duration-200 hover:bg-amber-300 hover:text-dark active:scale-[0.98]"
+                      >
+                        <PhoneCall size={18} className="transition-transform group-hover:rotate-12" />
+                        {tr('CONTACT.URGENT.PHONE_BUTTON')}
+                      </a>
+                    )}
+                    {line && (
+                      <a
+                        href={line}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex flex-1 items-center justify-center gap-2 rounded-xl bg-green-500 py-3 font-bold text-white transition-all duration-200 hover:bg-green-400 active:scale-[0.98]"
+                      >
+                        <MessageCircle size={18} className="transition-transform group-hover:scale-110" />
+                        {tr('CONTACT.URGENT.LINE_BUTTON')}
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </Reveal>
+            )}
           </div>
         </div>
 
-        {/* Privacy Policy Section */}
-        <section id="privacy-policy" className="mt-20">
-          <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
-            <h2 className="text-2xl font-bold text-gray-800 mb-8">
-              {getString('CONTACT.PRIVACY_POLICY.TITLE')}
-            </h2>
-            
-            <div className="prose prose-gray max-w-none text-sm text-gray-600 space-y-6">
-              <p>{getString('CONTACT.PRIVACY_POLICY.INTRO')}</p>
-
-              {privacySections.map((section) => (
-                <div key={section} className="space-y-2">
-                  <h3 className="text-lg font-bold text-gray-800">
-                    {getString(`CONTACT.PRIVACY_POLICY.${section}.TITLE`)}
-                  </h3>
-                  {section === 'SECTION2' ? (
-                    <div className="bg-gray-50 p-4 rounded-lg">
-                      <table className="w-full">
-                        <tbody>
-                          <tr>
-                            <th className="text-left py-2 w-1/4">
-                              {getString(`CONTACT.PRIVACY_POLICY.${section}.COMPANY_NAME`)}
-                            </th>
-                            <td>{getString('HEADER.COMPANY_NAME')}</td>
-                          </tr>
-                          <tr>
-                            <th className="text-left py-2">
-                              {getString(`CONTACT.PRIVACY_POLICY.${section}.REPRESENTATIVE`)}
-                            </th>
-                            <td>{getString('ABOUT.INFO.REPRESENTATIVE_VALUE')}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  ) : section === 'SECTION4' ? (
-                    <>
-                      <p>{getString(`CONTACT.PRIVACY_POLICY.${section}.CONTENT`)}</p>
-                      <ol className="list-decimal list-inside space-y-1 ml-4">
-                        {getArray(`CONTACT.PRIVACY_POLICY.${section}.PURPOSES`).map((purpose, idx) => (
-                          <li key={idx}>{purpose}</li>
-                        ))}
-                      </ol>
-                    </>
-                  ) : section === 'SECTION8' ? (
-                    <>
-                      <p>{getString(`CONTACT.PRIVACY_POLICY.${section}.CONTENT`)}</p>
-                      <div className="bg-gray-50 p-4 rounded-lg">
-                        <table className="w-full">
-                          <tbody>
-                            <tr>
-                              <th className="text-left py-2 w-1/4">
-                                {getString(`CONTACT.PRIVACY_POLICY.${section}.COMPANY_LABEL`)}
-                              </th>
-                              <td>{getString('HEADER.COMPANY_NAME')}</td>
-                            </tr>
-                            <tr>
-                              <th className="text-left py-2">
-                                {getString(`CONTACT.PRIVACY_POLICY.${section}.EMAIL_LABEL`)}
-                              </th>
-                              <td>{getString('FOOTER.EMAIL')}</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </>
-                  ) : (
-                    <p>{getString(`CONTACT.PRIVACY_POLICY.${section}.CONTENT`)}</p>
-                  )}
-                </div>
-              ))}
-
-              <p className="text-xs text-gray-500 pt-4 border-t">
-                {getString('CONTACT.PRIVACY_POLICY.DATE')}
-              </p>
-            </div>
-          </div>
-        </section>
+        <PrivacyPolicy />
       </div>
     </div>
   );

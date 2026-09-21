@@ -49,29 +49,44 @@ body {
 @keyframes hero-slide {
   0% {
     opacity: 0;
-    transform: translateX(100%);
+    transform: translateX(100%); /* Start off-screen right */
   }
-  8% {
+  6.25% {
+    opacity: 1;
+    transform: translateX(0);   /* Fully visible (Slide in takes ~1s) */
+  }
+  /* Hold visible for a long time to cover the next image's entry */
+  50% {
     opacity: 1;
     transform: translateX(0);
   }
-  /* Hold visible for ~4 seconds */
-  32% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  /* Fast exit — starts while next image is already entering */
-  40% {
+  /* Fast exit — aligns with the next image starting */
+  56.25% {
     opacity: 0;
-    transform: translateX(-60%);
+    transform: translateX(-60%); /* Slide out left */
   }
+  /* Stay hidden until loop restarts */
   100% {
     opacity: 0;
     transform: translateX(-60%);
   }
 }
 
+/* Fixed duration to 16s */
 .animate-hero-slide {
-  animation: hero-slide 15s infinite ease-in-out;
+  animation: hero-slide 16s infinite ease-in-out;
   will-change: transform, opacity;
+}
+/* app/globals.css */
+
+@keyframes drift {
+  0% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(var(--x), var(--y)) scale(1.03); }
+  50% { transform: translate(calc(var(--x) * 5), calc(var(--y) * -5)) scale(0.98); }
+  75% { transform: translate(calc(var(--x) * -2), calc(var(--y) * -3)) scale(1.02); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+.animate-drift {
+  animation: drift var(--duration) ease-in-out infinite;
 }

@@ -2,9 +2,16 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Recycle, ShoppingBag, Factory, ArrowRight, ChevronRight, ExternalLink } from 'lucide-react';
+import { useCallback, useState } from 'react';
+import { motion } from 'framer-motion';
+import { Recycle, ShoppingBag, Factory, ArrowRight, ChevronRight, ExternalLink, Leaf } from 'lucide-react';
 import Hero from '@/components/Hero';
-import { useTranslation } from '@/components/LanguageProvider';
+import { useTr } from '@/lib/useTr';
+import { EASE_OUT, Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal';
+import ParallaxImage from '@/components/motion/ParallaxImage';
+import SpotlightLink from '@/components/motion/SpotlightLink';
+import SectionNav from '@/components/service/SectionNav';
+import Lightbox from '@/components/service/Lightbox';
 
 // Product Gallery Images
 const serviceImages = [
@@ -49,7 +56,8 @@ const plasticTypes = [
     jaDesc: '食品容器・自動車部品・繊維',
     color: 'from-orange-400 to-orange-600',
     bgColor: 'bg-orange-50',
-    borderColor: 'border-orange-200'
+    borderColor: 'border-orange-200',
+    glow: 'rgba(249, 115, 22, 0.16)',
   },
   { 
     code: 'PVC', 
@@ -59,7 +67,8 @@ const plasticTypes = [
     jaDesc: 'パイプ・窓・床材・ケーブル',
     color: 'from-purple-400 to-purple-600',
     bgColor: 'bg-purple-50',
-    borderColor: 'border-purple-200'
+    borderColor: 'border-purple-200',
+    glow: 'rgba(168, 85, 247, 0.16)',
   },
   // { 
   //   code: 'LDPE', 
@@ -79,7 +88,8 @@ const plasticTypes = [
     jaDesc: '発泡包装・使い捨てカップ',
     color: 'from-yellow-400 to-yellow-600',
     bgColor: 'bg-yellow-50',
-    borderColor: 'border-yellow-200'
+    borderColor: 'border-yellow-200',
+    glow: 'rgba(234, 179, 8, 0.18)',
   },
   // { 
   //   code: 'ABS', 
@@ -99,7 +109,8 @@ const plasticTypes = [
     jaDesc: '眼鏡・CD・防弾ガラス',
     color: 'from-cyan-400 to-cyan-600',
     bgColor: 'bg-cyan-50',
-    borderColor: 'border-cyan-200'
+    borderColor: 'border-cyan-200',
+    glow: 'rgba(6, 182, 212, 0.16)',
   },
 ];
 
@@ -134,149 +145,243 @@ const machineryItems = [
   }
 ];
 
+// Fertilizer Products Data
+const fertilizerProducts = [
+  {
+    id: 'ka2-tt',
+    name: 'KA2-tt',
+    jaName: '発酵鶏ふん (KA2-tt)',
+    type: 'KA2_TT.TYPE',
+
+    description: 'KA2_TT.DESCRIPTION',
+    image: '/images/fertilizer/KA2-tt.jpg', // Make sure to save your image as this name
+    specs: [
+        { label: 'SPECS.NITROGEN', value: '2.4%' }, // Label is a KEY
+        { label: 'SPECS.PHOSPHORUS', value: '4.55%' },
+        { label: 'SPECS.POTASSIUM', value: '3.7%' },
+        { label: 'SPECS.MOISTURE', value: '17.1%' },
+        { label: 'SPECS.CN_RATIO', value: '9.5' },
+        { label: 'SPECS.ORGANIC_MATTER', value: '-' },
+      ],
+    highlight: 'KA2_TT.HIGHLIGHT'
+  },
+  {
+    id: 'nib-pt',
+    name: 'NIB-pt',
+    jaName: '発酵鶏ふん (NIB-pt)',
+    type: 'NIB_PT.TYPE',
+    description: 'NIB_PT.DESCRIPTION',
+    image: '/images/fertilizer/NIB-pt.jpg', // Make sure to save your image as this name
+    specs: [
+      { label: 'SPECS.NITROGEN', value: '3.0%' },
+      { label: 'SPECS.PHOSPHORUS', value: '5.0%' },
+      { label: 'SPECS.POTASSIUM', value: '4.0%' },
+      { label: 'SPECS.MOISTURE', value: '13.5%' },
+      { label: 'SPECS.CN_RATIO', value: '7.0' },
+      { label: 'SPECS.ORGANIC_MATTER', value: '51.5%' },
+    ],
+    highlight: 'NIB_PT.HIGHLIGHT'
+  }
+];
+
+/* -------------------------------------------------------------------------- */
+/*  N-P-K bars: shows each fertilizer's nutrient balance at a glance           */
+/* -------------------------------------------------------------------------- */
+
+const NPK = [
+  { key: 'SPECS.NITROGEN', symbol: 'N', bar: 'bg-emerald-500' },
+  { key: 'SPECS.PHOSPHORUS', symbol: 'P', bar: 'bg-amber-500' },
+  { key: 'SPECS.POTASSIUM', symbol: 'K', bar: 'bg-sky-500' },
+];
+const NPK_SCALE_MAX = 6; // percent that fills a bar completely
+
+function NpkBars({ specs }: { specs: { label: string; value: string }[] }) {
+  return (
+    <div className="mb-6 space-y-2.5" role="group" aria-label="N-P-K">
+      {NPK.map((nutrient, i) => {
+        const spec = specs.find((s) => s.label === nutrient.key);
+        const value = spec ? parseFloat(spec.value) : NaN;
+        if (!spec || Number.isNaN(value)) return null;
+
+        return (
+          <div key={nutrient.key} className="flex items-center gap-3 text-xs">
+            <span className="w-4 font-bold text-gray-700">{nutrient.symbol}</span>
+            <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-gray-100">
+              <motion.div
+                className={`h-full origin-left rounded-full ${nutrient.bar}`}
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: Math.min(value / NPK_SCALE_MAX, 1) }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: 0.25 + i * 0.12, ease: EASE_OUT }}
+              />
+            </div>
+            <span className="w-12 text-right tabular-nums text-gray-500">{spec.value}</span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
 
 export default function ServicePage() {
-  const { t } = useTranslation();
+  const tr = useTr();
+  const [lightbox, setLightbox] = useState<number | null>(null);
+  const closeLightbox = useCallback(() => setLightbox(null), []);
 
-  const getString = (key: string): string => {
-    const value = t(key);
-    return typeof value === 'string' ? value : key;
-  };
+  // SectionNav only re-subscribes when the ids change, so it's fine to rebuild this every render.
+  const sectionItems = [
+    { id: 'plastic', label: tr('SERVICE.NAV.PLASTIC', 'Plastic recycling') },
+    { id: 'fertilizer', label: tr('SERVICE.NAV.FERTILIZER', 'Fertilizer') },
+    { id: 'metal', label: tr('SERVICE.NAV.METAL', 'Metals') },
+    { id: 'machinery', label: tr('SERVICE.NAV.MACHINERY', 'Machinery') },
+    { id: 'other', label: tr('SERVICE.NAV.GALLERY', 'Gallery') },
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Hero 
         variant="page" 
-        title={getString('SERVICE.PAGE_TITLE')}
-        subtitle={getString('SERVICE.PAGE_SUBTITLE')}
+        title={tr('SERVICE.PAGE_TITLE')}
+        subtitle={tr('SERVICE.PAGE_SUBTITLE')}
       />
 
-      <div className="container mx-auto px-4 py-16 max-w-7xl space-y-28">
+      <SectionNav items={sectionItems} />
+
+      <div className="container mx-auto max-w-7xl space-y-28 px-4 py-16">
         
         {/* ===== PLASTIC RECYCLING - PRIORITY SECTION ===== */}
-        <section className="relative">
-          <div className="absolute -top-4 left-0 bg-green-500 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg">
+        <section id="plastic" className="relative scroll-mt-36">
+          <div className="absolute -top-4 left-0 z-10 inline-flex items-center gap-2 rounded-full bg-green-500 px-4 py-1 text-sm font-bold text-white shadow-lg">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white/70" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-white" />
+            </span>
             MAIN BUSINESS / 主力事業
           </div>
           
-          <div className="flex items-center mb-8 mt-4">
-            <div className="w-14 h-14 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center mr-4 shadow-xl">
+          <Reveal className="mb-8 mt-4 flex items-center">
+            <div className="mr-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-green-400 to-green-600 shadow-xl">
               <Factory className="text-white" size={32} />
             </div>
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
-                {getString('SERVICE.PLASTIC_RECYCLE.TITLE')}
+              <h2 className="text-3xl font-bold text-gray-800 md:text-4xl">
+                {tr('SERVICE.PLASTIC_RECYCLE.TITLE')}
               </h2>
-              <p className="text-gray-500 mt-2 text-lg">
+              <p className="mt-2 text-lg text-gray-500">
                 プラスチック再生・製造 | From Waste to Premium Pellets
               </p>
             </div>
-          </div>
+          </Reveal>
           
           {/* Main Description */}
-          <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12 mb-10">
-            <div className="grid lg:grid-cols-2 gap-10 items-center">
+          <Reveal className="mb-10 rounded-3xl bg-white p-8 shadow-xl md:p-12">
+            <div className="grid items-center gap-10 lg:grid-cols-2">
               <div>
-                <p className="text-gray-700 leading-relaxed mb-6 text-lg">
-                  {getString('SERVICE.PLASTIC_RECYCLE.DESCRIPTION')}
+                <p className="mb-6 text-lg leading-relaxed text-gray-700">
+                  {tr('SERVICE.PLASTIC_RECYCLE.DESCRIPTION')}
                 </p>
                 
-                <div className="space-y-4">
-                  <div className="flex items-start space-x-4 p-4 bg-green-50 rounded-xl">
-                    <div className="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Stagger className="space-y-4" stagger={0.12} delay={0.1}>
+                  <StaggerItem className="flex items-start space-x-4 rounded-xl bg-green-50 p-4">
+                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-green-500">
                       <Recycle className="text-white" size={20} />
                     </div>
                     <div>
                       <h4 className="font-bold text-gray-800">
-                        {getString('SERVICE.PLASTIC_RECYCLE.BUYING.TITLE')}
+                        {tr('SERVICE.PLASTIC_RECYCLE.BUYING.TITLE')}
                       </h4>
-                      <p className="text-gray-600 text-sm mt-1">
-                        {getString('SERVICE.PLASTIC_RECYCLE.BUYING.DESC')}
+                      <p className="mt-1 text-sm text-gray-600">
+                        {tr('SERVICE.PLASTIC_RECYCLE.BUYING.DESC')}
                       </p>
                     </div>
-                  </div>
+                  </StaggerItem>
                   
-                  <div className="flex items-start space-x-4 p-4 bg-blue-50 rounded-xl">
-                    <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <StaggerItem className="flex items-start space-x-4 rounded-xl bg-blue-50 p-4">
+                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-blue-500">
                       <Factory className="text-white" size={20} />
                     </div>
                     <div>
                       <h4 className="font-bold text-gray-800">
-                        {getString('SERVICE.PLASTIC_RECYCLE.MANUFACTURING.TITLE')}
+                        {tr('SERVICE.PLASTIC_RECYCLE.MANUFACTURING.TITLE')}
                       </h4>
-                      <p className="text-gray-600 text-sm mt-1">
-                        {getString('SERVICE.PLASTIC_RECYCLE.MANUFACTURING.DESC')}
+                      <p className="mt-1 text-sm text-gray-600">
+                        {tr('SERVICE.PLASTIC_RECYCLE.MANUFACTURING.DESC')}
                       </p>
                     </div>
-                  </div>
+                  </StaggerItem>
                   
-                  <div className="flex items-start space-x-4 p-4 bg-orange-50 rounded-xl">
-                    <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <StaggerItem className="flex items-start space-x-4 rounded-xl bg-orange-50 p-4">
+                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-orange-500">
                       <ShoppingBag className="text-white" size={20} />
                     </div>
                     <div>
                       <h4 className="font-bold text-gray-800">
-                        {getString('SERVICE.PLASTIC_RECYCLE.SELLING.TITLE')}
+                        {tr('SERVICE.PLASTIC_RECYCLE.SELLING.TITLE')}
                       </h4>
-                      <p className="text-gray-600 text-sm mt-1">
-                        {getString('SERVICE.PLASTIC_RECYCLE.SELLING.DESC')}
+                      <p className="mt-1 text-sm text-gray-600">
+                        {tr('SERVICE.PLASTIC_RECYCLE.SELLING.DESC')}
                       </p>
                     </div>
-                  </div>
-                </div>
+                  </StaggerItem>
+                </Stagger>
               </div>
               
-              {/* Process Image */}
-              <div className="relative h-80 rounded-2xl overflow-hidden shadow-lg">
-                <Image
-                  src="/services/manufac.png"
-                  alt="Plastic Recycling Process"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+              {/* Process Image (drifts slowly as you scroll past) */}
+              <ParallaxImage
+                src="/services/manufac.png"
+                alt="Plastic Recycling Process"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="h-80 rounded-2xl shadow-lg"
+              >
+                <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/60 to-transparent p-6">
                   <div className="text-white">
-                    <p className="font-bold text-xl">Manufacturing Process</p>
+                    <p className="text-xl font-bold">Manufacturing Process</p>
                     <p className="text-sm opacity-90">From raw waste to premium pellets</p>
                   </div>
                 </div>
-              </div>
+              </ParallaxImage>
             </div>
-          </div>
+          </Reveal>
 
-          {/* Plastic Types Grid - 8 Types */}
-          <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-            <span className="w-8 h-1 bg-green-500 rounded-full mr-3"></span>
-            {getString('SERVICE.PLASTIC_TYPES.TITLE')}
-            <span className="ml-3 text-sm font-normal text-gray-500">クリックして詳細を見る</span>
-          </h3>
+          {/* Plastic Types Grid */}
+          <Reveal>
+            <h3 className="mb-6 flex items-center text-2xl font-bold text-gray-800">
+              <span className="mr-3 h-1 w-8 rounded-full bg-green-500"></span>
+              {tr('SERVICE.PLASTIC_TYPES.TITLE')}
+              <span className="ml-3 text-sm font-normal text-gray-500">クリックして詳細を見る</span>
+            </h3>
+          </Reveal>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {plasticTypes.map((plastic, index) => (
-              <Link 
-                key={plastic.code}
-                href={`/service/plastic/${plastic.code.toLowerCase()}`}
-                className={`group relative ${plastic.bgColor} ${plastic.borderColor} border-2 rounded-2xl p-5 hover:shadow-xl transition-all duration-300 hover:-translate-y-1`}
-              >
-                <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${plastic.color} rounded-t-2xl`}></div>
-                <div className="flex justify-between items-start mb-3">
-                  <span className={`text-3xl font-black bg-gradient-to-r ${plastic.color} bg-clip-text text-transparent`}>
-                    {plastic.code}
-                  </span>
-                  <ArrowRight className="text-gray-400 group-hover:text-gray-600 transition-colors" size={20} />
-                </div>
-                <h4 className="font-bold text-gray-800 text-sm mb-1">{plastic.name}</h4>
-                <p className="text-xs text-gray-500 mb-2">{plastic.jaName}</p>
-                <p className="text-xs text-gray-600 line-clamp-2">{plastic.desc}</p>
-                <p className="text-[10px] text-gray-400 mt-1">{plastic.jaDesc}</p>
-                
-                <div className="mt-4 flex items-center text-xs font-semibold text-gray-500 group-hover:text-gray-800 transition-colors">
-                  <span>View Details</span>
-                  <ChevronRight size={14} className="ml-1 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </Link>
+          <Stagger className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            {plasticTypes.map((plastic) => (
+              <StaggerItem key={plastic.code} className="h-full">
+                <SpotlightLink 
+                  href={`/service/plastic/${plastic.code.toLowerCase()}`}
+                  glow={plastic.glow}
+                  className={`block h-full overflow-hidden rounded-2xl border-2 p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${plastic.bgColor} ${plastic.borderColor}`}
+                >
+                  <div className={`absolute left-0 top-0 h-1 w-full bg-gradient-to-r ${plastic.color}`}></div>
+                  <div className="mb-3 flex items-start justify-between">
+                    <span className={`bg-gradient-to-r bg-clip-text text-3xl font-black text-transparent ${plastic.color}`}>
+                      {plastic.code}
+                    </span>
+                    <ArrowRight className="text-gray-400 transition-all duration-300 group-hover:-rotate-45 group-hover:text-gray-700" size={20} />
+                  </div>
+                  <h4 className="mb-1 text-sm font-bold text-gray-800">{plastic.name}</h4>
+                  <p className="mb-2 text-xs text-gray-500">{plastic.jaName}</p>
+                  <p className="line-clamp-2 text-xs text-gray-600">{plastic.desc}</p>
+                  <p className="mt-1 text-[10px] text-gray-400">{plastic.jaDesc}</p>
+                  
+                  <div className="mt-4 flex items-center text-xs font-semibold text-gray-500 transition-colors group-hover:text-gray-800">
+                    <span>View Details</span>
+                    <ChevronRight size={14} className="ml-1 transition-transform group-hover:translate-x-1" />
+                  </div>
+                </SpotlightLink>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
 
           {/* View All Plastics Button */}
           {/* <div className="text-center mt-8">
@@ -289,217 +394,326 @@ export default function ServicePage() {
             </Link>
           </div> */}
         </section>
+        
+        {/* ===== FERTILIZER ===== */}
+        <section id="fertilizer" className="relative scroll-mt-36">
+          <Reveal className="mb-8 flex items-center">
+            <div className="mr-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 shadow-xl">
+              <Leaf className="text-white" size={32} />
+            </div>
+            <div>
+              <h2 className="text-3xl font-bold text-gray-800 md:text-4xl">
+                {tr('SERVICE.FERTILIZER.TITLE', 'Premium Fertilizers')}
+              </h2>
+              <p className="mt-2 text-lg text-gray-500">
+                {tr('SERVICE.FERTILIZER.SUBDESC', 'Imported from Japan to Cambodia & Vietnam')}
+              </p>
+            </div>
+          </Reveal>
 
-        {/* ===== METAL TRADING - SECONDARY SECTION ===== */}
-        <section>
-          <div className="flex items-center mb-8">
-            <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-red-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+          {/* Section Description */}
+          <Reveal delay={0.1}>
+            <p className="mb-10 max-w-4xl text-lg leading-relaxed text-gray-700">
+              {tr(
+                'SERVICE.FERTILIZER.DESCRIPTION',
+                'We supply high-quality organic special granulas imported directly from Japan. Click on a product to view its full technical specifications and solubility data.'
+              )}
+            </p>
+          </Reveal>
+
+          {/* Product Grid - Scales well for 2, 3, or more items */}
+          <Stagger className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {fertilizerProducts.map((product) => (
+              <StaggerItem key={product.id} className="h-full">
+                <SpotlightLink 
+                  href={`/service/fertilizers/${product.id}`}
+                  className="flex h-full flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                >
+                  {/* Product Header Image */}
+                  <div className="relative h-56 overflow-hidden bg-gray-50">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute left-4 top-4 rounded-full border border-green-100 bg-white/90 px-3 py-1 shadow-md backdrop-blur-sm">
+                      <span className="text-xs font-bold uppercase tracking-wide text-green-700">
+                        {tr(product.type)}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-1 flex-col p-6">
+                    {/* Product Title & Highlight */}
+                    <div className="mb-3 flex items-start justify-between">
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-900 transition-colors group-hover:text-green-700">
+                          {tr(product.name)}
+                        </h3>
+                        <p className="mt-1 text-xs font-medium text-gray-500">{tr(product.jaName)}</p>
+                      </div>
+                      <span className="inline-block rounded-md border border-green-100 bg-green-50 px-2 py-1 text-[10px] font-bold text-green-700">
+                        {tr(product.highlight)}
+                      </span>
+                    </div>
+
+                    {/* Short Description */}
+                    <p className="mb-5 line-clamp-3 text-sm leading-relaxed text-gray-600">
+                      {tr(product.description)}
+                    </p>
+
+                    {/* Nutrient balance */}
+                    <NpkBars specs={product.specs} />
+
+                    {/* Call to Action */}
+                    <div className="mt-auto flex items-center text-sm font-semibold text-green-600 group-hover:text-green-700">
+                      <span>{tr('SERVICE.FERTILIZER.BUTTON', 'View Specifications')} </span>
+                      <ChevronRight className="ml-1 transition-transform group-hover:translate-x-1" size={16} />
+                    </div>
+                  </div>
+                </SpotlightLink>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </section>
+
+        {/* ===== METAL TRADING ===== */}
+        <section id="metal" className="relative scroll-mt-36">
+          <Reveal className="mb-8 flex items-center">
+            <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-400 to-red-600 shadow-lg">
               <Recycle className="text-white" size={28} />
             </div>
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
-                {getString('SERVICE.METAL.TITLE')}
+              <h2 className="text-2xl font-bold text-gray-800 md:text-3xl">
+                {tr('SERVICE.METAL.TITLE')}
               </h2>
-              <p className="text-gray-500 mt-1">金属買取・販売 | Copper & Aluminum Specialists</p>
+              <p className="mt-1 text-gray-500">金属買取・販売 | Copper & Aluminum Specialists</p>
             </div>
-          </div>
+          </Reveal>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <Stagger className="grid gap-6 md:grid-cols-2" stagger={0.15}>
             {/* Copper Card */}
-            <Link 
-              href="/service/copper"
-              className="group relative bg-gray-900 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col h-full"
-            >
-              <div className="relative h-64">
-                <Image
-                  src="/images/copper.png"
-                  alt="Copper scrap and products"
-                  fill
-                  className="object-cover transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                <div className="absolute top-4 right-4 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                  <ExternalLink className="text-white" size={20} />
-                </div>
-              </div>
-              <div className="relative p-8 flex flex-col flex-grow">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-2xl font-bold text-white">
-                    {getString('SERVICE.METAL.COPPER.TITLE')}
-                  </h3>
-                  <span className="text-3xl font-bold text-orange-400">Cu</span>
-                </div>
-                <p className="text-gray-300 mb-4 flex-grow">
-                  {getString('SERVICE.METAL.COPPER.DESC')}
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center text-orange-400 font-semibold">
-                    <span>高価買取・販売</span>
-                  </div>
-                  <div className="flex items-center text-white group-hover:translate-x-2 transition-transform">
-                    <span className="text-sm mr-2">View Details</span>
-                    <ArrowRight size={18} />
+            <StaggerItem className="h-full">
+              <Link 
+                href="/service/copper"
+                className="group relative flex h-full flex-col overflow-hidden rounded-3xl bg-gray-900 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+              >
+                <div className="relative h-64 overflow-hidden">
+                  <Image
+                    src="/images/copper.png"
+                    alt="Copper scrap and products"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                  <div className="absolute right-4 top-4 flex h-12 w-12 items-center justify-center rounded-full bg-white/20 opacity-0 backdrop-blur-sm transition-all duration-300 group-hover:opacity-100">
+                    <ExternalLink className="text-white" size={20} />
                   </div>
                 </div>
-              </div>
-            </Link>
+                <div className="relative flex flex-grow flex-col p-8">
+                  <div className="mb-4 flex items-center justify-between">
+                    <h3 className="text-2xl font-bold text-white">
+                      {tr('SERVICE.METAL.COPPER.TITLE')}
+                    </h3>
+                    <span className="text-3xl font-bold text-orange-400">Cu</span>
+                  </div>
+                  <p className="mb-4 flex-grow text-gray-300">
+                    {tr('SERVICE.METAL.COPPER.DESC')}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center font-semibold text-orange-400">
+                      <span>高価買取・販売</span>
+                    </div>
+                    <div className="flex items-center text-white transition-transform group-hover:translate-x-2">
+                      <span className="mr-2 text-sm">View Details</span>
+                      <ArrowRight size={18} />
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </StaggerItem>
 
             {/* Aluminum Card */}
-            <Link 
-              href="/service/aluminum"
-              className="group relative bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col h-full"
-            >
-              <div className="relative h-64">
-                <Image
-                  src="/images/aluminum.png"
-                  alt="Aluminum scrap and products"
-                  fill
-                  className="object-cover transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                <div className="absolute top-4 right-4 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                  <ExternalLink className="text-white" size={20} />
-                </div>
-              </div>
-              <div className="relative p-8 flex flex-col flex-grow">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-2xl font-bold text-white">
-                    {getString('SERVICE.METAL.ALUMINUM.TITLE')}
-                  </h3>
-                  <span className="text-3xl font-bold text-gray-400">Al</span>
-                </div>
-                <p className="text-gray-300 mb-4 flex-grow">
-                  {getString('SERVICE.METAL.ALUMINUM.DESC')}
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center text-gray-300 font-semibold">
-                    <span>高価買取・販売</span>
-                  </div>
-                  <div className="flex items-center text-white group-hover:translate-x-2 transition-transform">
-                    <span className="text-sm mr-2">View Details</span>
-                    <ArrowRight size={18} />
+            <StaggerItem className="h-full">
+              <Link 
+                href="/service/aluminum"
+                className="group relative flex h-full flex-col overflow-hidden rounded-3xl bg-gray-800 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+              >
+                <div className="relative h-64 overflow-hidden">
+                  <Image
+                    src="/images/aluminum.png"
+                    alt="Aluminum scrap and products"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                  <div className="absolute right-4 top-4 flex h-12 w-12 items-center justify-center rounded-full bg-white/20 opacity-0 backdrop-blur-sm transition-all duration-300 group-hover:opacity-100">
+                    <ExternalLink className="text-white" size={20} />
                   </div>
                 </div>
-              </div>
-            </Link>
-          </div>
+                <div className="relative flex flex-grow flex-col p-8">
+                  <div className="mb-4 flex items-center justify-between">
+                    <h3 className="text-2xl font-bold text-white">
+                      {tr('SERVICE.METAL.ALUMINUM.TITLE')}
+                    </h3>
+                    <span className="text-3xl font-bold text-gray-400">Al</span>
+                  </div>
+                  <p className="mb-4 flex-grow text-gray-300">
+                    {tr('SERVICE.METAL.ALUMINUM.DESC')}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center font-semibold text-gray-300">
+                      <span>高価買取・販売</span>
+                    </div>
+                    <div className="flex items-center text-white transition-transform group-hover:translate-x-2">
+                      <span className="mr-2 text-sm">View Details</span>
+                      <ArrowRight size={18} />
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </StaggerItem>
+          </Stagger>
         </section>
 
-        {/* ===== MACHINERY - WITH IMAGES ===== */}
-        <section>
-          <div className="flex items-center">
-            <div className="w-12 h-12 bg-gradient-to-br from-primary to-dark rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+        {/* ===== MACHINERY ===== */}
+        <section id="machinery" className="relative scroll-mt-36">
+          <Reveal className="flex items-center">
+            <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-dark shadow-lg">
               <ShoppingBag className="text-white" size={28} />
             </div>
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
-                {getString('SERVICE.MACHINERY.TITLE')}
+              <h2 className="text-2xl font-bold text-gray-800 md:text-3xl">
+                {tr('SERVICE.MACHINERY.TITLE')}
               </h2>
-              <p className="text-gray-500 mt-1">建設機械・農機具 | Buy, Refurbish, Sell</p>
+              <p className="mt-1 text-gray-500">建設機械・農機具 | Buy, Refurbish, Sell</p>
             </div>
-          </div>
+          </Reveal>
 
           {/* Featured Machinery with Images */}
-          <div className="grid md:grid-cols-3 gap-6 mb-10 mt-6">
+          <Stagger className="mb-10 mt-6 grid gap-6 md:grid-cols-3">
             {machineryItems.map((item) => (
-              <Link
-                key={item.id}
-                href={item.link}
-                className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
-              >
-                <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <span className="inline-flex items-center text-white text-sm font-semibold">
-                      View Details <ArrowRight size={16} className="ml-1" />
-                    </span>
+              <StaggerItem key={item.id} className="h-full">
+                <SpotlightLink
+                  href={item.link}
+                  className="block h-full overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+                >
+                  <div className="relative h-48 overflow-hidden">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    <div className="absolute bottom-0 left-0 right-0 translate-y-full p-4 transition-transform duration-300 group-hover:translate-y-0">
+                      <span className="inline-flex items-center text-sm font-semibold text-white">
+                        View Details <ArrowRight size={16} className="ml-1" />
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-lg font-bold text-gray-800 mb-1">{item.title}</h3>
-                  <p className="text-xs text-gray-500 mb-3">{item.jaTitle}</p>
-                  <p className="text-sm text-gray-600 line-clamp-2">{item.description}</p>
-                </div>
-              </Link>
+                  <div className="p-6">
+                    <h3 className="mb-1 text-lg font-bold text-gray-800">{item.title}</h3>
+                    <p className="mb-3 text-xs text-gray-500">{item.jaTitle}</p>
+                    <p className="line-clamp-2 text-sm text-gray-600">{item.description}</p>
+                  </div>
+                </SpotlightLink>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </section>
 
         {/* ===== PRODUCT GALLERY ===== */}
-        <section className="pb-10">
-          <div className="flex items-center justify-center mb-10">
+        <section id="other" className="relative scroll-mt-36 pb-10">
+          <Reveal className="mb-10 flex items-center justify-center">
             <div className="text-center">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
-                {getString('SERVICE.GALLERY.TITLE')}
+              <h2 className="mb-2 text-2xl font-bold text-gray-800 md:text-3xl">
+                {tr('SERVICE.GALLERY.TITLE')}
               </h2>
               <p className="text-gray-500">
-                {getString('SERVICE.GALLERY.SUBTITLE')}
+                {tr('SERVICE.GALLERY.SUBTITLE')}
               </p>
-              <div className="w-24 h-1 bg-primary mx-auto mt-4 rounded-full"></div>
+              <motion.div
+                className="mx-auto mt-4 h-1 w-24 origin-center rounded-full bg-primary"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2, ease: EASE_OUT }}
+              />
             </div>
-          </div>
+          </Reveal>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+          <Stagger className="grid grid-cols-2 gap-6 md:grid-cols-3" stagger={0.06}>
             {serviceImages.map((image, index) => (
-              <div
-                key={index}
-                className="group relative h-64 rounded-2xl overflow-hidden shadow-lg cursor-pointer bg-white"
-              >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                  sizes="(max-width: 768px) 50vw, 33vw"
-                />
-                
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
-                
-                {/* Content */}
-                <div className="absolute inset-0 flex flex-col justify-end p-5">
-                  <h3 className="text-white font-bold text-lg mb-1 transform translate-y-0 transition-transform">
-                    {image.title}
-                  </h3>
-                  <p className="text-white/80 text-sm line-clamp-2 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                    {image.description}
-                  </p>
-                  <div className="h-0.5 w-0 bg-white mt-3 group-hover:w-full transition-all duration-500"></div>
-                </div>
+              <StaggerItem key={image.src}>
+                <button
+                  type="button"
+                  onClick={() => setLightbox(index)}
+                  aria-label={`${image.title} – open larger`}
+                  className="group relative h-64 w-full cursor-zoom-in overflow-hidden rounded-2xl bg-white text-left shadow-lg outline-none focus-visible:ring-4 focus-visible:ring-primary/40"
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                  />
+                  
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-70 transition-opacity duration-300 group-hover:opacity-90"></div>
+                  
+                  {/* Content */}
+                  <div className="absolute inset-0 flex flex-col justify-end p-5">
+                    <h3 className="mb-1 text-lg font-bold text-white">
+                      {image.title}
+                    </h3>
+                    <p className="line-clamp-2 translate-y-4 text-sm text-white/80 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                      {image.description}
+                    </p>
+                    <div className="mt-3 h-0.5 w-0 bg-white transition-all duration-500 group-hover:w-full"></div>
+                  </div>
 
-                {/* Hover Icon */}
-                <div className="absolute top-4 right-4 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                  <span className="text-white text-xl">+</span>
-                </div>
-              </div>
+                  {/* Hover Icon */}
+                  <div className="absolute right-4 top-4 flex h-10 w-10 translate-y-2 items-center justify-center rounded-full bg-white/20 opacity-0 backdrop-blur-sm transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                    <span className="text-xl text-white">+</span>
+                  </div>
+                </button>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
 
           {/* View More Button */}
-          <div className="text-center mt-10">
+          <Reveal className="mt-10 text-center">
             <Link 
               href="/products"
-              className="inline-flex items-center space-x-2 bg-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-dark transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+              className="group inline-flex items-center space-x-2 rounded-full bg-primary px-8 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-dark hover:shadow-xl active:scale-[0.98]"
             >
-              <span>{getString('SERVICE.GALLERY.VIEW_ALL')}</span>
-              <ArrowRight size={18} />
+              <span>{tr('SERVICE.GALLERY.VIEW_ALL')}</span>
+              <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
             </Link>
-          </div>
+          </Reveal>
 
           {/* Global Export Banner */}
-          <div className="mt-8 p-6 bg-gradient-to-r from-primary to-dark text-white rounded-2xl text-center shadow-lg">
+          <Reveal className="mt-8 rounded-2xl bg-gradient-to-r from-primary to-dark p-6 text-center text-white shadow-lg">
             <p className="text-lg font-medium">
-              {getString('SERVICE.MACHINERY.QUOTE')}
+              {tr('SERVICE.MACHINERY.QUOTE')}
             </p>
-          </div>
+          </Reveal>
         </section>
       </div>
+
+      <Lightbox
+        images={serviceImages}
+        index={lightbox}
+        onClose={closeLightbox}
+        onChange={setLightbox}
+      />
     </div>
   );
 }
