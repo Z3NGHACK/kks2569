@@ -1,0 +1,61 @@
+/* ==========================================================================
+   Append this to the bottom of app/globals.css
+   (you can delete the old `animate-hero-slide` keyframes; the hero no longer uses them)
+   ========================================================================== */
+
+/* Header publishes its visible height here so sticky bars can sit underneath it */
+:root {
+  --header-offset: 80px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Amber selection matches the accent used in the hero and footer */
+::selection {
+  background: rgb(252 211 77 / 0.6);
+  color: #052e16;
+}
+
+/* Clear keyboard focus on links/buttons. `:where()` keeps specificity at zero, so form inputs
+   (which use their own focus ring) aren't double-outlined. */
+:where(a, button, summary, [tabindex]):focus-visible {
+  outline: 2px solid #22c55e;
+  outline-offset: 2px;
+}
+
+/* Hide scrollbar on horizontally scrolling pill bars (mobile section nav) */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Materials ticker in the hero. The track holds two identical copies, so
+   sliding it by exactly half its width loops seamlessly. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 50s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Respect "reduce motion" for everything that isn't handled by framer-motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee-track {
+    animation: none;
+  }
+}

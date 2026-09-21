@@ -3,7 +3,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Recycle, ShoppingBag, Factory, ArrowRight, ChevronRight, ExternalLink } from 'lucide-react';
+import { Recycle, ShoppingBag, Factory, ArrowRight, ChevronRight, ExternalLink, Leaf } from 'lucide-react';
 import Hero from '@/components/Hero';
 import { useTranslation } from '@/components/LanguageProvider';
 
@@ -141,6 +141,44 @@ const additionalMachinery = [
   { src: "/images/i7.jpg", title: "Wheel Loaders", description: "Loading and moving materials" },
   { src: "/images/i6.jpg", title: "Crane Trucks", description: "Lifting and transport solutions" },
   { src: "/images/i10.jpg", title: "Generator Sets", description: "Power generation equipment" },
+];
+
+// Fertilizer Products Data
+const fertilizerProducts = [
+  {
+    id: 'ka2-tt',
+    name: 'KA2-tt',
+    jaName: '発酵鶏ふん (KA2-tt)',
+    type: 'Special Granula',
+    description: 'High-quality fermented chicken manure granules. Optimized for root development with balanced Phosphorus and Potassium.',
+    image: '/images/fertilizer-ka2.jpg', // Make sure to save your image as this name
+    specs: [
+      { label: 'Nitrogen (N)', value: '2.4%' },
+      { label: 'Phosphorus (P₂O₅)', value: '4.55%' },
+      { label: 'Potassium (K₂O)', value: '3.7%' },
+      { label: 'Moisture', value: '17.1%' },
+      { label: 'C/N Ratio', value: '9.5' },
+      { label: 'Organic Matter', value: '-' }, // As per your spec
+    ],
+    highlight: 'High Solubility'
+  },
+  {
+    id: 'nib-pt',
+    name: 'NIB-pt',
+    jaName: '発酵鶏ふん (NIB-pt)',
+    type: 'Special Granula',
+    description: 'Premium organic fertilizer rich in Organic Matter. Ensures fast nutrient release and improved soil structure.',
+    image: '/images/fertilizer-nib.jpg', // Make sure to save your image as this name
+    specs: [
+      { label: 'Nitrogen (N)', value: '3.0%' },
+      { label: 'Phosphorus (P₂O₅)', value: '5.0%' },
+      { label: 'Potassium (K₂O)', value: '4.0%' },
+      { label: 'Moisture', value: '13.5%' },
+      { label: 'C/N Ratio', value: '7.0' },
+      { label: 'Organic Matter', value: '51.5%' },
+    ],
+    highlight: 'Rich in Organic Matter'
+  }
 ];
 
 export default function ServicePage() {
@@ -299,6 +337,100 @@ export default function ServicePage() {
               <span>View All Plastic Types</span>
               <span>→</span>
             </Link>
+          </div>
+        </section>
+
+
+                {/* ===== FERTILIZER - NEW SECTION ===== */}
+        <section>
+          <div className="flex items-center mb-8">
+            <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mr-4 shadow-xl">
+              <Leaf className="text-white" size={32} />
+            </div>
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
+                {getString('SERVICE.FERTILIZER.TITLE') || 'Premium Fertilizers'}
+              </h2>
+              <p className="text-gray-500 mt-2 text-lg">
+                日本製有機肥料 | Imported from Japan to Cambodia & Vietnam
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12 mb-10">
+            <p className="text-gray-700 leading-relaxed mb-10 text-lg max-w-4xl">
+              {getString('SERVICE.FERTILIZER.DESCRIPTION') || 
+                'We supply high-quality organic special granulas imported directly from Japan. Our products, including KA2-tt and NIB-pt, are formulated to improve soil health and maximize crop yield in Southeast Asia.'}
+            </p>
+
+            <div className="grid lg:grid-cols-2 gap-8">
+              {fertilizerProducts.map((product) => (
+                <div 
+                  key={product.id}
+                  className="group border border-gray-200 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-white"
+                >
+                  {/* Product Header Image */}
+                  <div className="relative h-64 bg-gray-50 overflow-hidden">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-4 py-1 rounded-full shadow-md border border-green-100">
+                      <span className="text-green-700 font-bold text-sm uppercase tracking-wide">
+                        {product.type}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="p-6">
+                    {/* Product Title */}
+                    <div className="flex justify-between items-start mb-4">
+                      <div>
+                        <h3 className="text-2xl font-bold text-gray-900">{product.name}</h3>
+                        <p className="text-sm text-gray-500 font-medium mt-1">{product.jaName}</p>
+                      </div>
+                      <div className="text-right">
+                        <span className="inline-block px-3 py-1 bg-green-100 text-green-700 rounded-lg text-xs font-bold">
+                          {product.highlight}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-gray-600 text-sm mb-6 leading-relaxed h-10">
+                      {product.description}
+                    </p>
+
+                    {/* Technical Specs Table */}
+                    <div className="bg-gray-50 rounded-xl p-4">
+                      <h4 className="text-xs font-bold text-gray-400 uppercase mb-3 tracking-wider">
+                        Technical Specifications
+                      </h4>
+                      <div className="space-y-2">
+                        {product.specs.map((spec, idx) => (
+                          <div key={idx} className="flex justify-between items-center text-sm border-b border-gray-200 last:border-0 pb-1 last:pb-0">
+                            <span className="text-gray-500">{spec.label}</span>
+                            <span className={`font-bold ${spec.value === '-' ? 'text-gray-400' : 'text-gray-800'}`}>
+                              {spec.value}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Solubility Note */}
+                    <div className="mt-4 flex items-center text-xs text-blue-600 bg-blue-50 p-2 rounded-lg">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      High solubility observed within 45 minutes
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 

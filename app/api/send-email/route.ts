@@ -13,7 +13,7 @@ const emailAddresses: Record<string, string> = {
   Sophan: 's.sophann@kks2569.com',
   Sokhan: 'k.sokkhan@kks2569.com',
   sugimoto: 'h.sugimoto@kks2569.com',
-  info: 'info@kks2026.com',
+  info: 'info@kks2569.com',
 };
 
 const fromAddresses: Record<string, { name: string; email: string }> = {
@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Get API key and target email for recipient
-    const apiKey = 're_f4EKNTjf_N7ihxB7XeTf3E9wbSU7C2av8';
+    const apiKey = process.env.RESEND_API_KEY;
     const targetEmail = emailAddresses[recipient];
     const sender = fromAddresses[recipient];
 
@@ -168,7 +168,7 @@ function generateEmailTemplate(props: {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New Inquiry - KKS2026</title>
+  <title>New Inquiry - KKS2569</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -312,7 +312,7 @@ function generateEmailTemplate(props: {
   <div class="email-wrapper">
     <div class="header">
       <h1>📨 New Contact Inquiry</h1>
-      <p>KKS2026 Website Submission</p>
+      <p>KKS2569 Website Submission</p>
       <span class="badge">${inquiryType}</span>
     </div>
     
@@ -352,13 +352,13 @@ function generateEmailTemplate(props: {
     </div>
     
     <div class="action-section">
-      <a href="mailto:${escapedEmail}?subject=Re: Your inquiry to KKS2026" class="reply-button">
+      <a href="mailto:${escapedEmail}?subject=Re: Your inquiry to KKS2569" class="reply-button">
         Reply to ${escapedName}
       </a>
     </div>
     
     <div class="footer">
-      <p><strong>KKS2026 Co., Ltd.</strong></p>
+      <p><strong>KKS2569 Co., Ltd.</strong></p>
       <p>This email was sent from the official website contact form.</p>
       <p class="timestamp">
         Received: ${new Date().toLocaleString('en-US', { 

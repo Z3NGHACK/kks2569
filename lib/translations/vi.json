@@ -15,7 +15,7 @@
     "DESCRIPTION": "Chúng tôi thu gom và tái chế đồ điện, nhựa, nhôm, sắt, xe đạp, máy móc xây dựng và thiết bị nông nghiệp không còn sử dụng, góp phần vào việc tuần hoàn tài nguyên.",
     "MENU": "Menu",
     "CONTACT_INFO": "Thông tin liên hệ",
-    "EMAIL": "info@kks2026.com",
+    "EMAIL": "info@kks2569.com",
     "PHONE": "Liên hệ qua điện thoại",
     "LOCATION": "Osaka, Nhật Bản",
     "COPYRIGHT": "© 2024 Công ty TNHH Khmer Kansai. Bảo lưu mọi quyền."
@@ -23,39 +23,47 @@
   "HOME": {
     "HERO": {
       "TITLE_1": "Khoan đã!",
-      "TITLE_2": "Chọn",
-      "TITLE_HIGHLIGHT": "Tái sử dụng",
-      "TITLE_3": "Thay vì Vứt bỏ",
-      "DESCRIPTION": "Công ty TNHH Khmer Kansai thu gom và tái chế đồ điện, nhựa, nhôm, sắt, xe đạp, máy móc xây dựng và thiết bị nông nghiệp không còn sử dụng. Chúng tôi đóng góp vào các hoạt động thân thiện với môi trường bằng cách tái sử dụng các tài nguyên này ở Đông Nam Á.",
+      "TITLE_2": "Chọn Kết nối với",
+      "TITLE_HIGHLIGHT": "Chất lượng Nhật Bản",
+      "TITLE_3": "",
+      "DESCRIPTION": "Công ty TNHH Khmer Kansai là cầu nối giữa Nhật Bản và Đông Nam Á. Chúng tôi cung cấp máy móc bán lẻ (mới và đã qua sử dụng) và phân bón chất lượng cao từ Nhật Bản đến Campuchia và Việt Nam. Cam kết phát triển bền vững, chúng tôi cũng tiếp tục hoạt động tái chế nhựa, kim loại và đồ điện tử để hỗ trợ nền kinh tế tuần hoàn.",
       "BUTTON_PRIMARY": "Nhận báo giá / Liên hệ",
       "BUTTON_SECONDARY": "Xem dịch vụ"
     },
     "MISSION": {
-      "TITLE": "Hướng tới Tương lai Bền vững",
-      "SUBTITLE": "Chúng tôi hướng tới việc giảm thiểu tác động môi trường và hiện thực hóa xã hội tuần hoàn cho một tương lai bền vững."
+      "TITLE": "Cầu nối Chất lượng và Bền vững",
+      "SUBTITLE": "Chúng tôi hướng tới việc giảm thiểu tác động môi trường, hiện thực hóa xã hội tuần hoàn đồng thời mang đến công nghệ và tài nguyên chất lượng từ Nhật Bản."
     },
     "SERVICES": {
-      "TITLE": "Dịch vụ của chúng tôi",
+      "TITLE": "Ngành Kinh Doanh Cốt Lõi",
       "RECYCLE": {
-        "TITLE": "Kinh doanh Tái chế",
-        "DESCRIPTION": "Thu gom và tái chế nhựa, nhôm, sắt và các phế liệu kim loại khác"
+        "TITLE": "Tái Chế & Sản Xuất Nhựa",
+        "DESCRIPTION": "Chúng tôi thu mua rác thải nhựa và sản xuất thành hạt nhựa tái chế cao cấp cho công nghiệp, thúc đẩy nền kinh tế tuần hoàn."
       },
-      "BUYING": {
-        "TITLE": "Kinh doanh Mua lại",
-        "DESCRIPTION": "Mua lại đồ điện, ô tô và sản phẩm da với giá hợp lý"
+      "FERTILIZER": {
+        "TITLE": "Phân Bón Hữu Cơ Cao Cấp",
+        "DESCRIPTION": "Cung cấp phân bón hữu cơ dạng hạt đặc biệt trực tiếp từ Nhật Bản để nâng cao năng suất nông nghiệp tại Campuchia và Việt Nam."
       },
       "MACHINERY": {
-        "TITLE": "Máy móc Xây dựng & Nông nghiệp",
-        "DESCRIPTION": "Mua lại giá cao và đại lý xuất khẩu máy móc xây dựng và thiết bị nông nghiệp"
+        "TITLE": "Máy Móc & Thiết Bị",
+        "DESCRIPTION": "Bán lẻ máy móc xây dựng và nông nghiệp mới/cũ được nguồn từ các cuộc đấu giá tại Nhật Bản, xuất khẩu sang Campuchia và Việt Nam."
+      },
+      "METAL": {
+        "TITLE": "Kinh Doanh Kim Loại",
+        "DESCRIPTION": "Chuyên gia thu mua và bán Đồng và Nhôm phế liệu. Thu mua và xuất khẩu kim loại công nghiệp giá cao."
+      },
+      "OTHER": {
+        "TITLE": "Hàng Cũ & Phụ Tùng",
+        "DESCRIPTION": "Bán lẻ các sản phẩm cũ chất lượng như lốp xe, phụ tùng ô tô, xe đạp và đồ gia dụng cho thị trường Đông Nam Á."
       },
       "GLOBAL": {
-        "TITLE": "Mở rộng Toàn cầu",
-        "DESCRIPTION": "Mạng lưới tái sử dụng và bán hàng tại Đông Nam Á"
+        "TITLE": "Mạng Lưới Khu Vực",
+        "DESCRIPTION": "Chuỗi cung ứng mạnh mẽ và đáng tin cậy kết nối nguồn lực và công nghệ chất lượng Nhật Bản với các thị trường đang phát triển tại Campuchia và Việt Nam."
       }
     },
     "CTA": {
       "TITLE": "Hãy Liên hệ Với Chúng tôi Trước",
-      "SUBTITLE": "Ngay cả những vật dụng bạn nghĩ không còn sử dụng được cũng có thể tạo ra giá trị mới.",
+      "SUBTITLE": "Dù bạn cần máy móc, phân bón hay giải pháp tái chế, chúng tôi luôn sẵn sàng tư vấn để tìm ra giá trị tốt nhất.",
       "BUTTON": "Liên hệ tại đây"
     }
   },
@@ -306,7 +314,14 @@
   "SERVICE": {
     "PAGE_TITLE": "Dịch Vụ Của Chúng Tôi",
     "PAGE_SUBTITLE": "Tái Chế & Kinh Doanh",
-    
+    "FERTILIZER": {
+      "TITLE": "Phân bón",
+      "BUTTON": "Xem thông số kỹ thuật",
+      "SOLU": "Độ hòa tan cao được ghi nhận trong vòng 45 phút.",
+      "SPEC": "Thông số kỹ thuật",
+      "SUBDESC": "Nhập khẩu từ Nhật Bản sang Campuchia và Việt Nam",
+      "DESCRIPTION": "Chúng tôi cung cấp các loại phân bón hữu cơ Nhật Bản chất lượng cao (KA2-tt & NIB-pt) cho thị trường Campuchia và Việt Nam. Các sản phẩm dạng hạt của chúng tôi đều được kiểm nghiệm về độ hòa tan và hàm lượng dinh dưỡng."
+    },
     "PLASTIC_RECYCLE": {
       "TITLE": "Tái Chế Nhựa & Sản Xuất",
       "DESCRIPTION": "Chúng tôi là nhà sản xuất tái chế nhựa hàng đầu. Mua các loại nhựa phế thải, xử lý qua phân loại, làm sạch, xay nghiền và tạo hạt để sản xuất viên nhựa tái chế chất lượng cao cho sản xuất công nghiệp.",
@@ -666,8 +681,71 @@
   "COMMON": {
     "BACK_TO_SERVICES": "Quay lại Dịch Vụ",
     "VIEW_DETAILS": "Xem Chi Tiết"
+  },
+  
+  "FERTILIZERS": {
+    "PAGE_TITLE": "Phân Bón Hữu Cơ Cao Cấp",
+    "PAGE_SUBTITLE": "Phân bón hữu cơ Nhật Bản | Nhập khẩu sang Campuchia & Việt Nam",
+    "BACK_TO_SERVICES": "Quay lại Dịch vụ",
+    "HERO": {
+      "TITLE": "Chất Lượng Bạn Có Thể Tin Tưởng",
+      "DESCRIPTION": "Chúng tôi cung cấp phân bón hữu cơ chất lượng cao từ Nhật Bản (KA2-tt & NIB-pt) sang Campuchia và Việt Nam. Các loại hạt đã được kiểm tra độ hòa tan và hàm lượng dinh dưỡng để đảm bảo năng suất tối đa.",
+      "LAB_TESTED": "Đã Kiểm Nghiện Lab",
+      "ORGANIC": "100% Hữu Cơ",
+      "JAPAN_ORIGIN": "Sản xuất tại Nhật Bản"
+    },
+    "PRODUCTS": {
+      "TITLE": "Sản Phẩm Có Sẵn"
+    },
+    "SERVICES": {
+      "TITLE": "Dịch Vụ Của Chúng Tôi",
+      "ANALYSIS": {
+        "TITLE": "Phân Tích & Kiểm Nghiện",
+        "DESC": "Thử nghiệm nghiêm ngặt về hàm lượng NPK, độ ẩm và độ hòa tan để đảm bảo chất lượng."
+      },
+      "PACKING": {
+        "TITLE": "Tạo Hạt & Đóng Gói",
+        "DESC": "Xử lý thành dạng hạt đặc biệt để dễ bón và giải phóng chất dinh dưỡng chậm."
+      },
+      "LOGISTICS": {
+        "TITLE": "Xuất Khẩu Trực Tiếp",
+        "DESC": "Hậu cần vận chuyển hiệu quả đến thị trường Campuchia và Việt Nam."
+      }
+    },
+    "PROCESS": {
+      "TITLE": "Quy Trình Của Chúng Tôi"
+    },
+    "CTA": {
+      "TITLE": "Tăng Năng Suất Mùa Vụ",
+      "DESCRIPTION": "Liên hệ với chúng tôi ngay hôm nay để thảo luận về nhu cầu phân bón của bạn. Chúng tôi cung cấp giá cả cạnh tranh cho đơn đặt hàng số lượng lớn.",
+      "CONTACT": "Liên Hệ",
+      "QUOTE": "Nhận Báo Giá"
+    }
+  },
+  "KA2_TT": {
+    "TYPE": "Hạt Đặc Biệt",
+    "DESCRIPTION": "Hạt phân ủ phân gà chất lượng cao. Được tối ưu hóa cho phát triển rễ với sự cân bằng Lân và Kali.",
+    "HIGHLIGHT": "Độ Tan Cao"
+  },
+  "NIB_PT": {
+    "TYPE": "Hạt Đặc Biệt",
+    "DESCRIPTION": "Phân bón hữu cơ cao cấp giàu chất hữu cơ. Đảm bảo giải phóng chất dinh dưỡng nhanh và cải thiện cấu trúc đất.",
+    "HIGHLIGHT": "Giàu Chất Hữu Cơ"
+  },
+  "SPECS": {
+    "NITROGEN": "Đạm (N)",
+    "PHOSPHORUS": "Lân (P₂O₅)",
+    "POTASSIUM": "Kali (K₂O)",
+    "MOISTURE": "Độ Ẩm",
+    "CN_RATIO": "Tỷ lệ C/N",
+    "ORGANIC_MATTER": "Chất Hữu Cơ"
+  },
+  "TABLE": {
+    "TECHNICAL_SPECS": "Thông Số Kỹ Thuật"
+  },
+  "FERTILIZER": {
+    "SOLUBILITY_NOTE": "Độ hòa tan cao quan sát được trong 45 phút"
   }
-
 
 
 }
