@@ -3,9 +3,14 @@
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, Recycle, Factory, Package, CheckCircle, ChevronRight } from 'lucide-react';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { ArrowLeft, Recycle, Factory, Package, CheckCircle, ChevronRight, PackageSearch } from 'lucide-react';
 import Hero from '@/components/Hero';
-import { useTranslation } from '@/components/LanguageProvider';
+import { EASE_OUT, Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal';
+import Lightbox from '@/components/service/Lightbox';
+import { useTr } from '@/lib/useTr';
+import { inquiryHref } from '@/lib/inquiry';
 
 const plasticData: Record<string, {
   code: string;
@@ -19,6 +24,7 @@ const plasticData: Record<string, {
   sellingInfo: string;
   images: string[];
   color: string;
+  glow: string;
 }> = {
   // pet: {
   //   code: 'PET',
@@ -51,10 +57,11 @@ const plasticData: Record<string, {
   //   ],
   //   buyingInfo: 'We purchase all forms of PET waste including bottles, containers, factory scraps, and post-industrial waste. Competitive pricing based on quality and quantity.',
   //   sellingInfo: 'We sell premium recycled PET pellets suitable for bottle-to-bottle recycling, fiber production, and sheet manufacturing. Available in various grades and colors.',
-  //   images: ['/images/pet/pet1.jpg', '/images/pet/pet2.jpg', '/images/pet/pet3.jpg', 
-  //     '/images/pet/pet4.jpg', '/images/pet/pet5.jpg', '/images/pet/pet6.jpg', 
+  //   images: ['/images/pet/pet1.jpg', '/images/pet/pet2.jpg', '/images/pet/pet3.jpg',
+  //     '/images/pet/pet4.jpg', '/images/pet/pet5.jpg', '/images/pet/pet6.jpg',
   //     '/images/pet/pet7.jpg', '/images/pet/pet8.jpg', '/images/pet/pet9.jpg'],
-  //   color: 'from-green-400 to-green-600'
+  //   color: 'from-green-400 to-green-600',
+  //   glow: 'rgba(34, 197, 94, 0.16)'
   // },
   // hdpe: {
   //   code: 'HDPE',
@@ -90,7 +97,8 @@ const plasticData: Record<string, {
   //   images: ['/images/hdpe/hdpe1.jpg', '/images/hdpe/hdpe2.jpg', '/images/hdpe/hdpe3.jpg',
   //     '/images/hdpe/hdpe4.png', '/images/hdpe/hdpe5.jpg', '/images/hdpe/hdpe6.jpg',
   //   ],
-  //   color: 'from-blue-400 to-blue-600'
+  //   color: 'from-blue-400 to-blue-600',
+  //   glow: 'rgba(59, 130, 246, 0.16)'
   // },
   pp: {
     code: 'PP',
@@ -126,7 +134,8 @@ const plasticData: Record<string, {
     images: ['/images/pp/pp1.jpg', '/images/pp/pp2.jpg', '/images/pp/pp3.jpg',
       '/images/pp/pp4.jpg', '/images/pp/pp5.jpg', '/images/pp/pp6.jpg'
     ],
-    color: 'from-orange-400 to-orange-600'
+    color: 'from-orange-400 to-orange-600',
+    glow: 'rgba(249, 115, 22, 0.16)'
   },
   pvc: {
     code: 'PVC',
@@ -162,7 +171,8 @@ const plasticData: Record<string, {
     images: ['/images/pvc/pvc1.jpg', '/images/pvc/pvc2.jpg', '/images/pvc/pvc3.jpg',
       '/images/pvc/pvc4.jpg', '/images/pvc/pvc5.jpg', '/images/pvc/pvc6.jpeg'
     ],
-    color: 'from-purple-400 to-purple-600'
+    color: 'from-purple-400 to-purple-600',
+    glow: 'rgba(168, 85, 247, 0.16)'
   },
   // ldpe: {
   //   code: 'LDPE',
@@ -198,7 +208,8 @@ const plasticData: Record<string, {
   //   images: ['/images/ldpe/ldpe1.jpg', '/images/ldpe/ldpe2.jpg', '/images/ldpe/ldpe3.jpg',
   //     '/images/ldpe/ldpe4.jpg', '/images/ldpe/ldpe5.jpg', '/images/ldpe/ldpe6.jpg'
   //   ],
-  //   color: 'from-pink-400 to-pink-600'
+  //   color: 'from-pink-400 to-pink-600',
+  //   glow: 'rgba(236, 72, 153, 0.16)'
   // },
   ps: {
     code: 'PS',
@@ -232,7 +243,8 @@ const plasticData: Record<string, {
     buyingInfo: 'Buying EPS foam, food containers, and industrial PS scrap. We handle both expanded and solid polystyrene.',
     sellingInfo: 'Recycled PS pellets for packaging, disposable products, and insulation. Available in general purpose and high-impact grades.',
     images: ['/images/ps/ps1.jpg', '/images/ps/ps2.jpg', '/images/ps/ps3.jpg'],
-    color: 'from-yellow-400 to-yellow-600'
+    color: 'from-yellow-400 to-yellow-600',
+    glow: 'rgba(234, 179, 8, 0.18)'
   },
   // abs: {
   //   code: 'ABS',
@@ -266,7 +278,8 @@ const plasticData: Record<string, {
   //   buyingInfo: 'We purchase ABS from automotive, electronics, and consumer goods waste. Premium prices for clean, sorted material.',
   //   sellingInfo: 'High-quality recycled ABS for injection molding and extrusion. Available in natural, black, and custom colors with specified impact properties.',
   //   images: ['/images/abs/abs1.jpg', '/images/abs/abs2.jpg', '/images/abs/abs3.jpg'],
-  //   color: 'from-red-400 to-red-600'
+  //   color: 'from-red-400 to-red-600',
+  //   glow: 'rgba(239, 68, 68, 0.16)'
   // },
   pc: {
     code: 'PC',
@@ -300,152 +313,216 @@ const plasticData: Record<string, {
     buyingInfo: 'Buying PC from automotive, electronics, and optical applications. Highest prices for clear, uncontaminated material.',
     sellingInfo: 'Premium recycled PC pellets for optical, automotive, and electronic applications. Clear and colored grades available with maintained impact properties.',
     images: ['/images/pc/pc1.jpg', '/images/pc/pc2.jpg', '/images/pc/pc3.jpg'],
-    color: 'from-cyan-400 to-cyan-600'
+    color: 'from-cyan-400 to-cyan-600',
+    glow: 'rgba(6, 182, 212, 0.16)'
   }
 };
 
 export default function PlasticDetailPage() {
   const params = useParams();
-  const { t } = useTranslation();
-  const type = params.type as string;
+  const tr = useTr();
+  const type = (params.type as string)?.toLowerCase();
   const data = plasticData[type];
-
-  const getString = (key: string): string => {
-    const value = t(key);
-    return typeof value === 'string' ? value : key;
-  };
+  const [lightbox, setLightbox] = useState<number | null>(null);
 
   if (!data) {
-    return <div>Plastic type not found</div>;
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <p className="mb-6 text-lg text-gray-600">
+            {tr('PLASTIC_DETAIL.NOT_FOUND', 'This plastic type could not be found.')}
+          </p>
+          <Link
+            href="/service"
+            className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-semibold text-white transition-colors hover:bg-dark"
+          >
+            <ArrowLeft size={18} />
+            {tr('PLASTIC_DETAIL.BACK_TO_SERVICES')}
+          </Link>
+        </div>
+      </div>
+    );
   }
+
+  const gallery = data.images.map((src, i) => ({
+    src,
+    alt: `${data.name} ${i + 1}`,
+    title: `${data.name} — ${data.fullName}`,
+    description: '',
+  }));
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <div className={`bg-gradient-to-r ${data.color} text-white py-16`}>
-        <div className="container mx-auto px-4">
-          <div className="flex items-center space-x-4 mb-4">
-            <span className="text-6xl font-black">{data.code}</span>
+      {/* Hero */}
+      <section className={`relative overflow-hidden bg-gradient-to-br ${data.color} py-16 text-white md:py-24`}>
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.12]"
+          style={{
+            backgroundImage: 'radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)',
+            backgroundSize: '24px 24px',
+          }}
+        />
+        <div className="container relative mx-auto px-4">
+          <motion.div
+            className="flex flex-wrap items-center gap-4 sm:gap-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: EASE_OUT }}
+          >
+            <span className="text-6xl font-black leading-none md:text-7xl">{data.code}</span>
             <div>
-              <h1 className="text-4xl font-bold">{data.name}</h1>
-              <p className="text-xl text-white/90">{data.fullName}</p>
+              <h1 className="text-3xl font-bold md:text-4xl">{data.name}</h1>
+              <p className="text-lg text-white/90 md:text-xl">{data.fullName}</p>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </section>
 
-      <div className="container mx-auto px-4 py-12 max-w-6xl">
-        <Link href="/service" className="inline-flex items-center text-gray-600 hover:text-primary mb-8 transition-colors">
-          <ArrowLeft size={20} className="mr-2" />
-          {getString('PLASTIC_DETAIL.BACK_TO_SERVICES')}
+      <div className="container mx-auto max-w-6xl px-4 py-12">
+        <Link
+          href="/service"
+          className="group mb-8 inline-flex items-center text-gray-600 transition-colors hover:text-primary"
+        >
+          <ArrowLeft size={20} className="mr-2 transition-transform group-hover:-translate-x-1" />
+          {tr('PLASTIC_DETAIL.BACK_TO_SERVICES')}
         </Link>
-        
-        {/* Description */}
-        <section className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">{getString('PLASTIC_DETAIL.ABOUT')} {data.name}</h2>
-          <p className="text-gray-700 text-lg leading-relaxed">{data.description}</p>
-        </section>
 
-        <div className="grid lg:grid-cols-2 gap-8 mb-8">
+        {/* Description */}
+        <Reveal className="mb-8 rounded-2xl bg-white p-8 shadow-lg">
+          <h2 className="mb-4 text-2xl font-bold text-gray-800">
+            {tr('PLASTIC_DETAIL.ABOUT')} {data.name}
+          </h2>
+          <p className="text-lg leading-relaxed text-gray-700">{data.description}</p>
+        </Reveal>
+
+        <div className="mb-8 grid gap-8 lg:grid-cols-2">
           {/* Properties */}
-          <section className="bg-white rounded-2xl shadow-lg p-8">
-            <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center">
-              <CheckCircle className="text-primary mr-2" size={24} />
-              {getString('PLASTIC_DETAIL.PROPERTIES.TITLE')}
+          <Reveal className="rounded-2xl bg-white p-8 shadow-lg">
+            <h3 className="mb-6 flex items-center text-xl font-bold text-gray-800">
+              <CheckCircle className="mr-2 text-primary" size={24} />
+              {tr('PLASTIC_DETAIL.PROPERTIES.TITLE')}
             </h3>
-            <ul className="space-y-3">
+            <Stagger className="space-y-3" stagger={0.06}>
               {data.properties.map((prop, index) => (
-                <li key={index} className="flex items-start">
-                  <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                <StaggerItem key={index} className="flex items-start">
+                  <span className="mr-3 mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-primary" />
                   <span className="text-gray-700">{prop}</span>
-                </li>
+                </StaggerItem>
               ))}
-            </ul>
-          </section>
+            </Stagger>
+          </Reveal>
 
           {/* Applications */}
-          <section className="bg-white rounded-2xl shadow-lg p-8">
-            <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center">
-              <Package className="text-primary mr-2" size={24} />
-              {getString('PLASTIC_DETAIL.APPLICATIONS.TITLE')}
+          <Reveal className="rounded-2xl bg-white p-8 shadow-lg" delay={0.1}>
+            <h3 className="mb-6 flex items-center text-xl font-bold text-gray-800">
+              <Package className="mr-2 text-primary" size={24} />
+              {tr('PLASTIC_DETAIL.APPLICATIONS.TITLE')}
             </h3>
-            <ul className="space-y-3">
+            <Stagger className="space-y-3" stagger={0.06}>
               {data.applications.map((app, index) => (
-                <li key={index} className="flex items-start">
-                  <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                <StaggerItem key={index} className="flex items-start">
+                  <span className="mr-3 mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-primary" />
                   <span className="text-gray-700">{app}</span>
-                </li>
+                </StaggerItem>
               ))}
-            </ul>
-          </section>
+            </Stagger>
+          </Reveal>
         </div>
 
         {/* Recycling Process */}
-        <section className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-          <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center">
-            <Recycle className="text-primary mr-2" size={24} />
-            {getString('PLASTIC_DETAIL.PROCESS.TITLE')}
+        <Reveal className="mb-8 rounded-2xl bg-white p-8 shadow-lg">
+          <h3 className="mb-6 flex items-center text-xl font-bold text-gray-800">
+            <Recycle className="mr-2 text-primary" size={24} />
+            {tr('PLASTIC_DETAIL.PROCESS.TITLE')}
           </h3>
-          <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <Stagger className="grid gap-4 md:grid-cols-3 lg:grid-cols-6" stagger={0.08}>
             {data.recyclingProcess.map((step, index) => (
-              <div key={index} className="relative">
-                <div className="bg-gray-50 rounded-xl p-4 h-full border-2 border-gray-100 hover:border-primary transition-colors">
-                  <div className="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center font-bold mb-3">
+              <StaggerItem key={index} className="relative">
+                <div className="h-full rounded-xl border-2 border-gray-100 bg-gray-50 p-4 transition-colors hover:border-primary">
+                  <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-full bg-primary font-bold text-white">
                     {index + 1}
                   </div>
                   <p className="text-sm text-gray-700">{step}</p>
                 </div>
                 {index < data.recyclingProcess.length - 1 && (
-                  <ChevronRight className="hidden lg:block absolute -right-3 top-1/2 transform -translate-y-1/2 text-gray-300" size={24} />
+                  <ChevronRight
+                    className="absolute -right-3 top-1/2 hidden -translate-y-1/2 transform text-gray-300 lg:block"
+                    size={24}
+                  />
                 )}
-              </div>
+              </StaggerItem>
             ))}
-          </div>
-        </section>
+          </Stagger>
+        </Reveal>
 
-        {/* Image Gallery */}
-        <section className="mb-8">
-          <h3 className="text-xl font-bold text-gray-800 mb-6">{getString('PLASTIC_DETAIL.GALLERY.TITLE')}</h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            {data.images.map((img, index) => (
-              <div key={index} className="relative h-64 rounded-2xl overflow-hidden shadow-lg group">
-                <Image
-                  src={img}
-                  alt={`${data.name} ${index + 1}`}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              </div>
-            ))}
-          </div>
-        </section>
+        {/* Gallery */}
+        {gallery.length > 0 && (
+          <Reveal className="mb-8">
+            <h3 className="mb-6 text-xl font-bold text-gray-800">{tr('PLASTIC_DETAIL.GALLERY.TITLE')}</h3>
+            <Stagger className="grid gap-6 md:grid-cols-3" stagger={0.08}>
+              {gallery.map((img, index) => (
+                <StaggerItem key={img.src}>
+                  <button
+                    type="button"
+                    onClick={() => setLightbox(index)}
+                    aria-label={`${img.title} – open larger`}
+                    className="group relative h-64 w-full cursor-zoom-in overflow-hidden rounded-2xl shadow-lg outline-none focus-visible:ring-4 focus-visible:ring-primary/40"
+                  >
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                  </button>
+                </StaggerItem>
+              ))}
+            </Stagger>
+          </Reveal>
+        )}
 
-        {/* Buy/Sell Info */}
-        <div className="grid md:grid-cols-2 gap-8">
-          <section className="bg-green-50 rounded-2xl shadow-lg p-8 border-2 border-green-200">
-            <h3 className="text-xl font-bold text-green-800 mb-4 flex items-center">
-              <Factory className="mr-2" size={24} />
-              {getString('PLASTIC_DETAIL.BUY.TITLE')} {data.name}
-            </h3>
-            <p className="text-gray-700 mb-4">{data.buyingInfo}</p>
-            <Link href="/contact" className="inline-flex items-center text-green-700 font-semibold hover:underline">
-              {getString('PLASTIC_DETAIL.BUY.GET_QUOTE')} <ArrowLeft className="ml-2 rotate-180" size={16} />
-            </Link>
-          </section>
+        {/* Buy / Sell — each links straight into the contact form with this material pre-filled */}
+        <Stagger className="grid gap-8 md:grid-cols-2" stagger={0.12}>
+          <StaggerItem>
+            <div className="h-full rounded-2xl border-2 border-green-200 bg-green-50 p-8 shadow-lg">
+              <h3 className="mb-4 flex items-center text-xl font-bold text-green-800">
+                <Factory className="mr-2" size={24} />
+                {tr('PLASTIC_DETAIL.BUY.TITLE')} {data.name}
+              </h3>
+              <p className="mb-6 text-gray-700">{data.buyingInfo}</p>
+              <Link
+                href={inquiryHref({ product: `${data.name} (${data.fullName}) — selling to KKS`, type: 'buying' })}
+                className="group inline-flex items-center gap-2 rounded-full bg-green-600 px-6 py-3 font-semibold text-white transition-all duration-200 hover:bg-green-700 active:scale-[0.98]"
+              >
+                {tr('PLASTIC_DETAIL.BUY.GET_QUOTE')}
+                <ChevronRight size={16} className="transition-transform group-hover:translate-x-1" />
+              </Link>
+            </div>
+          </StaggerItem>
 
-          <section className="bg-blue-50 rounded-2xl shadow-lg p-8 border-2 border-blue-200">
-            <h3 className="text-xl font-bold text-blue-800 mb-4 flex items-center">
-              <Package className="mr-2" size={24} />
-              {getString('PLASTIC_DETAIL.SELL.TITLE')} {data.name} Pellets
-            </h3>
-            <p className="text-gray-700 mb-4">{data.sellingInfo}</p>
-            <Link href="/contact" className="inline-flex items-center text-blue-700 font-semibold hover:underline">
-              {getString('PLASTIC_DETAIL.SELL.REQUEST_SAMPLE')} <ArrowLeft className="ml-2 rotate-180" size={16} />
-            </Link>
-          </section>
-        </div>
+          <StaggerItem>
+            <div className="h-full rounded-2xl border-2 border-blue-200 bg-blue-50 p-8 shadow-lg">
+              <h3 className="mb-4 flex items-center text-xl font-bold text-blue-800">
+                <PackageSearch className="mr-2" size={24} />
+                {tr('PLASTIC_DETAIL.SELL.TITLE')} {data.name} Pellets
+              </h3>
+              <p className="mb-6 text-gray-700">{data.sellingInfo}</p>
+              <Link
+                href={inquiryHref({ product: `${data.name} (${data.fullName}) recycled pellets`, type: 'quote' })}
+                className="group inline-flex items-center gap-2 rounded-full bg-blue-600 px-6 py-3 font-semibold text-white transition-all duration-200 hover:bg-blue-700 active:scale-[0.98]"
+              >
+                {tr('PLASTIC_DETAIL.SELL.REQUEST_SAMPLE')}
+                <ChevronRight size={16} className="transition-transform group-hover:translate-x-1" />
+              </Link>
+            </div>
+          </StaggerItem>
+        </Stagger>
       </div>
+
+      <Lightbox images={gallery} index={lightbox} onClose={() => setLightbox(null)} onChange={setLightbox} />
     </div>
   );
 }

@@ -56,9 +56,23 @@ export default function ContactForm() {
   const person = findPerson(searchParams.get('to'));
   const recipientEmail = person?.email ?? COMPANY.generalEmail;
 
+  // Set by "Buy this" / "Get a quote" / "Request a sample" links via lib/inquiry.ts,
+  // so the visitor doesn't have to explain what they're asking about from scratch.
+  const [product, setProduct] = useState(() => searchParams.get('product') ?? '');
+
   const [form, setForm] = useState<FormState>(() => {
     const preset = searchParams.get('type');
-    return { ...EMPTY, type: isInquiryType(preset) ? preset : '' };
+    const presetProduct = searchParams.get('product');
+    return {
+      ...EMPTY,
+      type: isInquiryType(preset) ? preset : '',
+      message: presetProduct
+        ? tr('CONTACT.FORM.PRODUCT_MESSAGE', 'I would like more information about {product}.').replace(
+            '{product}',
+            presetProduct
+          )
+        : '',
+    };
   });
   const [honeypot, setHoneypot] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -85,6 +99,7 @@ export default function ContactForm() {
           website: honeypot, // honeypot, must stay empty
           recipient: person?.id ?? 'info',
           toEmail: recipientEmail, // kept so your current API route keeps working; see lib/contactValidation.ts
+          product,
         }),
       });
 
@@ -103,6 +118,35 @@ export default function ContactForm() {
 
   return (
     <div>
+      {/* What the message is about */}
+      <AnimatePresence>
+        {product && (
+          <motion.div
+            initial={{ opacity: 0, y: -8, height: 0, marginBottom: 0 }}
+            animate={{ opacity: 1, y: 0, height: 'auto', marginBottom: 24 }}
+            exit={{ opacity: 0, height: 0, marginBottom: 0 }}
+            transition={{ duration: 0.3, ease: EASE_OUT }}
+            className="overflow-hidden"
+          >
+            <div className="flex items-center justify-between gap-4 rounded-xl border border-amber-200 bg-amber-50 p-4">
+              <div className="min-w-0">
+                <p className="text-xs font-semibold uppercase tracking-wide text-amber-700">
+                  {tr('CONTACT.ASKING_ABOUT', 'Asking about')}
+                </p>
+                <p className="truncate font-bold text-gray-800">{product}</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setProduct('')}
+                className="shrink-0 rounded-lg px-2 py-1 text-sm text-amber-700 transition-colors hover:bg-amber-100"
+              >
+                {tr('CONTACT.CLEAR', 'Clear')}
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Who the message goes to */}
       {person && (
         <motion.div

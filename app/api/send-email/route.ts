@@ -1,27 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { COMPANY, findPerson } from '@/lib/company';
+import { parseContactPayload } from '@/lib/contactValidation';
 
-// API key mapping from .env - each key sends to its corresponding email
-// const apiKeys: Record<string, string> = {
-//   Sophan: process.env.PHANN_API_KEY || '',
-//   Sokhan: process.env.SOKKHAN_API_KEY || '',
-//   sugimoto: process.env.HASIMOTO_API_KEY || '',
-//   info: process.env.INFO_API_KEY || '',
-// };
+// ---------------------------------------------------------------------------
+// Who the email is sent FROM.
+// Names/emails come from lib/company.ts, so there is one list to maintain
+// (no more separate emailAddresses / fromAddresses maps that can drift apart).
+// ---------------------------------------------------------------------------
+const titleCase = (s: string) => s.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
 
-// Email mapping - actual recipient emails
-const emailAddresses: Record<string, string> = {
-  Sophan: 's.sophann@kks2569.com',
-  Sokhan: 'k.sokkhan@kks2569.com',
-  sugimoto: 'h.sugimoto@kks2569.com',
-  info: 'info@kks2569.com',
-};
-
-const fromAddresses: Record<string, { name: string; email: string }> = {
-  Sophan: { name: 'Sok Sophan', email: 's.sophann@kks2569.com' },
-  Sokhan: { name: 'Kean Sokkhan', email: 'k.sokkhan@kks2569.com' },
-  hasimoto: { name: 'Haruhisa Sugimoto', email: 'h.sugimoto@kks2569.com' },
-  info: { name: 'KKS Info', email: 'info@kks2569.com' },
-};
+function getSender(recipientId: string) {
+  const person = findPerson(recipientId);
+  return person
+    ? { name: titleCase(person.name), email: person.email }
+    : { name: 'KKS Info', email: COMPANY.generalEmail };
+}
 
 // Send email using Resend REST API
 async function sendEmail(apiKey: string, emailData: any) {
@@ -38,89 +31,69 @@ async function sendEmail(apiKey: string, emailData: any) {
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { name, email, phone, type, message, recipient } = body;
-
-    // Validation
-    if (!name || !email || !message || !recipient) {
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
-      );
+    // 1) Validate everything (required fields, email format, lengths, spam trap).
+    //    The recipient address is looked up on the server, never taken from the browser.
+    let body: unknown;
+    try {
+      body = await request.json();
+    } catch {
+      return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { error: 'Please enter a valid email address' },
-        { status: 400 }
-      );
+    const result = parseContactPayload(body);
+    if (!result.ok) {
+      // Bots get a fake "success" so they don't retry; real users get a clear error.
+      return result.reason === 'spam'
+        ? NextResponse.json({ success: true })
+        : NextResponse.json({ error: 'Invalid request' }, { status: 400 });
     }
+    const { name, email, phone, type, message, recipientId, toEmail, product } = result.data;
 
-    // Get API key and target email for recipient
-    const apiKey = 're_f4EKNTjf_N7ihxB7XeTf3E9wbSU7C2av8';
-    const targetEmail = emailAddresses[recipient];
-    const sender = fromAddresses[recipient];
-
-    if (!sender) {
-      return NextResponse.json({ error: 'Invalid recipient' }, { status: 400 });
-    }
+    // 2) API key comes from the environment (.env.local), NOT from the source code.
+    const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
+      console.error('❌ RESEND_API_KEY is not set');
       return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
     }
-    if (!targetEmail) {
-      return NextResponse.json({ error: 'Invalid recipient' }, { status: 400 });
-    }
 
-    // Log submission
+    const sender = getSender(recipientId);
+
     console.log('=== NEW CONTACT FORM SUBMISSION ===');
-    console.log('Name:', name);
-    console.log('From:', email);
-    console.log('To:', targetEmail);
-    console.log('Recipient:', recipient);
-    console.log('Type:', type || 'General');
+    console.log('To:', toEmail, '| Recipient:', recipientId, '| Type:', type);
     console.log('Timestamp:', new Date().toISOString());
-    console.log('=====================================');
 
-    // Generate email HTML
-    const emailHtml = generateEmailTemplate({ 
-      name, email, phone, type, message, recipient 
-    });
+    // 3) Send
+    const emailHtml = generateEmailTemplate({ name, email, phone, type, message, recipient: recipientId, product });
 
-    // Send email
     const emailResponse = await sendEmail(apiKey, {
-      from: `${sender.name} <${sender.email}>`,   // ← Now uses your real emails
-      to: [targetEmail],
-      subject: `[KKS] ${type ? capitalize(type) : 'New'} Inquiry from ${name}`,
+      from: `${sender.name} <${sender.email}>`,
+      to: [toEmail],
+      subject: product
+        ? `[KKS] ${capitalize(type)} Inquiry: ${product} — from ${name}`
+        : `[KKS] ${capitalize(type)} Inquiry from ${name}`,
       html: emailHtml,
-      reply_to: email,   // customer can reply directly
+      reply_to: email, // customer can reply directly
     });
 
     if (emailResponse.ok) {
-      const result = await emailResponse.json();
-      console.log('✅ Email sent to:', targetEmail, 'ID:', result.id);
-      
+      const sent = await emailResponse.json();
+      console.log('✅ Email sent to:', toEmail, 'ID:', sent.id);
       return NextResponse.json({
         success: true,
         message: 'Thank you! Your message has been sent successfully.',
-        id: result.id,
+        id: sent.id,
       });
-    } else {
-      const errorData = await emailResponse.json();
-      console.log('❌ Email failed:', errorData);
-      
-      return NextResponse.json({
-        success: false,
-        error: errorData.message || 'Failed to send email',
-      }, { status: 500 });
     }
 
-  } catch (error) {
-    console.error('❌ API error:', error);
+    const errorData = await emailResponse.json().catch(() => ({}));
+    console.log('❌ Email failed:', errorData);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { success: false, error: errorData.message || 'Failed to send email' },
       { status: 500 }
     );
+  } catch (error) {
+    console.error('❌ API error:', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
@@ -138,7 +111,7 @@ function escapeHtml(text: string): string {
     .replace(/'/g, '&#039;');
 }
 
-// Professional Email Template
+// Professional Email Template (unchanged from your version)
 function generateEmailTemplate(props: {
   name: string;
   email: string;
@@ -146,9 +119,10 @@ function generateEmailTemplate(props: {
   type: string;
   message: string;
   recipient: string;
+  product: string;
 }) {
-  const { name, email, phone, type, message, recipient } = props;
-  
+  const { name, email, phone, type, message, recipient, product } = props;
+
   const inquiryTypes: Record<string, string> = {
     buying: 'Purchase Inquiry',
     recycle: 'Recycling Service',
@@ -160,6 +134,8 @@ function generateEmailTemplate(props: {
   const escapedEmail = escapeHtml(email);
   const escapedPhone = escapeHtml(phone || '');
   const escapedMessage = escapeHtml(message);
+  const escapedRecipient = escapeHtml(recipient);
+  const escapedProduct = escapeHtml(product);
   const inquiryType = inquiryTypes[type] || 'General Inquiry';
 
   return `
@@ -168,7 +144,7 @@ function generateEmailTemplate(props: {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New Inquiry - KKS2569</title>
+  <title>New Inquiry - KKS2026</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -312,8 +288,8 @@ function generateEmailTemplate(props: {
   <div class="email-wrapper">
     <div class="header">
       <h1>📨 New Contact Inquiry</h1>
-      <p>KKS2569 Website Submission</p>
-      <span class="badge">${inquiryType}</span>
+      <p>KKS2026 Website Submission</p>
+      <span class="badge">${product ? `${inquiryType} · ${escapedProduct}` : inquiryType}</span>
     </div>
     
     <div class="content">
@@ -337,9 +313,16 @@ function generateEmailTemplate(props: {
           <div class="info-row">
             <span class="info-label">Recipient</span>
             <span class="info-value" style=" font-weight: 700; color: #059669;">
-              ${recipient}
+              ${escapedRecipient}
             </span>
           </div>
+          ${product ? `
+          <div class="info-row">
+            <span class="info-label">Product</span>
+            <span class="info-value" style="font-weight: 700;">
+              ${escapedProduct}
+            </span>
+          </div>` : ''}
         </div>
       </div>
       
@@ -352,13 +335,13 @@ function generateEmailTemplate(props: {
     </div>
     
     <div class="action-section">
-      <a href="mailto:${escapedEmail}?subject=Re: Your inquiry to KKS2569" class="reply-button">
+      <a href="mailto:${escapedEmail}?subject=Re: Your inquiry to KKS2026" class="reply-button">
         Reply to ${escapedName}
       </a>
     </div>
     
     <div class="footer">
-      <p><strong>KKS2569 Co., Ltd.</strong></p>
+      <p><strong>KKS2026 Co., Ltd.</strong></p>
       <p>This email was sent from the official website contact form.</p>
       <p class="timestamp">
         Received: ${new Date().toLocaleString('en-US', { 

@@ -1,90 +1,109 @@
 'use client';
 
-import { useEffect, useState, useRef, type RefObject } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowLeft, CheckCircle, Truck, Leaf, Phone, Droplets, Wind, Sun, ShieldCheck, Sprout, Clock } from 'lucide-react';
+import { motion } from 'framer-motion';
+import {
+  ArrowLeft,
+  Clock,
+  Droplets,
+  Leaf,
+  ShieldCheck,
+  Sprout,
+  Sun,
+  Wind,
+  type LucideIcon,
+} from 'lucide-react';
 import Hero from '@/components/Hero';
-import { useTranslation } from '@/components/LanguageProvider';
+import { EASE_OUT, Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal';
+import { useTr } from '@/lib/useTr';
+import { inquiryHref } from '@/lib/inquiry';
 
-// --- SCROLL ANIMATION HOOK ---
-function useInView(options = { threshold: 0.15 }): [RefObject<HTMLDivElement | null>, boolean] {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isInView, setIsInView] = useState(false);
-  useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) { setIsInView(true); if (ref.current) observer.unobserve(ref.current); }
-    }, options);
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [options.threshold]);
-  return [ref, isInView];
-}
-
-// --- DATA (Enhanced with application and storage details) ---
-const fertilizerProducts = [
+// --- DATA ---
+const fertilizerProducts: {
+  id: string;
+  name: string;
+  jaName: string;
+  type: string;
+  description: string;
+  image: string;
+  specs: { label: string; value: string; max: number; color: string; icon: LucideIcon }[];
+  highlight: string;
+  application: string[];
+  storage: string;
+}[] = [
   {
     id: 'ka2-tt',
     name: 'KA2-tt',
     jaName: '発酵鶏ふん (KA2-tt)',
     type: 'Special Granula',
-    description: 'High-quality fermented chicken manure granules. Optimized for root development with balanced Phosphorus and Potassium. Ideal for early-stage crops and root vegetables.',
+    description:
+      'High-quality fermented chicken manure granules. Optimized for root development with balanced Phosphorus and Potassium. Ideal for early-stage crops and root vegetables.',
     image: '/images/fertilizer/KA2-tt.jpg',
     specs: [
-      { label: 'Nitrogen (N)', value: '2.4', max: 10, color: 'bg-green-500', icon: <Wind size={18} /> },
-      { label: 'Phosphorus (P₂O₅)', value: '4.55', max: 10, color: 'bg-blue-500', icon: <Sun size={18} /> },
-      { label: 'Potassium (K₂O)', value: '3.7', max: 10, color: 'bg-orange-500', icon: <Droplets size={18} /> },
-      { label: 'Moisture', value: '17.1', max: 30, color: 'bg-cyan-500', icon: <Droplets size={18} /> },
-      { label: 'C/N Ratio', value: '9.5', max: 20, color: 'bg-purple-500', icon: <Wind size={18} /> },
-      { label: 'Organic Matter', value: '0', max: 60, color: 'bg-yellow-500', icon: <Leaf size={18} /> },
+      { label: 'Nitrogen (N)', value: '2.4', max: 10, color: 'bg-green-500', icon: Wind },
+      { label: 'Phosphorus (P₂O₅)', value: '4.55', max: 10, color: 'bg-blue-500', icon: Sun },
+      { label: 'Potassium (K₂O)', value: '3.7', max: 10, color: 'bg-orange-500', icon: Droplets },
+      { label: 'Moisture', value: '17.1', max: 30, color: 'bg-cyan-500', icon: Droplets },
+      { label: 'C/N Ratio', value: '9.5', max: 20, color: 'bg-purple-500', icon: Wind },
+      { label: 'Organic Matter', value: '0', max: 60, color: 'bg-yellow-500', icon: Leaf },
     ],
     highlight: 'High Solubility',
-    application: ['Apply 150-200kg per 10 acres for base fertilizer.', 'Top dressing during vegetative stage.', 'Water moderately after application to activate solubility.'],
-    storage: 'Store in a dry, ventilated place. Avoid direct sunlight and rain. Seal bag tightly after opening.'
+    application: [
+      'Apply 150-200kg per 10 acres for base fertilizer.',
+      'Top dressing during vegetative stage.',
+      'Water moderately after application to activate solubility.',
+    ],
+    storage: 'Store in a dry, ventilated place. Avoid direct sunlight and rain. Seal bag tightly after opening.',
   },
   {
     id: 'nib-pt',
     name: 'NIB-pt',
     jaName: '発酵鶏ふん (NIB-pt)',
     type: 'Special Granula',
-    description: 'Premium organic fertilizer rich in Organic Matter (51.5%). Ensures fast nutrient release and significant soil structure improvement. Perfect for degraded soils and long-term crops.',
+    description:
+      'Premium organic fertilizer rich in Organic Matter (51.5%). Ensures fast nutrient release and significant soil structure improvement. Perfect for degraded soils and long-term crops.',
     image: '/images/fertilizer/NIB-pt.jpg',
     specs: [
-      { label: 'Nitrogen (N)', value: '3.0', max: 10, color: 'bg-green-500', icon: <Wind size={18} /> },
-      { label: 'Phosphorus (P₂O₅)', value: '5.0', max: 10, color: 'bg-blue-500', icon: <Sun size={18} /> },
-      { label: 'Potassium (K₂O)', value: '4.0', max: 10, color: 'bg-orange-500', icon: <Droplets size={18} /> },
-      { label: 'Moisture', value: '13.5', max: 30, color: 'bg-cyan-500', icon: <Droplets size={18} /> },
-      { label: 'C/N Ratio', value: '7.0', max: 20, color: 'bg-purple-500', icon: <Wind size={18} /> },
-      { label: 'Organic Matter', value: '51.5', max: 60, color: 'bg-yellow-500', icon: <Leaf size={18} /> },
+      { label: 'Nitrogen (N)', value: '3.0', max: 10, color: 'bg-green-500', icon: Wind },
+      { label: 'Phosphorus (P₂O₅)', value: '5.0', max: 10, color: 'bg-blue-500', icon: Sun },
+      { label: 'Potassium (K₂O)', value: '4.0', max: 10, color: 'bg-orange-500', icon: Droplets },
+      { label: 'Moisture', value: '13.5', max: 30, color: 'bg-cyan-500', icon: Droplets },
+      { label: 'C/N Ratio', value: '7.0', max: 20, color: 'bg-purple-500', icon: Wind },
+      { label: 'Organic Matter', value: '51.5', max: 60, color: 'bg-yellow-500', icon: Leaf },
     ],
     highlight: 'Rich in Organic Matter',
-    application: ['Apply 200-250kg per 10 acres as base fertilizer.', 'Mix thoroughly into soil before planting.', 'Reduces need for chemical nitrogen top-dressing.'],
-    storage: 'Keep below 25°C. High organic matter content can degrade if exposed to excessive heat and moisture.'
-  }
+    application: [
+      'Apply 200-250kg per 10 acres as base fertilizer.',
+      'Mix thoroughly into soil before planting.',
+      'Reduces need for chemical nitrogen top-dressing.',
+    ],
+    storage: 'Keep below 25°C. High organic matter content can degrade if exposed to excessive heat and moisture.',
+  },
+];
+
+const npkBenefits: { key: string; icon: LucideIcon; border: string; iconColor: string }[] = [
+  { key: 'N', icon: Wind, border: 'border-green-500', iconColor: 'text-green-500' },
+  { key: 'P', icon: Sun, border: 'border-blue-500', iconColor: 'text-blue-500' },
+  { key: 'K', icon: Droplets, border: 'border-orange-500', iconColor: 'text-orange-500' },
 ];
 
 export default function FertilizerDetailPage() {
   const params = useParams();
-  const { t } = useTranslation();
-  
-  const [isMounted, setIsMounted] = useState(false);
-  useEffect(() => { setIsMounted(true); }, []);
-
-  // Section Animation Refs
-  const [specsRef, specsInView] = useInView();
-  const [applyRef, applyInView] = useInView();
-  const [benefitsRef, benefitsInView] = useInView();
-
+  const tr = useTr();
   const product = fertilizerProducts.find((p) => p.id === params.id);
-  const getString = (key: string): string => { const value = t(key); return typeof value === 'string' ? value : key; };
 
   if (!product) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center p-8">
-          <h1 className="text-2xl font-bold text-gray-800 mb-4">Product Not Found</h1>
-          <Link href="/service/fertilizers" className="text-green-600 font-semibold hover:underline">View All Fertilizers</Link>
+      <div className="flex min-h-screen items-center justify-center bg-gray-50">
+        <div className="p-8 text-center">
+          <h1 className="mb-4 text-2xl font-bold text-gray-800">
+            {tr('FERTILIZER_DETAIL.NOT_FOUND', 'Product not found')}
+          </h1>
+          <Link href="/service#fertilizer" className="font-semibold text-green-600 hover:underline">
+            {tr('FERTILIZER_DETAIL.VIEW_ALL', 'View all fertilizers')}
+          </Link>
         </div>
       </div>
     );
@@ -94,121 +113,171 @@ export default function FertilizerDetailPage() {
     <div className="min-h-screen bg-gray-50">
       <Hero variant="page" title={product.name} subtitle={product.jaName} />
 
-      <div className={`container mx-auto px-4 py-12 max-w-7xl transition-all duration-700 ease-out ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-        
-        <Link href="../" className="inline-flex items-center text-gray-500 hover:text-primary mb-10 transition-colors text-sm font-medium">
-          <ArrowLeft size={16} className="mr-2" /> Back to All Fertilizers
+      <div className="container mx-auto max-w-7xl px-4 py-12">
+        <Link
+          href="/service#fertilizer"
+          className="group mb-10 inline-flex items-center text-sm font-medium text-gray-500 transition-colors hover:text-primary"
+        >
+          <ArrowLeft size={16} className="mr-2 transition-transform group-hover:-translate-x-1" />
+          {tr('FERTILIZER_DETAIL.BACK', 'Back to all fertilizers')}
         </Link>
 
         {/* ===== HERO SECTION ===== */}
-        <section className="bg-white rounded-3xl shadow-xl overflow-hidden mb-20 border border-gray-100">
+        <Reveal className="mb-16 overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-xl">
           <div className="grid md:grid-cols-2">
-            <div className="relative h-80 md:h-auto bg-gray-100 overflow-hidden group">
-              <Image src={product.image} alt={product.name} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-              <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-md border border-green-100">
-                <span className="text-green-700 font-bold text-xs uppercase tracking-wider flex items-center"><Leaf size={14} className="mr-1.5" />{product.type}</span>
+            <div className="group relative h-80 overflow-hidden bg-gray-100 md:h-auto">
+              <Image
+                src={product.image}
+                alt={product.name}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              <div className="absolute left-6 top-6 rounded-full border border-green-100 bg-white/90 px-4 py-2 shadow-md backdrop-blur-sm">
+                <span className="flex items-center text-xs font-bold uppercase tracking-wider text-green-700">
+                  <Leaf size={14} className="mr-1.5" />
+                  {product.type}
+                </span>
               </div>
             </div>
-            <div className="p-10 md:p-14 flex flex-col justify-center relative overflow-hidden">
-              <div className="absolute -bottom-32 -right-32 w-64 h-64 bg-green-100/40 rounded-full blur-3xl pointer-events-none"></div>
+            <div className="relative flex flex-col justify-center overflow-hidden p-10 md:p-14">
+              <div className="pointer-events-none absolute -bottom-32 -right-32 h-64 w-64 rounded-full bg-green-100/40 blur-3xl" />
               <div className="relative z-10">
-                <div className="inline-block px-4 py-1.5 bg-green-50 text-green-700 rounded-lg text-sm font-bold border border-green-100 mb-6">{product.highlight}</div>
-                <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4 leading-tight bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">{product.name}</h2>
-                <p className="text-gray-500 text-lg mb-8">{product.jaName}</p>
-                <p className="text-gray-700 text-lg leading-relaxed">{product.description}</p>
+                <div className="mb-6 inline-block rounded-lg border border-green-100 bg-green-50 px-4 py-1.5 text-sm font-bold text-green-700">
+                  {product.highlight}
+                </div>
+                <h2 className="mb-4 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-4xl font-black leading-tight text-transparent md:text-5xl">
+                  {product.name}
+                </h2>
+                <p className="mb-8 text-lg text-gray-500">{product.jaName}</p>
+                <p className="text-lg leading-relaxed text-gray-700">{product.description}</p>
               </div>
             </div>
           </div>
-        </section>
+        </Reveal>
 
         {/* ===== SPECIFICATIONS DASHBOARD ===== */}
-        <section ref={specsRef as React.RefObject<HTMLDivElement>} className={`mb-20 transition-all duration-700 ease-out ${specsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-          <h3 className="text-3xl font-bold text-gray-900 mb-10 flex items-center">
-            <div className="w-2 h-10 bg-primary rounded-full mr-4"></div> Technical Data Sheet
-          </h3>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {product.specs.map((spec, idx) => (
-              <div key={idx} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 group" style={{ transitionDelay: `${idx * 80}ms` }}>
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-base font-bold text-gray-700">{spec.label}</span>
-                  <span className="text-gray-400 group-hover:text-primary transition-colors">{spec.icon}</span>
+        <section className="mb-20">
+          <Reveal>
+            <h3 className="mb-10 flex items-center text-3xl font-bold text-gray-900">
+              <div className="mr-4 h-10 w-2 rounded-full bg-primary" />
+              {tr('FERTILIZER_DETAIL.SPECS_TITLE', 'Technical Data Sheet')}
+            </h3>
+          </Reveal>
+
+          <Stagger className="grid grid-cols-1 gap-6 md:grid-cols-2" stagger={0.08}>
+            {product.specs.map((spec) => (
+              <StaggerItem key={spec.label}>
+                <div className="group rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-lg">
+                  <div className="mb-4 flex items-center justify-between">
+                    <span className="text-base font-bold text-gray-700">{spec.label}</span>
+                    <spec.icon size={18} className="text-gray-400 transition-colors group-hover:text-primary" />
+                  </div>
+                  <p className="mb-3 text-4xl font-black text-gray-900">{spec.value}%</p>
+                  <div className="h-2.5 w-full rounded-full bg-gray-100">
+                    <motion.div
+                      className={`h-2.5 rounded-full ${spec.color}`}
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${(parseFloat(spec.value) / spec.max) * 100}%` }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1, ease: EASE_OUT }}
+                    />
+                  </div>
                 </div>
-                <p className="text-4xl font-black text-gray-900 mb-3">{spec.value}{spec.label.includes('Ratio') || spec.label.includes('Matter') ? '%' : '%'}</p>
-                {/* Visual Progress Bar */}
-                <div className="w-full bg-gray-100 rounded-full h-2.5">
-                  <div className={`${spec.color} h-2.5 rounded-full transition-all duration-1000 ease-out`} style={{ width: `${(parseFloat(spec.value) / spec.max) * 100}%`, transitionDelay: `${idx * 100 + 300}ms` }}></div>
-                </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
-          
-          <div className="mt-8 flex items-center text-sm text-blue-700 bg-blue-50 p-5 rounded-xl border border-blue-100">
-            <Clock className="h-5 w-5 mr-3 flex-shrink-0" /> High solubility observed within 45 minutes of application.
-          </div>
+          </Stagger>
+
+          <Reveal delay={0.2} className="mt-8 flex items-center rounded-xl border border-blue-100 bg-blue-50 p-5 text-sm text-blue-700">
+            <Clock className="mr-3 h-5 w-5 flex-shrink-0" />
+            {tr('FERTILIZER_DETAIL.SOLUBILITY_NOTE', 'High solubility observed within 45 minutes of application.')}
+          </Reveal>
         </section>
 
         {/* ===== APPLICATION & STORAGE ===== */}
-        <section ref={applyRef as React.RefObject<HTMLDivElement>} className={`mb-20 transition-all duration-700 ease-out delay-200 ${applyInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-          <div className="grid md:grid-cols-5 gap-8">
-            {/* Application Guide */}
-            <div className="md:col-span-3 bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100">
-              <h3 className="text-2xl font-bold text-gray-900 mb-8 flex items-center"><Sprout className="text-primary mr-3" /> Application Guide</h3>
-              <div className="space-y-6">
-                {product.application.map((step, idx) => (
-                  <div key={idx} className="flex items-start">
-                    <div className="w-8 h-8 bg-green-100 text-green-700 rounded-full flex items-center justify-center font-bold text-sm mr-4 mt-1 flex-shrink-0">{idx + 1}</div>
-                    <p className="text-gray-700 text-lg leading-relaxed">{step}</p>
+        <section className="mb-20 grid gap-8 md:grid-cols-5">
+          <Reveal className="rounded-2xl border border-gray-100 bg-white p-8 shadow-sm md:col-span-3 md:p-10">
+            <h3 className="mb-8 flex items-center text-2xl font-bold text-gray-900">
+              <Sprout className="mr-3 text-primary" />
+              {tr('FERTILIZER_DETAIL.APPLICATION_TITLE', 'Application Guide')}
+            </h3>
+            <Stagger className="space-y-6" stagger={0.1}>
+              {product.application.map((step, idx) => (
+                <StaggerItem key={idx} className="flex items-start">
+                  <div className="mr-4 mt-1 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-green-100 text-sm font-bold text-green-700">
+                    {idx + 1}
                   </div>
-                ))}
-              </div>
-            </div>
+                  <p className="text-lg leading-relaxed text-gray-700">{step}</p>
+                </StaggerItem>
+              ))}
+            </Stagger>
+          </Reveal>
 
-            {/* Storage & Safety */}
-            <div className="md:col-span-2 bg-gray-800 text-white p-8 md:p-10 rounded-2xl shadow-sm relative overflow-hidden">
-              <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/5 rounded-full blur-xl"></div>
-              <h3 className="text-2xl font-bold mb-6 flex items-center relative z-10"><ShieldCheck className="text-green-400 mr-3" /> Storage & Safety</h3>
-              <p className="text-gray-300 leading-relaxed relative z-10">{product.storage}</p>
-              <div className="mt-8 pt-6 border-t border-gray-700 relative z-10">
-                <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Quality Guarantee</p>
-                <p className="text-green-400 font-bold text-lg">Lab Tested in Japan</p>
-              </div>
+          <Reveal
+            className="relative overflow-hidden rounded-2xl bg-gray-800 p-8 text-white shadow-sm md:col-span-2 md:p-10"
+            delay={0.15}
+          >
+            <div className="pointer-events-none absolute -top-10 -right-10 h-32 w-32 rounded-full bg-white/5 blur-xl" />
+            <h3 className="relative z-10 mb-6 flex items-center text-2xl font-bold">
+              <ShieldCheck className="mr-3 text-green-400" />
+              {tr('FERTILIZER_DETAIL.STORAGE_TITLE', 'Storage & Safety')}
+            </h3>
+            <p className="relative z-10 leading-relaxed text-gray-300">{product.storage}</p>
+            <div className="relative z-10 mt-8 border-t border-gray-700 pt-6">
+              <p className="mb-2 text-xs uppercase tracking-wider text-gray-500">
+                {tr('FERTILIZER_DETAIL.QUALITY_LABEL', 'Quality Guarantee')}
+              </p>
+              <p className="text-lg font-bold text-green-400">
+                {tr('FERTILIZER_DETAIL.QUALITY_VALUE', 'Lab Tested in Japan')}
+              </p>
             </div>
-          </div>
+          </Reveal>
         </section>
 
         {/* ===== WHY NPK MATTERS ===== */}
-        <section ref={benefitsRef as React.RefObject<HTMLDivElement>} className={`mb-20 transition-all duration-700 ease-out delay-400 ${benefitsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-          <h3 className="text-3xl font-bold text-gray-900 mb-10 text-center">Why NPK Matters</h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-white p-8 rounded-2xl shadow-sm border-t-4 border-green-500 text-center hover:-translate-y-2 transition-all duration-300">
-              <Wind className="text-green-500 mx-auto mb-4" size={40} />
-              <h4 className="font-bold text-gray-800 text-xl mb-3">Nitrogen (N)</h4>
-              <p className="text-gray-600">Promotes rapid leaf and stem growth. Essential for chlorophyll production and lush, green foliage.</p>
-            </div>
-            <div className="bg-white p-8 rounded-2xl shadow-sm border-t-4 border-blue-500 text-center hover:-translate-y-2 transition-all duration-300">
-              <Sun className="text-blue-500 mx-auto mb-4" size={40} />
-              <h4 className="font-bold text-gray-800 text-xl mb-3">Phosphorus (P)</h4>
-              <p className="text-gray-600">Stimulates strong root development and flowering. Critical for energy transfer within the plant.</p>
-            </div>
-            <div className="bg-white p-8 rounded-2xl shadow-sm border-t-4 border-orange-500 text-center hover:-translate-y-2 transition-all duration-300">
-              <Droplets className="text-orange-500 mx-auto mb-4" size={40} />
-              <h4 className="font-bold text-gray-800 text-xl mb-3">Potassium (K)</h4>
-              <p className="text-gray-600">Enhances overall plant health. Improves drought resistance, disease immunity, and fruit quality.</p>
-            </div>
-          </div>
+        <section className="mb-20">
+          <Reveal className="mb-10 text-center">
+            <h3 className="text-3xl font-bold text-gray-900">
+              {tr('FERTILIZER_DETAIL.NPK_TITLE', 'Why N-P-K Matters')}
+            </h3>
+          </Reveal>
+          <Stagger className="grid gap-6 md:grid-cols-3" stagger={0.12}>
+            {npkBenefits.map((benefit) => (
+              <StaggerItem key={benefit.key}>
+                <div
+                  className={`h-full rounded-2xl border-t-4 ${benefit.border} bg-white p-8 text-center shadow-sm transition-all duration-300 hover:-translate-y-2`}
+                >
+                  <benefit.icon className={`mx-auto mb-4 ${benefit.iconColor}`} size={40} />
+                  <h4 className="mb-3 text-xl font-bold text-gray-800">
+                    {tr(`FERTILIZER_DETAIL.NPK.${benefit.key}.TITLE`)}
+                  </h4>
+                  <p className="text-gray-600">{tr(`FERTILIZER_DETAIL.NPK.${benefit.key}.DESC`)}</p>
+                </div>
+              </StaggerItem>
+            ))}
+          </Stagger>
         </section>
 
-        {/* ===== CTA ===== */}
-        <section className="bg-gradient-to-r from-green-600 to-emerald-700 text-white rounded-3xl p-10 md:p-14 text-center shadow-xl relative overflow-hidden">
-          <div className="absolute -top-20 -left-20 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
-          <h3 className="text-3xl font-bold mb-4 relative z-10">Interested in {product.name}?</h3>
-          <p className="text-green-100 mb-8 max-w-2xl mx-auto relative z-10">Contact our sales team for pricing, bulk order discounts, and shipping schedules to Cambodia and Vietnam.</p>
-          <Link href="/contact" className="relative z-10 inline-flex items-center bg-white text-green-700 px-10 py-4 rounded-full font-bold hover:bg-gray-100 transition-colors shadow-lg hover:scale-105 transform transition-all duration-200">
-            <Phone className="mr-2" size={20} /> Contact Us
+        {/* ===== CTA — goes straight into the contact form with this product pre-filled ===== */}
+        <Reveal className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-green-600 to-emerald-700 p-10 text-center text-white shadow-xl md:p-14">
+          <div className="pointer-events-none absolute -left-20 -top-20 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
+          <h3 className="relative z-10 mb-4 text-3xl font-bold">
+            {tr('FERTILIZER_DETAIL.CTA_TITLE', 'Interested in')} {product.name}?
+          </h3>
+          <p className="relative z-10 mx-auto mb-8 max-w-2xl text-green-100">
+            {tr(
+              'FERTILIZER_DETAIL.CTA_DESC',
+              'Contact our sales team for pricing, bulk order discounts, and shipping schedules to Cambodia and Vietnam.'
+            )}
+          </p>
+          <Link
+            href={inquiryHref({ product: `${product.name} Fertilizer`, type: 'quote' })}
+            className="group relative z-10 inline-flex items-center gap-2 rounded-full bg-white px-10 py-4 font-bold text-green-700 shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:bg-gray-100 active:scale-[0.98]"
+          >
+            {tr('FERTILIZER_DETAIL.CTA_BUTTON', 'Ask about this product')}
           </Link>
-        </section>
+        </Reveal>
       </div>
     </div>
   );

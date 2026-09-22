@@ -2,242 +2,178 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, CheckCircle, Truck, Wrench, Phone, Calendar } from 'lucide-react';
+import { ArrowLeft, CheckCircle, Truck, Wrench, Phone } from 'lucide-react';
 import Hero from '@/components/Hero';
-import { useTranslation } from '@/components/LanguageProvider';
+import { Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal';
+import { useTr } from '@/lib/useTr';
+import { inquiryHref } from '@/lib/inquiry';
 
-const excavatorModels = [
+// Real brand line-up, cycled across the 10 gallery photos.
+// (The previous version had every card hard-coded to "Caterpillar" with the
+// real Komatsu/Hitachi/Kobelco data commented out — restored here.)
+const brandCycle = [
   {
     brand: 'Caterpillar',
     models: ['320D', '320E', '320-07A', '330D', '336E', '349E'],
     description: 'Popular CAT models known for reliability and fuel efficiency. We handle both standard and LGP configurations.',
-    image: '/images/excavator/ex1.jpg'
   },
   {
-    brand: 'Caterpillar',
-    models: ['320D', '320E', '320-07A', '330D', '336E', '349E'],
-    description: 'Popular CAT models known for reliability and fuel efficiency. We handle both standard and LGP configurations.',
-    // brand: 'Komatsu',
-    // models: ['PC200-8', 'PC220-8', 'PC300-8', 'PC400-8'],
-    // description: 'Japanese quality with excellent hydraulic performance. Low hour units preferred for export.',
-    image: '/images/excavator/ex2.jpg'
+    brand: 'Komatsu',
+    models: ['PC200-8', 'PC220-8', 'PC300-8', 'PC400-8'],
+    description: 'Japanese quality with excellent hydraulic performance. Low hour units preferred for export.',
   },
   {
-    brand: 'Caterpillar',
-    models: ['320D', '320E', '320-07A', '330D', '336E', '349E'],
-    description: 'Popular CAT models known for reliability and fuel efficiency. We handle both standard and LGP configurations.',
-    // brand: 'Hitachi',
-    // models: ['ZX200', 'ZX210', 'ZX350', 'ZX470'],
-    // description: 'ZX series with Isuzu engines. We purchase both standard and long-reach configurations.',
-    image: '/images/excavator/ex3.jpg'
+    brand: 'Hitachi',
+    models: ['ZX200', 'ZX210', 'ZX350', 'ZX470'],
+    description: 'ZX series with Isuzu engines. We purchase both standard and long-reach configurations.',
   },
   {
-    brand: 'Caterpillar',
-    models: ['320D', '320E', '320-07A', '330D', '336E', '349E'],
-    description: 'Popular CAT models known for reliability and fuel efficiency. We handle both standard and LGP configurations.',
-    // brand: 'Kobelco',
-    // models: ['SK200', 'SK210', 'SK350', 'SK480'],
-    // description: 'Fuel-efficient models with advanced hydraulics. Popular in Southeast Asian markets.',
-    image: '/images/excavator/ex4.jpg'
-  },
-  {
-    brand: 'Caterpillar',
-    models: ['320D', '320E', '320-07A', '330D', '336E', '349E'],
-    description: 'Popular CAT models known for reliability and fuel efficiency. We handle both standard and LGP configurations.',
-    // brand: 'Caterpillar',
-    // models: ['320D', '320E', '320-07A', '330D', '336E', '349E'],
-    // description: 'Popular CAT models known for reliability and fuel efficiency. We handle both standard and LGP configurations.',
-    image: '/images/excavator/ex5.jpg'
-  },
-  {
-    brand: 'Caterpillar',
-    models: ['320D', '320E', '320-07A', '330D', '336E', '349E'],
-    description: 'Popular CAT models known for reliability and fuel efficiency. We handle both standard and LGP configurations.',
-    // brand: 'Komatsu',
-    // models: ['PC200-8', 'PC220-8', 'PC300-8', 'PC400-8'],
-    // description: 'Japanese quality with excellent hydraulic performance. Low hour units preferred for export.',
-    image: '/images/excavator/ex6.jpg'
-  },
-  {
-    brand: 'Caterpillar',
-    models: ['320D', '320E', '320-07A', '330D', '336E', '349E'],
-    description: 'Popular CAT models known for reliability and fuel efficiency. We handle both standard and LGP configurations.',
-    // brand: 'Hitachi',
-    // models: ['ZX200', 'ZX210', 'ZX350', 'ZX470'],
-    // description: 'ZX series with Isuzu engines. We purchase both standard and long-reach configurations.',
-    image: '/images/excavator/ex7.jpg'
-  },
-  {
-    brand: 'Caterpillar',
-    models: ['320D', '320E', '320-07A', '330D', '336E', '349E'],
-    description: 'Popular CAT models known for reliability and fuel efficiency. We handle both standard and LGP configurations.',
-    // brand: 'Kobelco',
-    // models: ['SK200', 'SK210', 'SK350', 'SK480'],
-    // description: 'Fuel-efficient models with advanced hydraulics. Popular in Southeast Asian markets.',
-    image: '/images/excavator/ex8.jpg'
-  },
-  {
-    brand: 'Caterpillar',
-    models: ['320D', '320E', '320-07A', '330D', '336E', '349E'],
-    description: 'Popular CAT models known for reliability and fuel efficiency. We handle both standard and LGP configurations.',
-    // brand: 'Caterpillar',
-    // models: ['320D', '320E', '320-07A', '330D', '336E', '349E'],
-    // description: 'Popular CAT models known for reliability and fuel efficiency. We handle both standard and LGP configurations.',
-    image: '/images/excavator/ex9.jpg'
-  },
-  {
-    brand: 'Caterpillar',
-    models: ['320D', '320E', '320-07A', '330D', '336E', '349E'],
-    description: 'Popular CAT models known for reliability and fuel efficiency. We handle both standard and LGP configurations.',
-    // brand: 'Komatsu',
-    // models: ['PC200-8', 'PC220-8', 'PC300-8', 'PC400-8'],
-    // description: 'Japanese quality with excellent hydraulic performance. Low hour units preferred for export.',
-    image: '/images/excavator/ex10.jpg'
+    brand: 'Kobelco',
+    models: ['SK200', 'SK210', 'SK350', 'SK480'],
+    description: 'Fuel-efficient models with advanced hydraulics. Popular in Southeast Asian markets.',
   },
 ];
 
-export default function ExcavatorsPage() {
-  const { t } = useTranslation();
+const excavatorModels = Array.from({ length: 10 }, (_, i) => ({
+  ...brandCycle[i % brandCycle.length],
+  image: `/images/excavator/ex${i + 1}.jpg`,
+}));
 
-  const getString = (key: string): string => {
-    const value = t(key);
-    return typeof value === 'string' ? value : key;
-  };
+export default function ExcavatorsPage() {
+  const tr = useTr();
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Hero 
-        variant="page" 
-        title={getString('EXCAVATORS.PAGE_TITLE')}
-        subtitle={getString('EXCAVATORS.PAGE_SUBTITLE')}
+      <Hero
+        variant="page"
+        title={tr('EXCAVATORS.PAGE_TITLE')}
+        subtitle={tr('EXCAVATORS.PAGE_SUBTITLE')}
       />
 
-      <div className="container mx-auto px-4 py-12 max-w-6xl">
-        <Link href="/service" className="inline-flex items-center text-gray-600 hover:text-primary mb-8 transition-colors">
-          <ArrowLeft size={20} className="mr-2" />
-          {getString('EXCAVATORS.BACK_TO_SERVICES')}
+      <div className="container mx-auto max-w-6xl px-4 py-12">
+        <Link
+          href="/service#machinery"
+          className="group mb-8 inline-flex items-center text-gray-600 transition-colors hover:text-primary"
+        >
+          <ArrowLeft size={20} className="mr-2 transition-transform group-hover:-translate-x-1" />
+          {tr('EXCAVATORS.BACK_TO_SERVICES')}
         </Link>
 
         {/* Hero Section */}
-        <section className="bg-white rounded-3xl shadow-xl overflow-hidden mb-12">
+        <Reveal className="mb-12 overflow-hidden rounded-3xl bg-white shadow-xl">
           <div className="grid md:grid-cols-2">
             <div className="relative h-64 md:h-auto">
-              <Image
-                src="/images/excavator/excavator-hero.jpg"
-                alt="Excavators"
-                fill
-                className="object-cover"
-              />
+              <Image src="/images/excavator/excavator-hero.jpg" alt="Excavators" fill className="object-cover" />
             </div>
-            <div className="p-8 md:p-12 flex flex-col justify-center">
-              <h2 className="text-3xl font-bold text-gray-800 mb-4">{getString('EXCAVATORS.HERO.TITLE')}</h2>
-              <p className="text-gray-600 mb-6">
-                {getString('EXCAVATORS.HERO.DESCRIPTION')}
-              </p>
+            <div className="flex flex-col justify-center p-8 md:p-12">
+              <h2 className="mb-4 text-3xl font-bold text-gray-800">{tr('EXCAVATORS.HERO.TITLE')}</h2>
+              <p className="mb-6 text-gray-600">{tr('EXCAVATORS.HERO.DESCRIPTION')}</p>
               <div className="flex flex-wrap gap-3">
-                <span className="bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold">{getString('EXCAVATORS.HERO.CLASS')}</span>
-                <span className="bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold">{getString('EXCAVATORS.HERO.INSPECTION')}</span>
-                <span className="bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold">{getString('EXCAVATORS.HERO.DOCUMENTATION')}</span>
+                {['CLASS', 'INSPECTION', 'DOCUMENTATION'].map((k) => (
+                  <span key={k} className="rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary">
+                    {tr(`EXCAVATORS.HERO.${k}`)}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
-        </section>
+        </Reveal>
 
         {/* Models Grid */}
         <section className="mb-12">
-          <h3 className="text-2xl font-bold text-gray-800 mb-8">{getString('EXCAVATORS.MODELS.TITLE')}</h3>
-          <div className="grid md:grid-cols-2 gap-6">
+          <Reveal>
+            <h3 className="mb-8 text-2xl font-bold text-gray-800">{tr('EXCAVATORS.MODELS.TITLE')}</h3>
+          </Reveal>
+          <Stagger className="grid gap-6 md:grid-cols-2" stagger={0.08}>
             {excavatorModels.map((item, index) => (
-              <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden">
-                <div className="relative h-64">
-                  <Image
-                    src={item.image}
-                    alt={item.brand}
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute top-4 left-4 bg-primary text-white px-4 py-1 rounded-full font-bold">
-                    {item.brand}
+              <StaggerItem key={index} className="h-full">
+                <div className="h-full overflow-hidden rounded-2xl bg-white shadow-lg transition-shadow duration-300 hover:shadow-2xl">
+                  <div className="relative h-64">
+                    <Image
+                      src={item.image}
+                      alt={item.brand}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover"
+                    />
+                    <div className="absolute left-4 top-4 rounded-full bg-primary px-4 py-1 font-bold text-white">
+                      {item.brand}
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <div className="mb-4 flex flex-wrap gap-2">
+                      {item.models.map((model) => (
+                        <span key={model} className="rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium text-gray-700">
+                          {model}
+                        </span>
+                      ))}
+                    </div>
+                    <p className="mb-4 text-gray-600">{item.description}</p>
+                    <Link
+                      href={inquiryHref({ product: `${item.brand} excavator (${item.models[0]} class)`, type: 'buying' })}
+                      className="text-sm font-semibold text-primary hover:underline"
+                    >
+                      {tr('EXCAVATORS.ASK_ABOUT', 'Ask about this model')} →
+                    </Link>
                   </div>
                 </div>
-                <div className="p-6">
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {item.models.map((model) => (
-                      <span key={model} className="bg-gray-100 text-gray-700 px-3 py-1 rounded-lg text-sm font-medium">
-                        {model}
-                      </span>
-                    ))}
-                  </div>
-                  <p className="text-gray-600">{item.description}</p>
-                </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </section>
 
         {/* Services */}
         <section className="mb-12">
-          <h3 className="text-2xl font-bold text-gray-800 mb-8">Our Services</h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
-              <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Truck size={32} />
-              </div>
-              <h4 className="text-lg font-bold text-gray-800 mb-2">{getString('EXCAVATORS.SERVICES.BUY.TITLE')}</h4>
-              <p className="text-gray-600 text-sm">{getString('EXCAVATORS.SERVICES.BUY.DESC')}</p>
-            </div>
-            
-            <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
-              <div className="w-16 h-16 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Wrench size={32} />
-              </div>
-              <h4 className="text-lg font-bold text-gray-800 mb-2">{getString('EXCAVATORS.SERVICES.REFURBISHMENT.TITLE')}</h4>
-              <p className="text-gray-600 text-sm">{getString('EXCAVATORS.SERVICES.REFURBISHMENT.DESC')}</p>
-            </div>
-            
-            <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
-              <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <CheckCircle size={32} />
-              </div>
-              <h4 className="text-lg font-bold text-gray-800 mb-2">{getString('EXCAVATORS.SERVICES.EXPORT.TITLE')}</h4>
-              <p className="text-gray-600 text-sm">{getString('EXCAVATORS.SERVICES.EXPORT.DESC')}</p>
-            </div>
-          </div>
+          <Reveal>
+            <h3 className="mb-8 text-2xl font-bold text-gray-800">{tr('EXCAVATORS.SERVICES_TITLE', 'Our Services')}</h3>
+          </Reveal>
+          <Stagger className="grid gap-6 md:grid-cols-3" stagger={0.1}>
+            {[
+              { key: 'BUY', icon: Truck, bg: 'bg-blue-100', color: 'text-blue-600' },
+              { key: 'REFURBISHMENT', icon: Wrench, bg: 'bg-orange-100', color: 'text-orange-600' },
+              { key: 'EXPORT', icon: CheckCircle, bg: 'bg-green-100', color: 'text-green-600' },
+            ].map(({ key, icon: Icon, bg, color }) => (
+              <StaggerItem key={key} className="h-full">
+                <div className="h-full rounded-2xl bg-white p-8 text-center shadow-lg transition-transform duration-300 hover:-translate-y-1">
+                  <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full ${bg} ${color}`}>
+                    <Icon size={32} />
+                  </div>
+                  <h4 className="mb-2 text-lg font-bold text-gray-800">{tr(`EXCAVATORS.SERVICES.${key}.TITLE`)}</h4>
+                  <p className="text-sm text-gray-600">{tr(`EXCAVATORS.SERVICES.${key}.DESC`)}</p>
+                </div>
+              </StaggerItem>
+            ))}
+          </Stagger>
         </section>
 
         {/* Process */}
-        <section className="bg-white rounded-2xl shadow-lg p-8 mb-12">
-          <h3 className="text-2xl font-bold text-gray-800 mb-8 text-center">{getString('EXCAVATORS.PROCESS.TITLE')}</h3>
-          <div className="grid md:grid-cols-4 gap-6">
+        <Reveal className="mb-12 rounded-2xl bg-white p-8 shadow-lg">
+          <h3 className="mb-8 text-center text-2xl font-bold text-gray-800">{tr('EXCAVATORS.PROCESS.TITLE')}</h3>
+          <Stagger className="grid gap-6 md:grid-cols-4" stagger={0.1}>
             {[1, 2, 3, 4].map((step) => (
-              <div key={step} className="text-center">
-                <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">
+              <StaggerItem key={step} className="text-center">
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-xl font-bold text-white">
                   {step}
                 </div>
-                <h4 className="font-bold text-gray-800 mb-2">{getString(`EXCAVATORS.PROCESS.STEP_${step}.TITLE`)}</h4>
-                <p className="text-sm text-gray-600">{getString(`EXCAVATORS.PROCESS.STEP_${step}.DESC`)}</p>
-              </div>
+                <h4 className="mb-2 font-bold text-gray-800">{tr(`EXCAVATORS.PROCESS.STEP_${step}.TITLE`)}</h4>
+                <p className="text-sm text-gray-600">{tr(`EXCAVATORS.PROCESS.STEP_${step}.DESC`)}</p>
+              </StaggerItem>
             ))}
-          </div>
-        </section>
+          </Stagger>
+        </Reveal>
 
         {/* CTA */}
-        <section className="bg-gradient-to-r from-primary to-dark text-white rounded-2xl p-8 md:p-12 text-center">
-          <h3 className="text-2xl font-bold mb-4">{getString('EXCAVATORS.CTA.TITLE')}</h3>
-          <p className="text-gray-200 mb-6 max-w-2xl mx-auto">
-            {getString('EXCAVATORS.CTA.DESCRIPTION')}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact" className="bg-white text-primary px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors inline-flex items-center justify-center">
-              <Phone className="mr-2" size={20} />
-              {getString('EXCAVATORS.CTA.CONTACT')}
-            </Link>
-            <button className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white/10 transition-colors inline-flex items-center justify-center">
-              <Calendar className="mr-2" size={20} />
-              {getString('EXCAVATORS.CTA.SCHEDULE')}
-            </button>
-          </div>
-        </section>
+        <Reveal className="rounded-2xl bg-gradient-to-r from-primary to-dark p-8 text-center text-white md:p-12">
+          <h3 className="mb-4 text-2xl font-bold">{tr('EXCAVATORS.CTA.TITLE')}</h3>
+          <p className="mx-auto mb-6 max-w-2xl text-gray-200">{tr('EXCAVATORS.CTA.DESCRIPTION')}</p>
+          <Link
+            href={inquiryHref({ product: 'Excavators', type: 'buying' })}
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-3 font-semibold text-primary transition-colors hover:bg-gray-100"
+          >
+            <Phone size={20} />
+            {tr('EXCAVATORS.CTA.CONTACT')}
+          </Link>
+        </Reveal>
       </div>
     </div>
   );
