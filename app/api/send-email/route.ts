@@ -47,10 +47,15 @@ export async function POST(request: NextRequest) {
         ? NextResponse.json({ success: true })
         : NextResponse.json({ error: 'Invalid request' }, { status: 400 });
     }
-    const { name, email, phone, type, message, recipientId, toEmail, product } = result.data;
 
-    // 2) API key comes from the environment (.env.local), NOT from the source code.
+    // Get API key and target email for recipient
     const apiKey = process.env.RESEND_API_KEY;
+    const targetEmail = emailAddresses[recipient];
+    const sender = fromAddresses[recipient];
+
+    if (!sender) {
+      return NextResponse.json({ error: 'Invalid recipient' }, { status: 400 });
+    }
     if (!apiKey) {
       console.error('❌ RESEND_API_KEY is not set');
       return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
